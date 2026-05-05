@@ -1,8 +1,7 @@
-# Dexholdem Website
+# DexHoldemBench Website
 
 Static project website for the NeurIPS 2026 Dataset & Benchmark submission
-**Dexholdem: A real-world ShadowHand benchmark for dexterous tabletop
-manipulation and embodied agents**.
+**DexHoldemBench: Playing Texas Hold'em with Dexterous Embodied System**.
 
 Open `index.html` directly in a browser, or serve this folder with any static
 server. The site uses local assets only and has no build step.
@@ -27,6 +26,7 @@ hosted videos.
 
 ## Key Resources
 
-- Paper: `assets/papers/dexas-holdem-neurips2026.pdf`
+- Paper: `assets/papers/dexholdem-neurips2026.pdf`
 - Croissant metadata: `assets/data/croissant.json`
 - Dataset: <https://huggingface.co/datasets/Winniechen2002/TexasPokerRobot>
+- Skills runtime: <https://github.com/DexHoldem/DexHoldemSKills>
