@@ -432,6 +432,12 @@ pre {
   width: 100%;
 }
 
+.wide-figure img[src$="method.png"] {
+  padding: 12px;
+  background: #f7f7f5;
+  object-fit: contain;
+}
+
 figcaption {
   color: var(--muted);
   font-size: 0.92rem;
