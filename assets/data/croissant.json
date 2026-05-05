@@ -1,0 +1,292 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "cr": "http://mlcommons.org/schema/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "sc": "https://schema.org/",
+    "citeAs": "cr:citeAs",
+    "conformsTo": "dct:conformsTo",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "examples": {
+      "@id": "cr:examples",
+      "@type": "@json"
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "key": "cr:key",
+    "recordSet": "cr:recordSet",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform"
+  },
+  "@type": "sc:Dataset",
+  "@id": "https://huggingface.co/datasets/Winniechen2002/TexasPokerRobot",
+  "name": "TexasPokerRobot",
+  "alternateName": "Dexas Holdem real-world robot demonstrations",
+  "description": "A real-world ShadowHand tabletop-manipulation dataset for Texas Hold'em-style card and chip primitives. The dataset contains 1,470 teleoperated demonstrations across 14 atomic primitives, stored as NPZ archives in one directory per primitive.",
+  "url": "https://huggingface.co/datasets/Winniechen2002/TexasPokerRobot",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "citation": "Feng Chen, Tianzhe Chu, Li Sun, Pei Zhou, Zhuxiu Xu, Shenghua Gao, Yuexiang Zhai, Yanchao Yang, and Yi Ma. Dexas Holdem Benchmark, 2026. Dataset: https://huggingface.co/datasets/Winniechen2002/TexasPokerRobot.",
+  "conformsTo": "http://mlcommons.org/croissant/1.0",
+  "dateCreated": "2026-03-18T10:54:08Z",
+  "datePublished": "2026-03-26",
+  "dateModified": "2026-03-26T13:55:31Z",
+  "version": "1.0.0",
+  "identifier": "Winniechen2002/TexasPokerRobot@5584266d24e09a756f5b48f5e489913c551e8052",
+  "isAccessibleForFree": true,
+  "isLiveDataset": true,
+  "inLanguage": "en",
+  "rai:dataLimitations": [
+    "The dataset is limited to Texas Hold'em-style tabletop card and chip manipulation with a ShadowHand setup, so it should not be treated as representative of general dexterous manipulation, other robot hands, other camera layouts, or unconstrained household and industrial manipulation.",
+    "The demonstrations cover 14 atomic primitives rather than complete casino-game play or long-horizon autonomous interaction. Models trained on the dataset should be evaluated carefully before deployment in multi-step or safety-critical settings.",
+    "The data are not recommended for learning gambling strategies, human behavioral modeling, biometric inference, or applications requiring demographic, social, or personal attributes."
+  ],
+  "rai:dataBiases": [
+    "The data reflect the physical properties, calibration, workspace, card/chip materials, and teleoperation style of the collection setup. Policies may inherit biases toward this hardware, scene layout, object appearance, lighting, and demonstration distribution.",
+    "Each primitive is represented with the same nominal demonstration count, but the dataset does not cover the full diversity of card decks, chip stacks, table surfaces, occlusions, hand-object contact modes, or failure recoveries that may occur in other environments."
+  ],
+  "rai:personalSensitiveInformation": "No personal or sensitive information about human subjects is intentionally included. The dataset consists of robot demonstration files for tabletop manipulation and does not intentionally record faces, voices, names, demographics, health information, political or religious beliefs, or other sensitive human attributes.",
+  "rai:dataUseCases": [
+    "Intended use cases include training, fine-tuning, validating, and benchmarking robot policy models for language-conditioned dexterous tabletop manipulation primitives.",
+    "The dataset is intended to measure whether policies can ground primitive-level card and chip instructions in real robot observations and actions. Validity has not been established for human-subject analysis, gambling decision-making, general-purpose robotics, or safety certification."
+  ],
+  "rai:dataSocialImpact": "The dataset may support progress in dexterous robotic manipulation, reproducible embodied-AI benchmarks, and contact-rich policy evaluation. Potential negative impacts include overestimating policy reliability outside the controlled setup or reusing policies in physical environments without safety checks. The benchmark mitigates this by documenting the primitive-level task scope, physical setup, and evaluation criteria, including environment disturbance.",
+  "rai:hasSyntheticData": false,
+  "prov:wasGeneratedBy": {
+    "@type": "prov:Activity",
+    "name": "Teleoperated ShadowHand data collection and NPZ packaging",
+    "description": "Demonstrations were collected on a real ShadowHand tabletop setup using teleoperation for 14 card and chip manipulation primitives. The recorded episodes were organized by primitive and packaged as NPZ files with synchronized robot demonstration data for training and evaluation."
+  },
+  "keywords": [
+    "robotics",
+    "dexterous manipulation",
+    "ShadowHand",
+    "teleoperation",
+    "imitation learning",
+    "Texas Hold'em",
+    "cards",
+    "chips"
+  ],
+  "creator": [
+    { "@type": "sc:Person", "name": "Feng Chen" },
+    { "@type": "sc:Person", "name": "Tianzhe Chu" },
+    { "@type": "sc:Person", "name": "Li Sun" },
+    { "@type": "sc:Person", "name": "Pei Zhou" },
+    { "@type": "sc:Person", "name": "Zhuxiu Xu" },
+    { "@type": "sc:Person", "name": "Shenghua Gao" },
+    { "@type": "sc:Person", "name": "Yuexiang Zhai" },
+    { "@type": "sc:Person", "name": "Yanchao Yang" },
+    { "@type": "sc:Person", "name": "Yi Ma" }
+  ],
+  "publisher": {
+    "@type": "sc:Organization",
+    "name": "Hugging Face"
+  },
+  "distribution": [
+    {
+      "@type": "sc:FileObject",
+      "@id": "texaspokerrobot_repository",
+      "name": "texaspokerrobot_repository",
+      "description": "Git repository containing the NPZ demonstration files organized by manipulation primitive.",
+      "encodingFormat": "git+https",
+      "contentUrl": "https://huggingface.co/datasets/Winniechen2002/TexasPokerRobot"
+    },
+    {
+      "@type": "sc:FileSet",
+      "@id": "all_npz_demonstrations",
+      "name": "all_npz_demonstrations",
+      "description": "All demonstration archives. Each file corresponds to one teleoperated primitive demonstration.",
+      "encodingFormat": "application/octet-stream",
+      "containedIn": { "@id": "texaspokerrobot_repository" },
+      "includes": "*/data_*.npz"
+    },
+    {
+      "@type": "sc:FileSet",
+      "@id": "pick_up_left_npz",
+      "name": "pick_up_left_npz",
+      "description": "105 NPZ demonstrations for the pick_up_left primitive.",
+      "encodingFormat": "application/octet-stream",
+      "containedIn": { "@id": "texaspokerrobot_repository" },
+      "includes": "pick_up_left/data_*.npz"
+    },
+    {
+      "@type": "sc:FileSet",
+      "@id": "pick_up_right_npz",
+      "name": "pick_up_right_npz",
+      "description": "105 NPZ demonstrations for the pick_up_right primitive.",
+      "encodingFormat": "application/octet-stream",
+      "containedIn": { "@id": "texaspokerrobot_repository" },
+      "includes": "pick_up_right/data_*.npz"
+    },
+    {
+      "@type": "sc:FileSet",
+      "@id": "pull_5_npz",
+      "name": "pull_5_npz",
+      "description": "105 NPZ demonstrations for the pull_5 primitive.",
+      "encodingFormat": "application/octet-stream",
+      "containedIn": { "@id": "texaspokerrobot_repository" },
+      "includes": "pull_5/data_*.npz"
+    },
+    {
+      "@type": "sc:FileSet",
+      "@id": "pull_10_npz",
+      "name": "pull_10_npz",
+      "description": "105 NPZ demonstrations for the pull_10 primitive.",
+      "encodingFormat": "application/octet-stream",
+      "containedIn": { "@id": "texaspokerrobot_repository" },
+      "includes": "pull_10/data_*.npz"
+    },
+    {
+      "@type": "sc:FileSet",
+      "@id": "pull_50_npz",
+      "name": "pull_50_npz",
+      "description": "105 NPZ demonstrations for the pull_50 primitive.",
+      "encodingFormat": "application/octet-stream",
+      "containedIn": { "@id": "texaspokerrobot_repository" },
+      "includes": "pull_50/data_*.npz"
+    },
+    {
+      "@type": "sc:FileSet",
+      "@id": "pull_100_npz",
+      "name": "pull_100_npz",
+      "description": "105 NPZ demonstrations for the pull_100 primitive.",
+      "encodingFormat": "application/octet-stream",
+      "containedIn": { "@id": "texaspokerrobot_repository" },
+      "includes": "pull_100/data_*.npz"
+    },
+    {
+      "@type": "sc:FileSet",
+      "@id": "push_5_npz",
+      "name": "push_5_npz",
+      "description": "105 NPZ demonstrations for the push_5 primitive.",
+      "encodingFormat": "application/octet-stream",
+      "containedIn": { "@id": "texaspokerrobot_repository" },
+      "includes": "push_5/data_*.npz"
+    },
+    {
+      "@type": "sc:FileSet",
+      "@id": "push_10_npz",
+      "name": "push_10_npz",
+      "description": "105 NPZ demonstrations for the push_10 primitive.",
+      "encodingFormat": "application/octet-stream",
+      "containedIn": { "@id": "texaspokerrobot_repository" },
+      "includes": "push_10/data_*.npz"
+    },
+    {
+      "@type": "sc:FileSet",
+      "@id": "push_50_npz",
+      "name": "push_50_npz",
+      "description": "105 NPZ demonstrations for the push_50 primitive.",
+      "encodingFormat": "application/octet-stream",
+      "containedIn": { "@id": "texaspokerrobot_repository" },
+      "includes": "push_50/data_*.npz"
+    },
+    {
+      "@type": "sc:FileSet",
+      "@id": "push_100_npz",
+      "name": "push_100_npz",
+      "description": "105 NPZ demonstrations for the push_100 primitive.",
+      "encodingFormat": "application/octet-stream",
+      "containedIn": { "@id": "texaspokerrobot_repository" },
+      "includes": "push_100/data_*.npz"
+    },
+    {
+      "@type": "sc:FileSet",
+      "@id": "put_down_left_npz",
+      "name": "put_down_left_npz",
+      "description": "105 NPZ demonstrations for the put_down_left primitive.",
+      "encodingFormat": "application/octet-stream",
+      "containedIn": { "@id": "texaspokerrobot_repository" },
+      "includes": "put_down_left/data_*.npz"
+    },
+    {
+      "@type": "sc:FileSet",
+      "@id": "put_down_right_npz",
+      "name": "put_down_right_npz",
+      "description": "105 NPZ demonstrations for the put_down_right primitive.",
+      "encodingFormat": "application/octet-stream",
+      "containedIn": { "@id": "texaspokerrobot_repository" },
+      "includes": "put_down_right/data_*.npz"
+    },
+    {
+      "@type": "sc:FileSet",
+      "@id": "show_left_npz",
+      "name": "show_left_npz",
+      "description": "105 NPZ demonstrations for the show_left primitive.",
+      "encodingFormat": "application/octet-stream",
+      "containedIn": { "@id": "texaspokerrobot_repository" },
+      "includes": "show_left/data_*.npz"
+    },
+    {
+      "@type": "sc:FileSet",
+      "@id": "show_right_npz",
+      "name": "show_right_npz",
+      "description": "105 NPZ demonstrations for the show_right primitive.",
+      "encodingFormat": "application/octet-stream",
+      "containedIn": { "@id": "texaspokerrobot_repository" },
+      "includes": "show_right/data_*.npz"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "demonstrations",
+      "name": "demonstrations",
+      "description": "One record per NPZ demonstration archive. Primitive and episode index are derived from the repository path pattern '<primitive>/data_<episode>.npz'.",
+      "key": [{ "@id": "demonstrations/file_path" }],
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "demonstrations/file_path",
+          "name": "file_path",
+          "description": "Repository-relative path to the NPZ demonstration file.",
+          "dataType": "sc:Text",
+          "source": {
+            "distribution": { "@id": "all_npz_demonstrations" },
+            "extract": { "fileProperty": "fullpath" }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "demonstrations/primitive",
+          "name": "primitive",
+          "description": "Atomic card or chip manipulation primitive for this demonstration.",
+          "dataType": "sc:Text",
+          "source": {
+            "distribution": { "@id": "all_npz_demonstrations" },
+            "extract": { "fileProperty": "fullpath" },
+            "transform": { "regex": "^([^/]+)/data_\\d{4}\\.npz$" }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "demonstrations/episode_index",
+          "name": "episode_index",
+          "description": "Demonstration index parsed from the NPZ filename.",
+          "dataType": "sc:Integer",
+          "source": {
+            "distribution": { "@id": "all_npz_demonstrations" },
+            "extract": { "fileProperty": "filename" },
+            "transform": { "regex": "^data_(\\d{4})\\.npz$" }
+          }
+        }
+      ]
+    }
+  ]
+}

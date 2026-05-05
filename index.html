@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dexholdem: A real-world ShadowHand benchmark for dexterous tabletop manipulation and embodied agents</title>
+    <meta
+      name="description"
+      content="Dexholdem is a real-world ShadowHand benchmark for dexterous tabletop manipulation and embodied agents."
+    >
+    <meta property="og:title" content="Dexholdem">
+    <meta
+      property="og:description"
+      content="A real-world ShadowHand benchmark for dexterous tabletop manipulation and embodied agents."
+    >
+    <meta property="og:image" content="assets/images/overview-policy-teaser.png">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header" id="top">
+      <a class="brand" href="#top" aria-label="Dexholdem home">
+        <span class="brand-mark">D</span>
+        <span>Dexholdem</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="#abstract">Abstract</a>
+        <a href="#benchmark">Benchmark</a>
+        <a href="#demos">Demos</a>
+        <a href="#results">Results</a>
+        <a href="#resources">Resources</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-content">
+          <p class="venue">NeurIPS 2026 Dataset &amp; Benchmark Track</p>
+          <h1 id="hero-title">
+            <span class="title-main">Dexholdem:</span>
+            <span class="title-tail">A real-world ShadowHand benchmark for dexterous tabletop manipulation and embodied agents</span>
+          </h1>
+          <p class="hero-subtitle">
+            A physical card-and-chip manipulation suite for studying instruction grounding,
+            scene tracking, and fine-grained multi-finger robot control.
+          </p>
+          <p class="authors">
+            Feng Chen<sup>*&dagger;</sup>, Tianzhe Chu<sup>*</sup>, Li Sun<sup>*</sup>,
+            Pei Zhou<sup>*</sup>, Zhuxiu Xu, Shenghua Gao, Yuexiang Zhai,
+            Yanchao Yang, Yi Ma
+          </p>
+          <p class="author-note">* Equal contribution. &dagger; Project lead.</p>
+
+          <div class="hero-actions" aria-label="Project links">
+            <a class="button primary" href="assets/papers/dexas-holdem-neurips2026.pdf">Paper</a>
+            <a class="button" href="https://huggingface.co/datasets/Winniechen2002/TexasPokerRobot">Dataset</a>
+            <a class="button" href="#demos">Demos &amp; Videos</a>
+            <a class="button" href="assets/data/croissant.json">Croissant</a>
+          </div>
+        </div>
+
+        <dl class="hero-metrics" aria-label="Benchmark statistics">
+          <div>
+            <dt>1,470</dt>
+            <dd>real-world demonstrations</dd>
+          </div>
+          <div>
+            <dt>14</dt>
+            <dd>atomic manipulation primitives</dd>
+          </div>
+          <div>
+            <dt>3</dt>
+            <dd>RGB-D viewpoints plus proprioception</dd>
+          </div>
+          <div>
+            <dt>80</dt>
+            <dd>physical rollouts per policy</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="section tight" id="abstract" aria-labelledby="abstract-title">
+        <div class="section-heading">
+          <p class="eyebrow">Abstract</p>
+          <h2 id="abstract-title">A benchmark for grounding instructions in contact-rich tabletop control.</h2>
+        </div>
+        <div class="abstract-body">
+          <p>
+            Evaluating language-conditioned embodied systems in realistic physical scenes remains difficult
+            because existing benchmarks often separate semantic reasoning from dexterous execution.
+            Dexholdem couples semantic grounding, sequential state tracking, and fine-grained
+            multi-finger manipulation in a Texas Hold'em-style tabletop setting.
+          </p>
+          <p>
+            The benchmark contains 1,470 teleoperated demonstrations across 14 card and chip primitives,
+            with standardized task definitions, shared initial-state randomization, and objective
+            primitive-level success criteria. In completed physical trials over the 14-primitive schedule,
+            the best-performing policy achieves a 47.5% scene-preserving success rate and a 61.2%
+            task completion rate when disruptive completions are also counted.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" id="benchmark" aria-labelledby="benchmark-title">
+        <div class="section-heading">
+          <p class="eyebrow">Benchmark</p>
+          <h2 id="benchmark-title">Texas Hold'em-style manipulation, without evaluating poker intelligence.</h2>
+          <p>
+            The task domain uses cards and chips as semantically structured objects. Policies must identify
+            the requested target, execute a precise manipulation primitive, and preserve the tabletop state
+            for subsequent interaction.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <h3>Real Robot Setup</h3>
+            <p>
+              A ShadowHand mounted on a UR10e operates on a standardized card-and-chip table with
+              top-down, third-person, and wrist camera observations.
+            </p>
+          </article>
+          <article class="feature-card">
+            <h3>Instruction-Conditioned Skills</h3>
+            <p>
+              The suite covers card pickup, put-down, reveal, and chip push/pull primitives across
+              four chip denominations.
+            </p>
+          </article>
+          <article class="feature-card">
+            <h3>Scene-Preserving Evaluation</h3>
+            <p>
+              Success requires both completing the requested primitive and leaving unrelated objects
+              usable for continued interaction.
+            </p>
+          </article>
+        </div>
+
+        <figure class="wide-figure">
+          <img src="assets/images/benchmark-pipeline.jpg" alt="Dexholdem agent benchmark and policy model pipeline">
+          <figcaption>
+            Benchmark loop and policy-model interface: perception summarizes the table state, a router
+            selects a primitive, and policy models execute actions from multi-view observations.
+          </figcaption>
+        </figure>
+
+        <div class="split-panel">
+          <div>
+            <h3>Primitive Suite</h3>
+            <p>
+              Each primitive has a canonical instruction template, train/validation demonstrations,
+              and physical rollout schedule.
+            </p>
+            <div class="primitive-list" aria-label="Dexholdem primitive list">
+              <span>pick_up_left</span>
+              <span>pick_up_right</span>
+              <span>put_down_left</span>
+              <span>put_down_right</span>
+              <span>show_left</span>
+              <span>show_right</span>
+              <span>push_5</span>
+              <span>push_10</span>
+              <span>push_50</span>
+              <span>push_100</span>
+              <span>pull_5</span>
+              <span>pull_10</span>
+              <span>pull_50</span>
+              <span>pull_100</span>
+            </div>
+          </div>
+          <div class="spec-table-wrap">
+            <table class="spec-table">
+              <caption>Dataset and observation summary</caption>
+              <tbody>
+                <tr>
+                  <th scope="row">Platform</th>
+                  <td>ShadowHand on UR10e, real world</td>
+                </tr>
+                <tr>
+                  <th scope="row">Objects</th>
+                  <td>Standard poker cards and 5/10/50/100 chips</td>
+                </tr>
+                <tr>
+                  <th scope="row">Observations</th>
+                  <td>Top-down, third-person, wrist RGB-D views plus 30 robot joint states</td>
+                </tr>
+                <tr>
+                  <th scope="row">Data Split</th>
+                  <td>100 train and 5 validation trajectories per primitive</td>
+                </tr>
+                <tr>
+                  <th scope="row">Scoring</th>
+                  <td>SPSR and TCR over 80 physical rollouts per policy</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="section visual-band" aria-labelledby="views-title">
+        <div class="section-heading">
+          <p class="eyebrow">Observation Views</p>
+          <h2 id="views-title">Multi-view evidence for layout, contact, and execution state.</h2>
+        </div>
+        <div class="view-grid">
+          <figure>
+            <img src="assets/images/topdown-camera.png" alt="Top-down view of cards and chips on the Dexholdem table">
+            <figcaption>Top-down camera</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/images/third-person-camera.png" alt="Third-person view of the robot arm and Hold'em table">
+            <figcaption>Third-person camera</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/images/wrist-camera.png" alt="Wrist camera view near the dexterous robot hand">
+            <figcaption>Wrist camera</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section" id="demos" aria-labelledby="demos-title">
+        <div class="section-heading">
+          <p class="eyebrow">Demos &amp; Videos</p>
+          <h2 id="demos-title">Robot rollout gallery and qualitative examples.</h2>
+          <p>
+            Demo videos will appear here as hosted clips for primitive rollouts, contact-rich execution,
+            and policy-comparison failure cases.
+          </p>
+        </div>
+
+        <div class="demo-grid">
+          <article class="demo-card">
+            <img src="assets/images/topdown-camera.png" alt="Poster for a card and chip tabletop manipulation demo">
+            <div class="demo-copy">
+              <p class="demo-label">Primitive rollout</p>
+              <h3>Card pickup and placement</h3>
+              <p>Fine-grained card contact under instruction-conditioned control.</p>
+            </div>
+          </article>
+          <article class="demo-card">
+            <img src="assets/images/wrist-camera.png" alt="Poster for a wrist-view dexterous manipulation demo">
+            <div class="demo-copy">
+              <p class="demo-label">Contact view</p>
+              <h3>Wrist-camera manipulation</h3>
+              <p>Close-range evidence for grasp, reveal, and placement verification.</p>
+            </div>
+          </article>
+          <article class="demo-card">
+            <img src="assets/images/third-person-camera.png" alt="Poster for a third-person robot execution demo">
+            <div class="demo-copy">
+              <p class="demo-label">Execution trace</p>
+              <h3>Robot policy rollout</h3>
+              <p>Third-person view for arm trajectory and scene disturbance analysis.</p>
+            </div>
+          </article>
+          <article class="demo-card">
+            <img src="assets/images/policy-results-teaser.png" alt="Poster for policy comparison video">
+            <div class="demo-copy">
+              <p class="demo-label">Benchmark analysis</p>
+              <h3>Policy comparison</h3>
+              <p>Qualitative failures and successes across pretrained and task-trained policies.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="results" aria-labelledby="results-title">
+        <div class="section-heading">
+          <p class="eyebrow">Results</p>
+          <h2 id="results-title">Physical policy evaluation over the 14-primitive schedule.</h2>
+          <p>
+            SPSR counts only scene-preserving success. TCR also counts disruptive completions where
+            the requested primitive is completed but the scene is no longer normally usable.
+          </p>
+        </div>
+
+        <div class="leaderboard-controls" aria-label="Result filters">
+          <button class="filter-button active" type="button" data-filter="all">All</button>
+          <button class="filter-button" type="button" data-filter="vla">VLA / pretrained</button>
+          <button class="filter-button" type="button" data-filter="imitation">Task-trained</button>
+        </div>
+
+        <div class="table-wrap">
+          <table class="leaderboard" id="leaderboard">
+            <caption>Aggregate policy-model results over 80 real-world primitive-evaluation trials per policy.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Policy</th>
+                <th scope="col">Family</th>
+                <th scope="col">SP</th>
+                <th scope="col">DC</th>
+                <th scope="col">TF</th>
+                <th scope="col">DF</th>
+                <th scope="col">SPSR</th>
+                <th scope="col">TCR</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-family="vla">
+                <th scope="row">&pi;<sub>0.5</sub></th>
+                <td>VLA</td>
+                <td>38</td>
+                <td>11</td>
+                <td>31</td>
+                <td>0</td>
+                <td><span class="bar-value" style="--w: 47.5%;">47.5%</span></td>
+                <td><span class="bar-value strong" style="--w: 61.2%;">61.2%</span></td>
+              </tr>
+              <tr data-family="vla">
+                <th scope="row">&pi;<sub>0</sub></th>
+                <td>VLA</td>
+                <td>38</td>
+                <td>8</td>
+                <td>33</td>
+                <td>1</td>
+                <td><span class="bar-value" style="--w: 47.5%;">47.5%</span></td>
+                <td><span class="bar-value" style="--w: 57.5%;">57.5%</span></td>
+              </tr>
+              <tr data-family="vla">
+                <th scope="row">RDT</th>
+                <td>Robot-pretrained</td>
+                <td>24</td>
+                <td>13</td>
+                <td>40</td>
+                <td>3</td>
+                <td><span class="bar-value" style="--w: 30.0%;">30.0%</span></td>
+                <td><span class="bar-value" style="--w: 46.2%;">46.2%</span></td>
+              </tr>
+              <tr data-family="imitation">
+                <th scope="row">DP (DINO)</th>
+                <td>Task-trained</td>
+                <td>21</td>
+                <td>8</td>
+                <td>48</td>
+                <td>3</td>
+                <td><span class="bar-value" style="--w: 26.2%;">26.2%</span></td>
+                <td><span class="bar-value" style="--w: 36.2%;">36.2%</span></td>
+              </tr>
+              <tr data-family="imitation">
+                <th scope="row">DP-Transformer</th>
+                <td>Task-trained</td>
+                <td>11</td>
+                <td>5</td>
+                <td>46</td>
+                <td>18</td>
+                <td><span class="bar-value" style="--w: 13.8%;">13.8%</span></td>
+                <td><span class="bar-value" style="--w: 20.0%;">20.0%</span></td>
+              </tr>
+              <tr data-family="imitation">
+                <th scope="row">RDT-small</th>
+                <td>Task-trained</td>
+                <td>11</td>
+                <td>3</td>
+                <td>59</td>
+                <td>7</td>
+                <td><span class="bar-value" style="--w: 13.8%;">13.8%</span></td>
+                <td><span class="bar-value" style="--w: 17.5%;">17.5%</span></td>
+              </tr>
+              <tr data-family="imitation">
+                <th scope="row">ACT</th>
+                <td>Task-trained</td>
+                <td>8</td>
+                <td>4</td>
+                <td>67</td>
+                <td>1</td>
+                <td><span class="bar-value" style="--w: 10.0%;">10.0%</span></td>
+                <td><span class="bar-value" style="--w: 15.0%;">15.0%</span></td>
+              </tr>
+              <tr data-family="imitation">
+                <th scope="row">BAKU</th>
+                <td>Task-trained</td>
+                <td>5</td>
+                <td>5</td>
+                <td>67</td>
+                <td>3</td>
+                <td><span class="bar-value" style="--w: 6.2%;">6.2%</span></td>
+                <td><span class="bar-value" style="--w: 12.5%;">12.5%</span></td>
+              </tr>
+              <tr data-family="imitation">
+                <th scope="row">DP-UNet</th>
+                <td>Task-trained</td>
+                <td>1</td>
+                <td>0</td>
+                <td>79</td>
+                <td>0</td>
+                <td><span class="bar-value" style="--w: 1.2%;">1.2%</span></td>
+                <td><span class="bar-value" style="--w: 1.2%;">1.2%</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="result-figures">
+          <figure>
+            <img src="assets/images/policy-results-teaser.png" alt="Policy results chart for Dexholdem">
+            <figcaption>Policy pretraining scale and task completion rate.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/images/rdt-pretraining-final-loss.png" alt="RDT final validation loss scaling chart">
+            <figcaption>RDT final validation loss under data-scaling ablations.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section resource-band" id="resources" aria-labelledby="resources-title">
+        <div class="section-heading">
+          <p class="eyebrow">Resources</p>
+          <h2 id="resources-title">Paper, dataset, metadata, and citation.</h2>
+        </div>
+
+        <div class="resource-grid">
+          <a class="resource-link" href="assets/papers/dexas-holdem-neurips2026.pdf">
+            <span>Paper</span>
+            <strong>NeurIPS 2026 PDF</strong>
+          </a>
+          <a class="resource-link" href="https://huggingface.co/datasets/Winniechen2002/TexasPokerRobot">
+            <span>Dataset</span>
+            <strong>TexasPokerRobot on Hugging Face</strong>
+          </a>
+          <a class="resource-link" href="assets/data/croissant.json">
+            <span>Metadata</span>
+            <strong>Croissant JSON-LD</strong>
+          </a>
+          <a class="resource-link" href="https://github.com/DexHoldem/Dexholdem">
+            <span>Website</span>
+            <strong>GitHub repository</strong>
+          </a>
+        </div>
+
+        <div class="citation-box">
+          <div class="citation-heading">
+            <h3>BibTeX</h3>
+            <button class="copy-button" type="button" data-copy-target="bibtex">Copy</button>
+          </div>
+          <pre id="bibtex"><code>@misc{dexasholdem2026,
+  title = {Dexholdem: A real-world ShadowHand benchmark for dexterous tabletop manipulation and embodied agents},
+  author = {Chen, Feng and Chu, Tianzhe and Sun, Li and Zhou, Pei and Xu, Zhuxiu and Gao, Shenghua and Zhai, Yuexiang and Yang, Yanchao and Ma, Yi},
+  year = {2026},
+  note = {NeurIPS 2026 Dataset and Benchmark Track},
+  url = {https://huggingface.co/datasets/Winniechen2002/TexasPokerRobot}
+}</code></pre>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        Built for Dexholdem. Page organization is inspired by
+        <a href="https://os-world.github.io/">OSWorld</a> and
+        <a href="https://www.swebench.com/">SWE-bench</a>.
+      </p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
