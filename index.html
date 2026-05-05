@@ -550,9 +550,41 @@
           <p class="eyebrow">Demos &amp; Release</p>
           <h2 id="demos-title">Videos, runnable skills, and benchmark artifacts.</h2>
           <p>
-            The site is prepared for hosted rollout videos. The released skills repository already
-            provides a runnable agent loop and monitor dashboard for reproducing system-level experiments.
+            Policy-bench rollouts are released as compressed web videos with labels recovered from
+            the original model-task-result filenames. The released skills repository also provides a
+            runnable agent loop and monitor dashboard for reproducing system-level experiments.
           </p>
+        </div>
+
+        <div class="policy-video-block" aria-labelledby="policy-video-title">
+          <div class="policy-video-heading">
+            <div>
+              <p class="demo-label">Policy Bench Rollouts</p>
+              <h3 id="policy-video-title">Compressed real-world demos with model, task, and outcome labels.</h3>
+            </div>
+            <p>
+              Source recordings are 4K 50fps MOV files. The hosted videos are 960x540 H.264 MP4
+              previews with original filenames preserved for traceability.
+            </p>
+          </div>
+
+          <div class="policy-video-controls" aria-label="Policy video filters">
+            <label>
+              <span>Model</span>
+              <select id="policy-model-filter"></select>
+            </label>
+            <label>
+              <span>Outcome</span>
+              <select id="policy-outcome-filter">
+                <option value="all">All outcomes</option>
+                <option value="Success">Success</option>
+                <option value="Fail">Fail</option>
+              </select>
+            </label>
+            <output id="policy-video-count" aria-live="polite"></output>
+          </div>
+
+          <div class="policy-video-grid" id="policy-video-grid"></div>
         </div>
 
         <div class="demo-grid">
