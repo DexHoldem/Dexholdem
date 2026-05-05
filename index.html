@@ -38,7 +38,7 @@
         <div class="hero-content">
           <p class="venue">NeurIPS 2026 Dataset &amp; Benchmark Track</p>
           <h1 id="hero-title">
-            <span class="title-main">DexHoldemBench:</span>
+            <span class="title-main">DexHoldem<wbr>Bench:</span>
             <span class="title-tail">Playing Texas Hold'em with Dexterous Embodied System</span>
           </h1>
           <p class="hero-subtitle">
@@ -215,14 +215,28 @@
         </div>
 
         <div class="system-grid">
-          <figure class="system-figure">
-            <img src="assets/images/activity.png" alt="DexHoldem activity-stage panel showing capture, perceive, reason, act, re-execute, and request human">
-            <figcaption>Activity stages tracked by the runtime loop.</figcaption>
-          </figure>
-          <figure class="system-figure">
-            <img src="assets/images/table-state.png" alt="DexHoldem structured table-state panel for chips, bets, status, and cards">
-            <figcaption>Structured state fields used by perception and routing.</figcaption>
-          </figure>
+          <div class="runtime-panels" aria-label="Runtime state panels">
+            <article class="runtime-panel activity-panel">
+              <p class="panel-title">Activity</p>
+              <ul>
+                <li>Capturing</li>
+                <li>Perceiving</li>
+                <li>Reasoning</li>
+                <li class="is-active">Acting</li>
+                <li>Re-executing</li>
+                <li>Requesting Human</li>
+              </ul>
+            </article>
+            <article class="runtime-panel state-panel">
+              <p class="panel-title">Game State Memory</p>
+              <div class="state-cells">
+                <div><strong>My Chips</strong><span>5: 0 | 10: 0<br>50: 0 | 100: 0</span></div>
+                <div><strong>Opponent Chips</strong><span>5: 0 | 10: 0<br>50: 0 | 100: 0</span></div>
+                <div><strong>My Bet</strong><span>5: 0 | 10: 0<br>50: 0 | 100: 0</span></div>
+                <div><strong>Status</strong><span>My Turn: True<br>Stable: True</span></div>
+              </div>
+            </article>
+          </div>
           <div class="workflow-card">
             <h3>Runtime Contract</h3>
             <ol class="workflow-list">
@@ -559,7 +573,7 @@
             </div>
           </article>
           <article class="demo-card">
-            <img src="assets/images/dexholdem-skills-theme.png" alt="DexHoldem Skills release poster">
+            <img class="contain-image" src="assets/images/method.png" alt="DexHoldemBench system loop release poster">
             <div class="demo-copy">
               <p class="demo-label">Runnable System</p>
               <h3>DexHoldem Skills</h3>
@@ -567,7 +581,7 @@
             </div>
           </article>
           <article class="demo-card">
-            <img src="assets/images/policy-results-teaser.png" alt="Policy comparison chart poster">
+            <img class="contain-image" src="assets/images/model-scale-success.png" alt="Policy model-scale and task-completion chart poster">
             <div class="demo-copy">
               <p class="demo-label">Benchmark Analysis</p>
               <h3>Policy Comparison</h3>
