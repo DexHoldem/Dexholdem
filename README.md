@@ -28,6 +28,8 @@ matching posters under `assets/videos/policy-bench/posters/`. Update
 
 - Paper placeholder: `assets/papers/paper.pdf`
 - Teaser: `assets/images/teaser.png`
+- Policy rollout snapshots: `assets/images/trajectory-*.png`
+- Skills state captures: `assets/images/skills-state-*.jpg`
 - Detail pages: `pages/perception.html`, `pages/policy.html`, `pages/system.html`, `pages/analysis.html`
 - Croissant metadata: `assets/data/croissant.json`
 - Dataset: <https://huggingface.co/datasets/Winniechen2002/TexasPokerRobot>

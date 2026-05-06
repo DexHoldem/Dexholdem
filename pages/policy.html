@@ -34,7 +34,7 @@
             chip primitives executed by a ShadowHand mounted on a UR arm.
           </p>
         </div>
-        <img src="../assets/images/topdown-camera.png" alt="Top-down DexHoldem tabletop camera view">
+        <img src="../assets/images/trajectory-1.png" alt="DexHoldem physical policy rollout trajectory">
       </section>
 
       <section class="detail-section">
@@ -55,6 +55,27 @@
             <h3>80 Rollouts</h3>
             <p>Each policy is evaluated as a single multi-task policy over a fixed primitive schedule.</p>
           </article>
+        </div>
+      </section>
+
+      <section class="detail-section">
+        <div class="section-heading compact-heading">
+          <p class="eyebrow">Observation Streams</p>
+          <h2>Each rollout couples multi-view RGB-D streams with robot state.</h2>
+        </div>
+        <div class="asset-strip camera-strip">
+          <figure>
+            <img src="../assets/images/topdown-camera.png" alt="Top-down DexHoldem camera stream">
+            <figcaption>Top-down camera: table layout, cards, chips, and contact context.</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/images/third-person-camera.png" alt="Third-person DexHoldem camera stream">
+            <figcaption>Third-person camera: arm-hand approach and scene-level motion.</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/images/wrist-camera.png" alt="Wrist DexHoldem camera stream">
+            <figcaption>Wrist camera: local hand-object geometry for precise manipulation.</figcaption>
+          </figure>
         </div>
       </section>
 
@@ -82,9 +103,46 @@
       </section>
 
       <section class="detail-section">
+        <div class="section-heading compact-heading">
+          <p class="eyebrow">Rollout Material</p>
+          <h2>Trajectory snapshots from the released physical policy bench.</h2>
+          <p>
+            The trajectory panels are copied from the policy-benchmark paper assets and provide a
+            compact visual index for the real-world primitive rollouts.
+          </p>
+        </div>
+        <div class="asset-strip six trajectory-gallery">
+          <figure>
+            <img src="../assets/images/trajectory-1.png" alt="DexHoldem policy trajectory snapshot 1">
+            <figcaption>Trajectory 1</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/images/trajectory-2.png" alt="DexHoldem policy trajectory snapshot 2">
+            <figcaption>Trajectory 2</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/images/trajectory-3.png" alt="DexHoldem policy trajectory snapshot 3">
+            <figcaption>Trajectory 3</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/images/trajectory-4.png" alt="DexHoldem policy trajectory snapshot 4">
+            <figcaption>Trajectory 4</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/images/trajectory-5.png" alt="DexHoldem policy trajectory snapshot 5">
+            <figcaption>Trajectory 5</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/images/trajectory-6.png" alt="DexHoldem policy trajectory snapshot 6">
+            <figcaption>Trajectory 6</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="detail-section">
         <div class="table-wrap">
           <table class="leaderboard">
-            <caption>Policy implementations referenced by Dexas-Policy.</caption>
+            <caption>Policy implementations referenced by DexHoldem Policy.</caption>
             <thead>
               <tr>
                 <th scope="col">Model</th>
@@ -130,13 +188,18 @@
       </section>
 
       <section class="detail-section">
-        <figure class="wide-figure">
-          <img src="../assets/images/model-scale-success.png" alt="DexHoldem policy scale and task completion chart">
-          <figcaption>
-            Policy rollouts are scored with scene-preserving success rate and task completion rate,
-            separating clean completion from disruptive completion.
-          </figcaption>
-        </figure>
+        <div class="detail-grid two policy-figure-grid">
+          <figure class="wide-figure">
+            <img src="../assets/images/policy-results-teaser.png" alt="DexHoldem policy benchmark result overview">
+            <figcaption>Aggregate comparison between pretrained VLA policies and task-trained imitation policies.</figcaption>
+          </figure>
+          <figure class="wide-figure">
+            <img src="../assets/images/model-scale-success.png" alt="DexHoldem policy scale and task completion chart">
+            <figcaption>
+              Policy rollouts are scored with scene-preserving success rate and task completion rate.
+            </figcaption>
+          </figure>
+        </div>
       </section>
 
       <section class="detail-section detail-links">
