@@ -321,14 +321,9 @@ pre {
   font-size: 0.91rem;
 }
 
-.teaser-section {
-  padding: clamp(28px, 5vw, 56px) clamp(20px, 5vw, 72px);
-  background: var(--paper-deep);
-}
-
 .teaser-figure {
   width: min(1180px, 100%);
-  margin: 0 auto;
+  margin: 0 0 clamp(24px, 4vw, 38px);
 }
 
 .teaser-figure img {
