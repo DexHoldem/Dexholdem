@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DexHoldem Policy Rollouts</title>
+    <meta
+      name="description"
+      content="DexHoldem policy benchmark details: robot interface, primitive suite, model families, data format, and deployment."
+    >
+    <link rel="stylesheet" href="../styles.css">
+  </head>
+  <body>
+    <header class="site-header scrolled">
+      <a class="brand" href="../index.html" aria-label="DexHoldem home">
+        <span class="brand-mark">D</span>
+        <span>DexHoldem</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="../index.html#benchmark">Benchmark</a>
+        <a href="../index.html#results">Results</a>
+        <a href="../index.html#demos">Demos</a>
+        <a href="../index.html#resources">Resources</a>
+      </nav>
+    </header>
+
+    <main class="detail-page">
+      <section class="detail-hero">
+        <div>
+          <p class="eyebrow">Policy Rollout</p>
+          <h1>Card and Chip Primitives</h1>
+          <p>
+            A real-robot imitation-learning benchmark for 14 instruction-conditioned card and
+            chip primitives executed by a ShadowHand mounted on a UR arm.
+          </p>
+        </div>
+        <img src="../assets/images/topdown-camera.png" alt="Top-down DexHoldem tabletop camera view">
+      </section>
+
+      <section class="detail-section">
+        <div class="detail-grid four">
+          <article>
+            <h3>1,470 Demos</h3>
+            <p>105 accepted teleoperated trajectories per primitive, split into 100 train and 5 validation demonstrations.</p>
+          </article>
+          <article>
+            <h3>30-D Actions</h3>
+            <p>Each policy outputs joint-position targets for 6 UR arm joints and 24 ShadowHand joints.</p>
+          </article>
+          <article>
+            <h3>Three Cameras</h3>
+            <p>Top-down, third-person, and wrist RGB-D streams are paired with robot proprioception.</p>
+          </article>
+          <article>
+            <h3>80 Rollouts</h3>
+            <p>Each policy is evaluated as a single multi-task policy over a fixed primitive schedule.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="detail-section">
+        <div class="section-heading compact-heading">
+          <p class="eyebrow">Primitive Suite</p>
+          <h2>Atomic skills isolate dexterous execution from game-level strategy.</h2>
+        </div>
+        <div class="primitive-list large-list" aria-label="DexHoldem policy primitives">
+          <span>pick_up_left</span>
+          <span>pick_up_right</span>
+          <span>put_down_left</span>
+          <span>put_down_right</span>
+          <span>show_left</span>
+          <span>show_right</span>
+          <span>push_5</span>
+          <span>push_10</span>
+          <span>push_50</span>
+          <span>push_100</span>
+          <span>pull_5</span>
+          <span>pull_10</span>
+          <span>pull_50</span>
+          <span>pull_100</span>
+        </div>
+      </section>
+
+      <section class="detail-section">
+        <div class="table-wrap">
+          <table class="leaderboard">
+            <caption>Policy implementations referenced by Dexas-Policy.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Model</th>
+                <th scope="col">Visual Backbone</th>
+                <th scope="col">Architecture</th>
+                <th scope="col">Role</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Diffusion Policy</th>
+                <td>DinoV2 CLS or ResNet18</td>
+                <td>DDPM/DDIM with Transformer or UNet</td>
+                <td>Task-trained imitation baseline</td>
+              </tr>
+              <tr>
+                <th scope="row">ACT</th>
+                <td>Trainable ResNet18</td>
+                <td>CVAE plus Transformer</td>
+                <td>Action-chunking baseline</td>
+              </tr>
+              <tr>
+                <th scope="row">RDT</th>
+                <td>SigLIP-SO400M</td>
+                <td>Robotics diffusion transformer with T5 text tokens</td>
+                <td>Robot-pretrained or scratch variant</td>
+              </tr>
+              <tr>
+                <th scope="row">Cortex</th>
+                <td>SigLIP-SO400M</td>
+                <td>Hierarchical planner and refiner</td>
+                <td>Policy-repo extension path</td>
+              </tr>
+              <tr>
+                <th scope="row">pi0 / pi0.5</th>
+                <td>OpenPI camera adapters</td>
+                <td>Language-conditioned VLA policies</td>
+                <td>Pretrained policy family</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="detail-section">
+        <figure class="wide-figure">
+          <img src="../assets/images/model-scale-success.png" alt="DexHoldem policy scale and task completion chart">
+          <figcaption>
+            Policy rollouts are scored with scene-preserving success rate and task completion rate,
+            separating clean completion from disruptive completion.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="detail-section detail-links">
+        <a class="button primary" href="https://github.com/DexHoldem/Dexholdem-Policy">DexHoldem Policy Repository</a>
+        <a class="button" href="../index.html#demos">View Demo Videos</a>
+      </section>
+    </main>
+  </body>
+</html>

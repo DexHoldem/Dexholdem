@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DexHoldem Skills System</title>
+    <meta
+      name="description"
+      content="DexHoldem Skills runtime details: capture-parse-route-execute loop, durable state cache, monitor dashboard, and system protocol."
+    >
+    <link rel="stylesheet" href="../styles.css">
+  </head>
+  <body>
+    <header class="site-header scrolled">
+      <a class="brand" href="../index.html" aria-label="DexHoldem home">
+        <span class="brand-mark">D</span>
+        <span>DexHoldem</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="../index.html#system">System</a>
+        <a href="../index.html#perception">Perception</a>
+        <a href="../index.html#demos">Demos</a>
+        <a href="../index.html#resources">Resources</a>
+      </nav>
+    </header>
+
+    <main class="detail-page">
+      <section class="detail-hero">
+        <div>
+          <p class="eyebrow">Runnable System</p>
+          <h1>DexHoldem Skills</h1>
+          <p>
+            A coding-agent native runtime for capture, perception, routing, execution,
+            verification, recovery, and auditable state progression.
+          </p>
+        </div>
+        <img class="detail-contain" src="../assets/images/method.png" alt="DexHoldem system loop">
+      </section>
+
+      <section class="detail-section">
+        <div class="workflow-card detail-workflow">
+          <h3>Runtime Contract</h3>
+          <ol class="workflow-list">
+            <li><strong>Capture</strong><span>Read <code>s_current/00_capture.jpg</code> from the experiment folder.</span></li>
+            <li><strong>Parse</strong><span>Write <code>01_parsed_state.md</code> with loop stage, robot behavior, table fields, and uncertainties.</span></li>
+            <li><strong>Route</strong><span>Run router gates such as <code>visual_parse</code>, <code>resolve_turn</code>, <code>resolve_uncertain_fields</code>, and <code>verify_sequence_complete</code>.</span></li>
+            <li><strong>Execute</strong><span>Translate high-level actions into supported card or chip primitive commands.</span></li>
+            <li><strong>Verify</strong><span>Compare pre/post observations, update retry counters, and decide continue, recover, or request human help.</span></li>
+            <li><strong>Advance</strong><span>Create the next state directory and synchronize durable caches.</span></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="detail-section">
+        <div class="detail-grid three">
+          <article>
+            <h3>Skill Variants</h3>
+            <p>
+              <code>dexholdem-v2</code> supports scoped visual subagents, while
+              <code>dexholdem-v2-native</code> lets one coding agent apply the same visual
+              guidelines directly.
+            </p>
+          </article>
+          <article>
+            <h3>State Files</h3>
+            <p>
+              The experiment stores captured images, parsed states, action records,
+              <code>hole_card_cache.json</code>, and <code>action_sequence.json</code> for replayable
+              inspection.
+            </p>
+          </article>
+          <article>
+            <h3>Monitor Dashboard</h3>
+            <p>
+              The monitor watches the experiment directory and displays current capture, loop stage,
+              table state, safety counters, and human-help alerts.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="detail-section">
+        <div class="table-wrap">
+          <table class="leaderboard">
+            <caption>Supported high-level actions routed by the system layer.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Group</th>
+                <th scope="col">Actions</th>
+                <th scope="col">Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Observation</th>
+                <td><code>wait</code>, <code>view_card</code>, <code>reset_to_init</code></td>
+                <td>Collect information, wait for turn, or reset the physical state.</td>
+              </tr>
+              <tr>
+                <th scope="row">Poker action</th>
+                <td><code>check</code>, <code>fold</code>, <code>call</code>, <code>raise</code>, <code>all_in</code></td>
+                <td>Select legal game-level behavior from parsed table state.</td>
+              </tr>
+              <tr>
+                <th scope="row">Primitive execution</th>
+                <td><code>show_card</code>, <code>put_down_card</code>, <code>collect_winnings</code></td>
+                <td>Translate decisions into card and chip motion sequences.</td>
+              </tr>
+              <tr>
+                <th scope="row">Safety</th>
+                <td><code>request_human</code>, <code>stop</code></td>
+                <td>Terminate or escalate when safe continuation is not possible.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="detail-section detail-links">
+        <a class="button primary" href="https://github.com/DexHoldem/DexHoldemSKills">DexHoldem Skills Repository</a>
+        <a class="button" href="../index.html#system">Back To System Overview</a>
+      </section>
+    </main>
+  </body>
+</html>

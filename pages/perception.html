@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DexHoldem Perception Bench</title>
+    <meta
+      name="description"
+      content="DexHoldem agentic perception benchmark details: fixed tabletop states, output artifacts, schema fields, and scoring protocol."
+    >
+    <link rel="stylesheet" href="../styles.css">
+  </head>
+  <body>
+    <header class="site-header scrolled">
+      <a class="brand" href="../index.html" aria-label="DexHoldem home">
+        <span class="brand-mark">D</span>
+        <span>DexHoldem</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="../index.html#abstract">Abstract</a>
+        <a href="../index.html#benchmark">Benchmark</a>
+        <a href="../index.html#demos">Demos</a>
+        <a href="../index.html#resources">Resources</a>
+      </nav>
+    </header>
+
+    <main class="detail-page">
+      <section class="detail-hero">
+        <div>
+          <p class="eyebrow">Perception Problem</p>
+          <h1>Agentic Perception Bench</h1>
+          <p>
+            A controlled state-parsing benchmark that asks an embodied agent to recover the
+            routing-relevant tabletop state before it selects poker actions or robot primitives.
+          </p>
+        </div>
+        <img src="../assets/images/perception-turn-gate.jpg" alt="DexHoldem turn-gate perception state">
+      </section>
+
+      <section class="detail-section">
+        <div class="section-heading compact-heading">
+          <p class="eyebrow">Task Definition</p>
+          <h2>Parse visual state into auditable routing facts.</h2>
+        </div>
+        <div class="detail-grid three">
+          <article>
+            <h3>36 Fixed Problems</h3>
+            <p>
+              The released problem list covers turn gates, opponent-wait states, robot actions in
+              progress, held-card reads, cached-sequence continuation, recovery cases, table
+              decisions, fold wins, showdown outcomes, and collect-winnings sequences.
+            </p>
+          </article>
+          <article>
+            <h3>Required Artifacts</h3>
+            <p>
+              Each run writes <code>visual_summary.json</code>, <code>eval_report.md</code>, and
+              nonempty visual evidence under <code>visual_raw/</code>. Missing or invalid artifacts
+              are scored as incorrect for the affected fields.
+            </p>
+          </article>
+          <article>
+            <h3>Deterministic Scoring</h3>
+            <p>
+              The evaluator normalizes the submitted summary and compares it against hidden labels
+              with strict problem-level exact match plus field-wise diagnostic accuracy.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="detail-section">
+        <div class="table-wrap">
+          <table class="leaderboard perception-results">
+            <caption>Model-facing perception fields and their role in downstream routing.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Field Group</th>
+                <th scope="col">What It Captures</th>
+                <th scope="col">Used By</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Loop stage</th>
+                <td><code>idle</code>, <code>acting</code>, <code>to_recover</code>, <code>down</code>, and related workflow states</td>
+                <td>Router gating and verification</td>
+              </tr>
+              <tr>
+                <th scope="row">Turn and blind</th>
+                <td>Turn ownership, dealer button, small blind, big blind, and wait-vs-act decisions</td>
+                <td>Legal action selection</td>
+              </tr>
+              <tr>
+                <th scope="row">Cards</th>
+                <td>Visible community cards, robot-held card state, and showdown-visible cards</td>
+                <td>Decision context and outcome judgment</td>
+              </tr>
+              <tr>
+                <th scope="row">Chips and bets</th>
+                <td>Robot-side inventory, opponent inventory, current bets, and committed chips</td>
+                <td>Call, raise, all-in, and chip primitive translation</td>
+              </tr>
+              <tr>
+                <th scope="row">Safety</th>
+                <td>Scene stability, robot behavior, uncertainty, retryability, and human-help triggers</td>
+                <td>Recovery and reset decisions</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="detail-section">
+        <div class="view-grid perception-grid">
+          <figure>
+            <img src="../assets/images/perception-turn-gate.jpg" alt="Turn-gate perception problem">
+            <figcaption>Turn gate: identify whether the robot should wait or act.</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/images/perception-recovery.jpg" alt="Recovery perception problem">
+            <figcaption>Recovery: distinguish retryable failures from human-help cases.</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/images/perception-showdown.jpg" alt="Showdown perception problem">
+            <figcaption>Outcome: parse visible cards, chip state, and winner.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="detail-section detail-links">
+        <a class="button primary" href="https://github.com/DexHoldem/DexHoldemSKills">Perception Harness</a>
+        <a class="button" href="../index.html#perception">Back To Results</a>
+      </section>
+    </main>
+  </body>
+</html>

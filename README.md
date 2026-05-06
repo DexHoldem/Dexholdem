@@ -28,6 +28,7 @@ matching posters under `assets/videos/policy-bench/posters/`. Update
 
 - Paper placeholder: `assets/papers/paper.pdf`
 - Teaser: `assets/images/teaser.png`
+- Detail pages: `pages/perception.html`, `pages/policy.html`, `pages/system.html`, `pages/analysis.html`
 - Croissant metadata: `assets/data/croissant.json`
 - Dataset: <https://huggingface.co/datasets/Winniechen2002/TexasPokerRobot>
 - GitHub organization: <https://github.com/DexHoldem>
