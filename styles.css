@@ -321,6 +321,30 @@ pre {
   font-size: 0.91rem;
 }
 
+.teaser-section {
+  padding: clamp(28px, 5vw, 56px) clamp(20px, 5vw, 72px);
+  background: var(--paper-deep);
+}
+
+.teaser-figure {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+}
+
+.teaser-figure img {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+
+.teaser-figure figcaption {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 0.96rem;
+}
+
 .section {
   padding: clamp(68px, 9vw, 112px) clamp(20px, 5vw, 72px);
 }

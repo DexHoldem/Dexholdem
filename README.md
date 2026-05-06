@@ -27,6 +27,7 @@ matching posters under `assets/videos/policy-bench/posters/`. Update
 ## Key Resources
 
 - Paper: `assets/papers/dexholdem-neurips2026.pdf`
+- Teaser: `assets/images/neurips-teaser.png`
 - Croissant metadata: `assets/data/croissant.json`
 - Dataset: <https://huggingface.co/datasets/Winniechen2002/TexasPokerRobot>
 - Skills runtime: <https://github.com/DexHoldem/DexHoldemSKills>
