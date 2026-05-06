@@ -1,7 +1,7 @@
-# DexHoldemBench Website
+# DexHoldem Website
 
 Static project website for the NeurIPS 2026 Dataset & Benchmark submission
-**DexHoldemBench: Playing Texas Hold'em with Dexterous Embodied System**.
+**DexHoldem: Playing Texas Hold'em with Dexterous Embodied System**.
 
 Open `index.html` directly in a browser, or serve this folder with any static
 server. The site uses local assets only and has no build step.
@@ -20,9 +20,9 @@ Settings -> Pages -> Source to `GitHub Actions`.
 
 ## Updating Demo Videos
 
-Place released videos under `assets/videos/` and update the cards in
-`index.html` to use `<video controls poster="...">` elements or direct links to
-hosted videos.
+Compressed policy-bench videos live under `assets/videos/policy-bench/`, with
+matching posters under `assets/videos/policy-bench/posters/`. Update
+`policyDemoVideos` in `script.js` when adding new demo files or labels.
 
 ## Key Resources
 

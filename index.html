@@ -3,12 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>DexHoldemBench: Playing Texas Hold'em with Dexterous Embodied System</title>
+    <title>DexHoldem: A real-world ShadowHand benchmark for dexterous tabletop manipulation and embodied agents</title>
     <meta
       name="description"
-      content="DexHoldemBench is a NeurIPS 2026 Dataset & Benchmark project for real-world ShadowHand tabletop manipulation, agentic perception, and embodied Texas Hold'em system evaluation."
+      content="DexHoldem is a NeurIPS 2026 Dataset & Benchmark project for real-world ShadowHand tabletop manipulation, agentic perception, and embodied Texas Hold'em-style system evaluation."
     >
-    <meta property="og:title" content="DexHoldemBench">
+    <meta property="og:title" content="DexHoldem">
     <meta
       property="og:description"
       content="A real-world ShadowHand benchmark coupling dexterous card-and-chip manipulation with embodied-agent perception and routing."
@@ -18,9 +18,9 @@
   </head>
   <body>
     <header class="site-header" id="top">
-      <a class="brand" href="#top" aria-label="DexHoldemBench home">
+      <a class="brand" href="#top" aria-label="DexHoldem home">
         <span class="brand-mark">D</span>
-        <span>DexHoldemBench</span>
+        <span>DexHoldem</span>
       </a>
       <nav class="site-nav" aria-label="Primary navigation">
         <a href="#abstract">Abstract</a>
@@ -38,19 +38,20 @@
         <div class="hero-content">
           <p class="venue">NeurIPS 2026 Dataset &amp; Benchmark Track</p>
           <h1 id="hero-title">
-            <span class="title-main">DexHoldem<wbr>Bench:</span>
-            <span class="title-tail">Playing Texas Hold'em with Dexterous Embodied System</span>
+            <span class="title-main">DexHoldem:</span>
+            <span class="title-tail">A real-world ShadowHand benchmark for dexterous tabletop manipulation and embodied agents</span>
           </h1>
           <p class="hero-subtitle">
-            A real-world ShadowHand benchmark that couples contact-rich tabletop manipulation,
-            visual state parsing, activity-stage routing, and embodied-agent execution.
+            A Texas Hold'em-style tabletop benchmark that couples semantic grounding,
+            sequential state tracking, and fine-grained multi-finger manipulation on a
+            ShadowHand-UR10e platform.
           </p>
           <p class="authors">
             Feng Chen<sup>*&dagger;</sup>, Tianzhe Chu<sup>*</sup>, Li Sun<sup>*</sup>,
             Pei Zhou<sup>*</sup>, Zhuxiu Xu, Shenghua Gao, Yuexiang Zhai,
             Yanchao Yang, Yi Ma
           </p>
-          <p class="author-note">* Equal contribution. &dagger; Project lead.</p>
+          <p class="author-note">* Equal contribution. &dagger; Project leader.</p>
 
           <div class="hero-actions" aria-label="Project links">
             <a class="button primary" href="assets/papers/dexholdem-neurips2026.pdf">Paper</a>
@@ -71,11 +72,11 @@
           </div>
           <div>
             <dt>36</dt>
-            <dd>agentic perception problems</dd>
+            <dd>fixed agentic perception problems</dd>
           </div>
           <div>
             <dt>3</dt>
-            <dd>benchmark layers</dd>
+            <dd>released evaluation surfaces</dd>
           </div>
         </dl>
       </section>
@@ -93,11 +94,12 @@
             instruction-conditioned visual grounding or long-horizon state tracking.
           </p>
           <p>
-            DexHoldemBench uses a real ShadowHand Texas Hold'em-style tabletop setup to evaluate both
-            low-level dexterous execution and high-level embodied-agent perception. The benchmark contains
-            1,470 demonstrations across 14 primitives, a standardized physical rollout protocol, and a
-            36-problem perception benchmark for parsing turn state, cards, chips, bets, robot activity,
-            recovery conditions, and outcomes.
+            We introduce <strong>DexHoldem</strong>, a real-world ShadowHand benchmark that uses
+            Texas Hold'em-style tabletop interaction to couple semantic grounding, sequential state
+            tracking, and fine-grained multi-finger manipulation. The benchmark contains 1,470
+            teleoperated demonstrations across 14 atomic card and chip primitives, a completed
+            physical policy evaluation, and a 36-problem perception benchmark for parsing turn
+            state, cards, chips, bets, robot activity, recovery conditions, and outcomes.
           </p>
         </div>
       </section>
@@ -107,9 +109,9 @@
           <p class="eyebrow">Benchmark Scope</p>
           <h2 id="benchmark-title">A benchmark suite with three coupled layers.</h2>
           <p>
-            DexHoldemBench is not a benchmark of gambling strategy. It uses Hold'em-style tabletop
-            interaction as a controlled real-world setting where semantic state, object layout, and
-            dexterous physical execution all matter.
+            DexHoldem is not a benchmark of gambling strategy. It uses Hold'em-style tabletop
+            interaction as a controlled real-world setting where semantic state, object layout,
+            long-horizon progress tracking, and dexterous physical execution all matter.
           </p>
         </div>
 
@@ -118,32 +120,35 @@
             <span class="card-index">01</span>
             <h3>Dexterous Hand Policy Bench</h3>
             <p>
-              14 language-instructed atomic primitives over cards and chips, each with 105 real-world
-              demonstrations and a common 30-dimensional joint-position action space.
+              14 language-instructed atomic primitives over cards and chips, each with 105
+              teleoperated demonstrations, a fixed 100/5 split, and a shared 30-dimensional
+              joint-position action space.
             </p>
           </article>
           <article class="feature-card">
             <span class="card-index">02</span>
             <h3>Agentic Perception Bench</h3>
             <p>
-              36 tabletop states test whether an agent can produce a structured visual summary for
-              loop stage, robot behavior, turn ownership, cards, chips, bets, and outcome.
+              36 fixed tabletop states test whether an agent can produce structured artifacts for
+              loop stage, robot behavior, turn ownership, cards, chips, bets, scene stability, and
+              outcome.
             </p>
           </article>
           <article class="feature-card">
             <span class="card-index">03</span>
             <h3>Full-System Protocol</h3>
             <p>
-              A capture-parse-route-execute-verify loop composes visual state parsing, routing,
-              primitive execution, recovery, and human intervention when safe continuation fails.
+              A protocol-only capture-parse-route-execute-verify loop composes visual state
+              parsing, legal high-level actions, primitive execution, recovery, and human
+              intervention when safe continuation fails.
             </p>
           </article>
         </div>
 
         <figure class="wide-figure">
-          <img src="assets/images/method.png" alt="DexHoldemBench system loop showing capture, game-state memory, activity reasoning, and execution">
+          <img src="assets/images/method.png" alt="DexHoldem system loop showing capture, game-state memory, activity reasoning, and execution">
           <figcaption>
-            DexHoldemBench system loop: capture tabletop observations, load and renew game-state
+            DexHoldem system loop: capture tabletop observations, load and renew game-state
             memory, reason over the activity stage, and execute the selected dexterous primitive.
           </figcaption>
         </figure>
@@ -152,11 +157,12 @@
           <div>
             <h3>Primitive Suite</h3>
             <p>
-              The policy benchmark isolates atomic dexterous execution from game-level decision making.
-              Each policy is evaluated under the same physical primitive schedule and scored for both
-              task completion and scene preservation.
+              The policy benchmark isolates atomic dexterous execution from game-level decision
+              making. Each policy is evaluated under the same 80-rollout physical primitive
+              schedule and scored with a four-level rubric that separates task completion from
+              scene preservation.
             </p>
-            <div class="primitive-list" aria-label="DexHoldemBench primitive list">
+            <div class="primitive-list" aria-label="DexHoldem primitive list">
               <span>pick_up_left</span>
               <span>pick_up_right</span>
               <span>put_down_left</span>
@@ -195,7 +201,7 @@
                 </tr>
                 <tr>
                   <th scope="row">Evaluation</th>
-                  <td>SPSR/TCR for policy rollouts; strict exact-match and field-wise perception accuracy</td>
+                  <td>SPSR/TCR for completed policy rollouts; strict exact-match and field-wise perception accuracy; protocol specification for system rollouts</td>
                 </tr>
               </tbody>
             </table>
@@ -208,9 +214,10 @@
           <p class="eyebrow">Embodied System</p>
           <h2 id="system-title">Capture, parse, route, execute, and recover.</h2>
           <p>
-            DexHoldem Skills provides the agent-side runtime for launching a self-contained experiment:
-            the agent reads the current capture, writes a parsed state, routes to the next action,
-            calls the executor, advances the state folder, and repeats.
+            DexHoldem Skills provides the agent-side runtime for launching a self-contained
+            experiment. The released skill variants include <code>dexholdem-v2</code> for scoped
+            subagents and <code>dexholdem-v2-native</code> for a single coding agent that directly
+            follows the visual guidelines, router, executor, and durable state-cache contract.
           </p>
         </div>
 
@@ -221,9 +228,10 @@
               <ul>
                 <li>Capturing</li>
                 <li>Perceiving</li>
-                <li>Reasoning</li>
+                <li>Routing</li>
                 <li class="is-active">Acting</li>
-                <li>Re-executing</li>
+                <li>Verifying</li>
+                <li>Recovering</li>
                 <li>Requesting Human</li>
               </ul>
             </article>
@@ -240,13 +248,15 @@
           <div class="workflow-card">
             <h3>Runtime Contract</h3>
             <ol class="workflow-list">
-              <li><strong>Capture</strong><span>Read the latest state image.</span></li>
-              <li><strong>Parse</strong><span>Write a structured visual summary.</span></li>
-              <li><strong>Route</strong><span>Select wait, perceive, reason, execute, recover, or request human help.</span></li>
-              <li><strong>Execute</strong><span>Translate high-level action into one of the dexterous primitives.</span></li>
-              <li><strong>Advance</strong><span>Create the next state and keep durable caches synchronized.</span></li>
+              <li><strong>Capture</strong><span>Read the latest <code>00_capture.jpg</code> from the current state folder.</span></li>
+              <li><strong>Parse</strong><span>Write <code>01_parsed_state.md</code> with loop stage, robot status, table fields, and uncertainties.</span></li>
+              <li><strong>Route</strong><span>Gate progress through <code>visual_parse</code>, <code>resolve_turn</code>, <code>resolve_uncertain_fields</code>, and <code>verify_sequence_complete</code>.</span></li>
+              <li><strong>Execute</strong><span>Translate a legal high-level action into supported card or chip primitives.</span></li>
+              <li><strong>Verify</strong><span>Compare pre/post observations, update retry counters, and decide continue, recover, or request human help.</span></li>
+              <li><strong>Advance</strong><span>Create the next state and keep hole-card, blind, action-sequence, and safety caches synchronized.</span></li>
             </ol>
             <a class="inline-link" href="https://github.com/DexHoldem/DexHoldemSKills">DexHoldem Skills repository</a>
+            <p class="install-command"><code>npx skills add DexHoldem/DexHoldemSKills</code></p>
           </div>
         </div>
       </section>
@@ -257,8 +267,10 @@
           <h2 id="perception-title">State parsing before any action is allowed.</h2>
           <p>
             Each perception problem asks an agent to parse the routing-relevant table state from
-            visual evidence. The benchmark separates perception from poker-action selection and
-            physical execution, making failures easier to diagnose.
+            visual evidence and write auditable artifacts such as <code>visual_summary.json</code>,
+            <code>eval_report.md</code>, and nonempty visual evidence. The benchmark separates
+            perception from poker-action selection and physical execution, making failures easier
+            to diagnose.
           </p>
         </div>
 
@@ -312,7 +324,8 @@
           <p>
             Policy results are measured over 80 real-world primitive rollouts per model. Perception
             results use strict problem-level exact-match over 36 tabletop states, plus field-wise
-            diagnostic accuracies.
+            diagnostic accuracies. Full-system rollouts are released as an evaluation protocol and
+            runtime interface rather than a completed hand-level leaderboard.
           </p>
         </div>
 
@@ -540,7 +553,7 @@
           </figure>
           <figure>
             <img src="assets/images/rdt-pretraining-final-loss.png" alt="RDT final validation loss scaling chart">
-            <figcaption>RDT final validation loss under DexHoldemBench data-scaling ablations.</figcaption>
+            <figcaption>RDT final validation loss under DexHoldem data-scaling ablations.</figcaption>
           </figure>
         </div>
       </section>
@@ -563,7 +576,7 @@
               <h3 id="policy-video-title">Compressed real-world demos with model, task, and outcome labels.</h3>
             </div>
             <p>
-              Source recordings are 4K 50fps MOV files. The hosted videos are 960x540 H.264 MP4
+              Source recordings are 4K 60fps MOV files. The hosted videos are 960x540 H.264 MP4
               previews with original filenames preserved for traceability.
             </p>
           </div>
@@ -589,7 +602,7 @@
 
         <div class="demo-grid">
           <article class="demo-card">
-            <img src="assets/images/perception-turn-gate.jpg" alt="DexHoldemBench demo poster for turn-gate tabletop state">
+            <img src="assets/images/perception-turn-gate.jpg" alt="DexHoldem demo poster for turn-gate tabletop state">
             <div class="demo-copy">
               <p class="demo-label">Perception Problem</p>
               <h3>Turn Gate</h3>
@@ -597,7 +610,7 @@
             </div>
           </article>
           <article class="demo-card">
-            <img src="assets/images/topdown-camera.png" alt="DexHoldemBench top-down manipulation poster">
+            <img src="assets/images/topdown-camera.png" alt="DexHoldem top-down manipulation poster">
             <div class="demo-copy">
               <p class="demo-label">Policy Rollout</p>
               <h3>Card and Chip Primitives</h3>
@@ -605,11 +618,11 @@
             </div>
           </article>
           <article class="demo-card">
-            <img class="contain-image" src="assets/images/method.png" alt="DexHoldemBench system loop release poster">
+            <img class="contain-image" src="assets/images/method.png" alt="DexHoldem system loop release poster">
             <div class="demo-copy">
               <p class="demo-label">Runnable System</p>
               <h3>DexHoldem Skills</h3>
-              <p>Launch an embodied-agent experiment through a coding-agent native skill.</p>
+              <p>Launch <code>dexholdem-v2-native</code> experiments through a coding-agent native skill.</p>
             </div>
           </article>
           <article class="demo-card">
@@ -653,8 +666,8 @@
             <h3>BibTeX</h3>
             <button class="copy-button" type="button" data-copy-target="bibtex">Copy</button>
           </div>
-          <pre id="bibtex"><code>@misc{dexholdembench2026,
-  title = {DexHoldemBench: Playing Texas Hold'em with Dexterous Embodied System},
+          <pre id="bibtex"><code>@misc{dexholdem2026,
+  title = {DexHoldem: Playing Texas Hold'em with Dexterous Embodied System},
   author = {Chen, Feng and Chu, Tianzhe and Sun, Li and Zhou, Pei and Xu, Zhuxiu and Gao, Shenghua and Zhai, Yuexiang and Yang, Yanchao and Ma, Yi},
   year = {2026},
   note = {NeurIPS 2026 Dataset and Benchmark Track},
@@ -666,7 +679,7 @@
 
     <footer class="site-footer">
       <p>
-        DexHoldemBench project page. Site organization is inspired by
+        DexHoldem project page. Site organization is inspired by
         <a href="https://os-world.github.io/">OSWorld</a> and
         <a href="https://www.swebench.com/">SWE-bench</a>.
       </p>

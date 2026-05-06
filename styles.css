@@ -692,6 +692,12 @@ caption {
   text-decoration: none;
 }
 
+.install-command {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
 .taxonomy-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
