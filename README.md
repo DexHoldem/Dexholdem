@@ -1,6 +1,6 @@
 # DexHoldem Website
 
-Static project website for the NeurIPS 2026 Dataset & Benchmark submission
+Static project website for
 **DexHoldem: Playing Texas Hold'em with Dexterous Embodied System**.
 
 Open `index.html` directly in a browser, or serve this folder with any static
@@ -26,8 +26,10 @@ matching posters under `assets/videos/policy-bench/posters/`. Update
 
 ## Key Resources
 
-- Paper: `assets/papers/dexholdem-neurips2026.pdf`
-- Teaser: `assets/images/neurips-teaser.png`
+- Paper placeholder: `assets/papers/paper.pdf`
+- Teaser: `assets/images/teaser.png`
 - Croissant metadata: `assets/data/croissant.json`
 - Dataset: <https://huggingface.co/datasets/Winniechen2002/TexasPokerRobot>
+- GitHub organization: <https://github.com/DexHoldem>
+- DexHoldem Policy: <https://github.com/DexHoldem/Dexholdem-Policy>
 - Skills runtime: <https://github.com/DexHoldem/DexHoldemSKills>
