@@ -101,6 +101,23 @@ pre {
   font-size: 21px;
 }
 
+.brand-mark.image-mark {
+  padding: 2px;
+  background: #fff;
+  border-color: rgba(255, 255, 255, 0.58);
+}
+
+.site-header.scrolled .brand-mark.image-mark {
+  border-color: rgba(38, 43, 52, 0.14);
+}
+
+.brand-mark.image-mark img {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  object-fit: contain;
+}
+
 .site-nav {
   display: flex;
   align-items: center;
