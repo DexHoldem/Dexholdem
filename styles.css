@@ -1233,6 +1233,7 @@ caption {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  width: min(1180px, 100%);
 }
 
 .leaderboard-controls {
@@ -1462,6 +1463,36 @@ caption {
 
 .site-footer a {
   color: #fff;
+}
+
+.hero-content,
+.hero-metrics,
+.section-heading,
+.teaser-figure,
+.abstract-body,
+.feature-grid,
+.wide-figure,
+.split-panel,
+.view-grid,
+.system-grid,
+.taxonomy-grid,
+.asset-strip,
+.policy-architecture,
+.demo-grid,
+.policy-video-block,
+.leaderboard-controls,
+.table-wrap,
+.result-figures,
+.resource-grid,
+.citation-box,
+.detail-grid,
+.schema-block,
+.detail-note,
+.large-list,
+.detail-workflow,
+.detail-links,
+.site-footer p {
+  margin-inline: auto;
 }
 
 @media (max-width: 980px) {
