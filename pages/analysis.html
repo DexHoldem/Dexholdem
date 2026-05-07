@@ -6,7 +6,7 @@
     <title>DexHoldem Benchmark Analysis</title>
     <meta
       name="description"
-      content="DexHoldem benchmark analysis: policy performance, perception bottlenecks, primitive groups, and data-scaling diagnostics."
+      content="DexHoldem benchmark analysis: policy performance, primitive groups, RDT data-scaling diagnostics, and system-level case-study counters."
     >
     <link rel="icon" href="../assets/images/logo-poker-hand.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../styles.css">
@@ -29,10 +29,10 @@
       <section class="detail-hero">
         <div>
           <p class="eyebrow">Benchmark Analysis</p>
-          <h1>Policy and Agent Results</h1>
+          <h1>Policy and System Analysis</h1>
           <p>
-            DexHoldem separates local task completion from scene preservation, and separates
-            physical policy failures from upstream perception and routing failures.
+            DexHoldem separates local task completion from scene preservation, then studies how
+            primitive reliability compounds during closed-loop system-level rollouts.
           </p>
         </div>
         <img class="detail-contain" src="../assets/images/policy-results-teaser.png" alt="DexHoldem policy benchmark overview chart">
@@ -93,36 +93,6 @@
         </div>
       </section>
 
-      <section class="detail-section" id="agent-evaluation">
-        <div class="section-heading compact-heading">
-          <p class="eyebrow">Agent Evaluation</p>
-          <h2>Table-state parsing remains a bottleneck for embodied agents.</h2>
-        </div>
-        <div class="detail-grid three">
-          <article>
-            <h3>Strict Overall</h3>
-            <p>
-              Overall perception is strict problem-level exact match. The best strict score is
-              34.3%, reached by Opus 4.7.
-            </p>
-          </article>
-          <article>
-            <h3>Field-Wise Gap</h3>
-            <p>
-              GPT 5.5 reaches the best average field-wise accuracy at 66.8%, showing that isolated
-              visual sub-capabilities still fail to compose into complete state recovery.
-            </p>
-          </article>
-          <article>
-            <h3>Chip Bottleneck</h3>
-            <p>
-              Current bet chips and opponent chip inventory are the weakest routing-critical fields,
-              so errors can send the full system into wait or recovery branches.
-            </p>
-          </article>
-        </div>
-      </section>
-
       <section class="detail-section" id="system-level-evaluation">
         <div class="section-heading compact-heading">
           <p class="eyebrow">System-Level Evaluation</p>
@@ -170,7 +140,6 @@
       <section class="detail-section detail-links">
         <a class="button primary" href="../index.html#results">Back To Result Tables</a>
         <a class="button" href="policy.html">Policy Details</a>
-        <a class="button" href="perception.html">Perception Details</a>
         <a class="button" href="system.html">System Details</a>
       </section>
     </main>

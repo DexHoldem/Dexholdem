@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DexHoldem Agent Evaluation</title>
+    <meta
+      name="description"
+      content="DexHoldem agent evaluation results for the 36-problem agentic perception benchmark."
+    >
+    <link rel="icon" href="../assets/images/logo-poker-hand.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../styles.css">
+  </head>
+  <body>
+    <header class="site-header scrolled">
+      <a class="brand" href="../index.html" aria-label="DexHoldem home">
+        <span class="brand-mark image-mark"><img src="../assets/images/logo-poker-hand.svg" alt=""></span>
+        <span>DexHoldem</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="../index.html#benchmark">Benchmark</a>
+        <a href="../index.html#results">Results</a>
+        <a href="../index.html#demos">Demos</a>
+        <a href="../index.html#resources">Resources</a>
+      </nav>
+    </header>
+
+    <main class="detail-page">
+      <section class="detail-hero">
+        <div>
+          <p class="eyebrow">Agent Evaluation</p>
+          <h1>Agentic Perception Results</h1>
+          <p>
+            DexHoldem evaluates agent perceivers on 36 fixed tabletop states. Each perceiver must
+            recover the structured state needed for routing, waiting, recovery, showdown judgment,
+            and legal action selection.
+          </p>
+        </div>
+        <img src="../assets/images/perception-turn-gate.jpg" alt="DexHoldem agent evaluation tabletop state">
+      </section>
+
+      <section class="detail-section">
+        <div class="detail-grid three">
+          <article>
+            <h3>Strict Overall</h3>
+            <p>
+              Overall is strict problem-level exact match. The best strict score is 34.3%, reached
+              by Opus 4.7 in the Claude Code harness.
+            </p>
+          </article>
+          <article>
+            <h3>Field-Wise Avg</h3>
+            <p>
+              GPT 5.5 reaches the best unweighted field-wise average at 66.8%, while its strict
+              Overall remains 31.5%.
+            </p>
+          </article>
+          <article>
+            <h3>Chip Bottleneck</h3>
+            <p>
+              Current bet chips and opponent chip inventory are the weakest routing-critical
+              fields, peaking at 45.8% and 43.8%.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="detail-section">
+        <div class="section-heading compact-heading">
+          <p class="eyebrow">Evaluation Protocol</p>
+          <h2>Each perceiver is evaluated inside its native agent harness.</h2>
+          <p>
+            Codex, Claude Code, and Gemini CLI are given the same agent-view observation,
+            predecessor-state context when relevant, visual guidelines, and workflow guidelines.
+            The submitted structured state is scored by strict exact match and field-wise
+            diagnostic columns.
+          </p>
+        </div>
+        <div class="table-wrap">
+          <table class="leaderboard perception-results">
+            <caption>Per-perceiver accuracy on the 36-problem agentic perception benchmark.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Harness</th>
+                <th scope="col">Perceiver</th>
+                <th scope="col">Overall</th>
+                <th scope="col">LS</th>
+                <th scope="col">TO</th>
+                <th scope="col">BI</th>
+                <th scope="col">CC</th>
+                <th scope="col">CB</th>
+                <th scope="col">RCI</th>
+                <th scope="col">OCI</th>
+                <th scope="col">SO</th>
+                <th scope="col">Avg</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Codex</th><td>GPT 5.5</td><td>31.5</td><td>72.2</td><td>80.6</td><td>100.0</td><td>61.5</td><td>45.8</td><td>62.5</td><td>35.4</td><td>76.2</td><td>66.8</td></tr>
+              <tr><th scope="row">Codex</th><td>GPT 5.4</td><td>31.5</td><td>65.7</td><td>93.5</td><td>100.0</td><td>23.1</td><td>31.2</td><td>56.2</td><td>18.8</td><td>47.6</td><td>54.5</td></tr>
+              <tr><th scope="row">Codex</th><td>GPT 5.4 mini</td><td>25.9</td><td>56.5</td><td>94.4</td><td>99.1</td><td>33.3</td><td>14.6</td><td>29.2</td><td>18.8</td><td>47.6</td><td>49.2</td></tr>
+              <tr><th scope="row">Claude Code</th><td>Opus 4.7</td><td>34.3</td><td>43.5</td><td>93.5</td><td>100.0</td><td>43.6</td><td>31.2</td><td>37.5</td><td>43.8</td><td>0.0</td><td>49.1</td></tr>
+              <tr><th scope="row">Claude Code</th><td>Sonnet 4.6</td><td>25.0</td><td>46.3</td><td>88.0</td><td>100.0</td><td>23.1</td><td>10.4</td><td>29.2</td><td>22.9</td><td>14.3</td><td>41.8</td></tr>
+              <tr><th scope="row">Claude Code</th><td>Haiku 4.5</td><td>13.9</td><td>47.2</td><td>68.5</td><td>91.7</td><td>35.9</td><td>12.5</td><td>25.0</td><td>18.8</td><td>0.0</td><td>37.4</td></tr>
+              <tr><th scope="row">Gemini CLI</th><td>Gemini 3 Flash</td><td>20.4</td><td>63.9</td><td>77.8</td><td>100.0</td><td>28.2</td><td>18.8</td><td>29.2</td><td>22.9</td><td>71.4</td><td>51.5</td></tr>
+              <tr><th scope="row">Gemini CLI</th><td>Gemini 3.1 Flash L.</td><td>10.2</td><td>27.8</td><td>73.1</td><td>94.4</td><td>28.2</td><td>12.5</td><td>22.9</td><td>14.6</td><td>0.0</td><td>34.2</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="detail-section">
+        <div class="section-heading compact-heading">
+          <p class="eyebrow">Failure Modes</p>
+          <h2>Strong isolated fields still fail to compose into full state recovery.</h2>
+          <p>
+            Blind information is nearly saturated and turn ownership is often reliable, but table
+            decision and outcome-judge states require many fields to be correct simultaneously.
+            Exact chip dictionaries are especially brittle because small stacked chips are often
+            partially occluded on the far side of the table.
+          </p>
+        </div>
+        <div class="view-grid perception-grid">
+          <figure>
+            <img src="../assets/images/perception-turn-gate.jpg" alt="Turn-gate agent evaluation problem">
+            <figcaption>Turn gate: decide whether the robot should wait or begin the route.</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/images/perception-recovery.jpg" alt="Recovery agent evaluation problem">
+            <figcaption>Recovery: distinguish retryable physical failures from human-help cases.</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/images/perception-showdown.jpg" alt="Showdown agent evaluation problem">
+            <figcaption>Showdown: parse visible cards, chip state, and terminal outcome.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="detail-section detail-links">
+        <a class="button primary" href="https://github.com/DexHoldem/DexHoldemSKills/tree/main/bench">Agent Bench Data</a>
+        <a class="button" href="perception.html">Perception Protocol</a>
+        <a class="button" href="../index.html#demos">Back To Release Cards</a>
+      </section>
+    </main>
+  </body>
+</html>
