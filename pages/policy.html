@@ -132,7 +132,8 @@
             <h3>Shared Observation Encoder</h3>
             <p>
               DP and ACT consume <code>ObsEncoder</code> features: RGB/depth encoders, robot-state
-              MLPs, and optional instruction embeddings assembled as flat vectors or modality tokens.
+              MLPs, and optional instruction embeddings. DPMax, RDT, and Cortex use specialized
+              patch-token and text-token paths for higher-capacity fusion.
             </p>
           </article>
           <article>
@@ -140,14 +141,15 @@
             <h3>Instruction Conditioning</h3>
             <p>
               DP can concatenate instruction features or use a dedicated condition token. ACT treats
-              instruction as its own token stream. RDT and Cortex use frozen text encoders internally.
+              instruction as its own token stream. DPMax, RDT, and Cortex use instruction tokens in
+              alternating condition-injection paths.
             </p>
           </article>
           <article>
             <span>03</span>
             <h3>Action Generator</h3>
             <p>
-              Diffusion policies denoise action chunks; ACT decodes action queries from a CVAE
+              DP, DPMax, and RDT denoise action chunks; ACT decodes action queries from a CVAE
               latent; Cortex separates trajectory planning from a proprioceptive refiner.
             </p>
           </article>
@@ -218,6 +220,12 @@
                 <td>DinoV2 CLS or ResNet18</td>
                 <td>DDPM/DDIM denoiser with Transformer cross-attention or conditional UNet FiLM blocks</td>
                 <td>ObsEncoder integer/text embedding; optional dedicated condition token</td>
+              </tr>
+              <tr>
+                <th scope="row">DPMax</th>
+                <td>DinoV2 patch tokens</td>
+                <td>Patch-cross-attention diffusion transformer over image-region tokens</td>
+                <td>Learned instruction token alternates with DinoV2 patch-token cross-attention</td>
               </tr>
               <tr>
                 <th scope="row">ACT</th>
