@@ -89,12 +89,12 @@
               </tr>
               <tr>
                 <th scope="row">Community cards</th>
-                <td><strong>CC</strong> visible shared board cards, scored only when community cards are present</td>
+                <td><strong>CC</strong> visible shared board cards from <code>community_cards</code>, scored only when community cards are present</td>
                 <td>Decision context and showdown-state parsing</td>
               </tr>
               <tr>
                 <th scope="row">Chip state</th>
-                <td><strong>CB</strong> current bet chips, <strong>RCI</strong> robot chip inventory, and <strong>OCI</strong> opponent chip inventory</td>
+                <td><strong>CB</strong> current bet chips from <code>my_current_bet</code> and <code>opponent_bet</code>, <strong>RCI</strong> robot chip inventory, and <strong>OCI</strong> opponent chip inventory</td>
                 <td>Call, raise, all-in, collect-winnings, and wait-branch decisions</td>
               </tr>
               <tr>
@@ -104,7 +104,7 @@
               </tr>
               <tr>
                 <th scope="row">Schema support</th>
-                <td><code>scene_stable</code>, <code>uncertain_fields</code>, and compact table dictionaries</td>
+                <td><code>scene_stable</code>, <code>uncertain_fields</code>, <code>my_chips</code>, <code>opponent_chips</code>, and compact table dictionaries</td>
                 <td>Artifact validation and auditable evidence for deterministic scoring</td>
               </tr>
             </tbody>
