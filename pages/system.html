@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>DexHoldem Skills System</title>
+    <title>DexHoldem System Evaluation</title>
     <meta
       name="description"
-      content="DexHoldem Skills runtime details: capture-parse-route-execute loop, durable state cache, monitor dashboard, and system protocol."
+      content="DexHoldem system-level evaluation: Section 3.3 protocol, Section 4.5 GPT 5.5 + pi0 hand-level counters, and Appendix B.3 trajectory panels."
     >
     <link rel="icon" href="../assets/images/logo-poker-hand.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../styles.css">
@@ -19,7 +19,7 @@
       </a>
       <nav class="site-nav" aria-label="Primary navigation">
         <a href="../index.html#system">System</a>
-        <a href="../index.html#perception">Perception</a>
+        <a href="../index.html#results">Results</a>
         <a href="../index.html#demos">Demos</a>
         <a href="../index.html#resources">Resources</a>
       </nav>
@@ -28,169 +28,222 @@
     <main class="detail-page">
       <section class="detail-hero">
         <div>
-          <p class="eyebrow">Runnable System</p>
-          <h1>DexHoldem Skills</h1>
+          <p class="eyebrow">System Evaluation</p>
+          <h1>Closed-loop hand-level rollouts.</h1>
           <p>
-            A coding-agent native runtime for capture, perception, routing, execution,
-            verification, recovery, and auditable state progression.
+            This page follows the paper's Section 3.3, Section 4.5, and Appendix B.3. It is
+            separate from agent evaluation: the agent benchmark isolates visual state parsing,
+            while system evaluation composes GPT 5.5, deterministic routing, and the pi0
+            dexterous policy in real hand-level rollouts.
           </p>
         </div>
-        <img class="detail-contain" src="../assets/images/method.png" alt="DexHoldem system loop">
+        <img src="../assets/images/system-level-trajectory.jpg" alt="DexHoldem system-level trajectory state">
       </section>
 
       <section class="detail-section">
+        <div class="section-heading compact-heading">
+          <p class="eyebrow">Boundary</p>
+          <h2>Agent evaluation is a perception benchmark; system evaluation is a composed rollout.</h2>
+        </div>
+        <div class="detail-grid two">
+          <article>
+            <h3>Agent Evaluation</h3>
+            <p>
+              The agentic-perception benchmark scores whether a perceiver can recover structured
+              table state from fixed tabletop states. It is isolated from poker-action selection and
+              physical execution.
+            </p>
+          </article>
+          <article>
+            <h3>System Evaluation</h3>
+            <p>
+              The system-level study runs closed-loop Texas Hold'em-style hands. It counts
+              captured states, wait branches, recovery dispatches, human-help requests, and
+              repeated pi0 primitive dispatches across the full trace.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="detail-section">
+        <div class="section-heading compact-heading">
+          <p class="eyebrow">Section 3.3 Protocol</p>
+          <h2>The system composes perception, routing, and dexterous-policy execution.</h2>
+          <p>
+            At each loop step, the agent captures an agent-view image, parses it into structured
+            state, routes that state through deterministic workflow gates, and dispatches a
+            dexterous-policy primitive whenever physical motion is required. The main agent is
+            not invoked at every captured state: the router handles waiting, verification,
+            completion, continuation of pending multi-atom translations, and retryable recovery.
+          </p>
+        </div>
+        <figure class="wide-figure">
+          <img class="detail-contain" src="../assets/images/method.png" alt="DexHoldem embodied-agent system loop">
+          <figcaption>
+            Figure 2 protocol context: the agent loads structured game-state memory and routes to
+            a dexterous policy only when the scene is stable and an executable primitive is needed.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="detail-section" id="system-level-evaluation">
+        <div class="section-heading compact-heading">
+          <p class="eyebrow">Section 4.5 / Table 3</p>
+          <h2>Three GPT 5.5 + pi0 traces are reported as operational counters.</h2>
+          <p>
+            The reported instantiation uses the Codex harness with GPT 5.5 as both perceiver and
+            main agent, paired with the pi0 dexterous policy. These three released trajectories are
+            case studies, not a statistically powered success-rate estimate.
+          </p>
+        </div>
+        <div class="table-wrap">
+          <table class="leaderboard system-eval-table">
+            <caption>Case studies of per-trajectory operational counters under the system-level protocol.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Agent</th>
+                <th scope="col">Policy</th>
+                <th scope="col">Trajectory</th>
+                <th scope="col">States</th>
+                <th scope="col">AP</th>
+                <th scope="col">DPP</th>
+                <th scope="col">WA</th>
+                <th scope="col">HL</th>
+                <th scope="col">RC</th>
+                <th scope="col">LAP</th>
+                <th scope="col">LDP</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">GPT 5.5</th><td>pi0</td><td>(i)</td><td>22</td><td>8</td><td>7</td><td>7</td><td>2</td><td>1</td><td><code>view_card(L)</code></td><td><code>pick_up_left</code></td></tr>
+              <tr><th scope="row">GPT 5.5</th><td>pi0</td><td>(ii)</td><td>54</td><td>13</td><td>22</td><td>26</td><td>0</td><td>1</td><td><code>collect_winnings</code></td><td><code>push_100</code></td></tr>
+              <tr><th scope="row">GPT 5.5</th><td>pi0</td><td>(iii)</td><td>23</td><td>8</td><td>10</td><td>7</td><td>0</td><td>1</td><td><code>call</code></td><td><code>pick_up_left</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="detail-grid three">
+          <article>
+            <h3>AP / DPP</h3>
+            <p>
+              AP counts dispatched agent primitives, including <code>request_human</code>. DPP
+              counts dispatched dexterous-policy primitives from the physical policy suite.
+            </p>
+          </article>
+          <article>
+            <h3>WA / HL / RC</h3>
+            <p>
+              WA counts wait-branch events; HL counts human-help requests; RC counts recovery
+              dispatches for retryable failures.
+            </p>
+          </article>
+          <article>
+            <h3>LAP / LDP</h3>
+            <p>
+              LAP and LDP identify the agent primitive and dexterous-policy primitive occupying
+              the most consecutive states. They are longest-run counters, not final actions.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="detail-section">
+        <div class="section-heading compact-heading">
+          <p class="eyebrow">Section 4.5 Case Study</p>
+          <h2>Trajectory (iii) shows the compounding closed-loop reliability gap.</h2>
+          <p>
+            The main text inspects trajectory (iii). Across 23 states, GPT 5.5 makes eight
+            high-level decisions: it views both hole cards, raises 10 chips, checks twice, calls a
+            200-chip bet, and reveals both cards at showdown. About one third of the states are
+            spent in wait branches around chip or card changes. The run has one router-level
+            retry, never requests human help, and terminates after the second card reveal.
+          </p>
+        </div>
+        <div class="detail-grid three">
+          <article>
+            <h3>Trajectory (i)</h3>
+            <p>
+              A 22-state rollout: <code>view_card</code> on both hole cards, two
+              <code>request_human</code> escalations when the scene fails to settle, then
+              <code>raise (10)</code>, <code>check</code>, <code>check</code>, and
+              <code>call</code>. The final call is interrupted before chip-push completion.
+            </p>
+          </article>
+          <article>
+            <h3>Trajectory (ii)</h3>
+            <p>
+              A 54-state rollout: both hole cards are read, the bet escalates through
+              <code>raise (5)</code>, <code>raise (105)</code>, two <code>raise (100)</code>
+              actions, and <code>all_in</code>, then showdown and <code>collect_winnings</code>
+              expand into chip-pull atoms.
+            </p>
+          </article>
+          <article>
+            <h3>Trajectory (iii)</h3>
+            <p>
+              A 23-state rollout: both hole cards are read, the betting sequence is
+              <code>raise (10)</code>, <code>check</code>, <code>check</code>, and
+              <code>call</code>, and showdown finishes through <code>show_card(L)</code> and
+              <code>show_card(R)</code> after one router-level retry.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="detail-section">
+        <div class="section-heading compact-heading">
+          <p class="eyebrow">Appendix B.3</p>
+          <h2>Trace labels reveal where the router, main agent, and pi0 policy each act.</h2>
+          <p>
+            Appendix B.3 shows per-state agent-view captures for all three rollouts. The label
+            grammar is part of the evaluation: it distinguishes main-agent choices, waits,
+            continuation of already translated multi-atom primitives, verification, completion,
+            recovery, and terminal states.
+          </p>
+        </div>
         <div class="workflow-card detail-workflow">
-          <h3>Runtime Contract</h3>
+          <h3>State-Label Grammar</h3>
           <ol class="workflow-list">
-            <li><strong>Capture</strong><span>Read <code>s_current/00_capture.jpg</code> from the experiment folder.</span></li>
-            <li><strong>Parse</strong><span>Write <code>01_parsed_state.md</code> with loop stage, robot behavior, table fields, and uncertainties.</span></li>
-            <li><strong>Route</strong><span>Run router gates such as <code>visual_parse</code>, <code>resolve_turn</code>, <code>resolve_uncertain_fields</code>, and <code>verify_sequence_complete</code>.</span></li>
-            <li><strong>Execute</strong><span>Translate high-level actions into supported card or chip primitive commands.</span></li>
-            <li><strong>Verify</strong><span>Compare pre/post observations, update retry counters, and decide continue, recover, or request human help.</span></li>
-            <li><strong>Advance</strong><span>Create the next state directory and synchronize durable caches.</span></li>
+            <li><strong>Main-Agent Choice</strong><span>Labels such as <code>view_card(L)</code>, <code>raise (10)</code>, <code>check</code>, <code>call</code>, <code>show_card(R)</code>, <code>collect_winnings</code>, and <code>request_human</code>.</span></li>
+            <li><strong>Wait Branch</strong><span><code>wait (scene)</code>, <code>wait (acting)</code>, and <code>wait (turn)</code> indicate scene instability, robot still acting, or not the robot's turn.</span></li>
+            <li><strong>Continuation</strong><span><code>cont.</code> labels advance a multi-atom translation already chosen earlier, such as another <code>push_5</code> atom in a <code>raise (105)</code> sequence.</span></li>
+            <li><strong>Router Gate</strong><span><code>cache hole card</code>, <code>verify</code>, <code>complete</code>, <code>retry</code>, and <code>end</code> expose visual reads, verification, recovery, and terminal rollout states.</span></li>
           </ol>
         </div>
       </section>
 
       <section class="detail-section">
-        <figure class="wide-figure">
-          <img src="../assets/images/system-line.png" alt="DexHoldem runtime system visualization">
-          <figcaption>
-            Released system material connects visual capture, cached state, action routing, and
-            primitive execution through an auditable agent loop.
-          </figcaption>
-        </figure>
-      </section>
-
-      <section class="detail-section">
         <div class="section-heading compact-heading">
-          <p class="eyebrow">Runtime States</p>
-          <h2>Example state folders from DexHoldem Skills.</h2>
+          <p class="eyebrow">Takeaway</p>
+          <h2>System evaluation exposes accumulation, not a single decision outcome.</h2>
           <p>
-            Each state directory stores a capture image plus parsed-state, action, cache, and
-            verification artifacts that make the agent loop inspectable after a run.
+            The counters show that closed-loop execution is dominated by repeated waiting,
+            verification, continuation, and occasional recovery. Even when the policy and
+            perceiver solve parts of the benchmark in isolation, the composed rollout must keep
+            maintaining state, selecting or continuing legal primitives, executing pi0 actions, and
+            verifying the resulting table state across many captured states.
           </p>
         </div>
         <div class="asset-strip state-strip">
           <figure>
-            <img src="../assets/images/skills-state-s0.jpg" alt="DexHoldem Skills example state s0">
-            <figcaption><code>s0</code>: initial visual capture before parsing and route selection.</figcaption>
+            <img src="../assets/images/skills-state-s0.jpg" alt="DexHoldem initial system trace state">
+            <figcaption><code>s0</code>: capture and parse before the first route decision.</figcaption>
           </figure>
           <figure>
-            <img src="../assets/images/skills-state-s1.jpg" alt="DexHoldem Skills example state s1">
-            <figcaption><code>s1</code>: updated tabletop state after an executed primitive.</figcaption>
+            <img src="../assets/images/skills-state-s1.jpg" alt="DexHoldem post-dispatch system trace state">
+            <figcaption><code>s1</code>: table state after a dispatched physical primitive.</figcaption>
           </figure>
           <figure>
-            <img src="../assets/images/skills-state-s2.jpg" alt="DexHoldem Skills example state s2">
-            <figcaption><code>s2</code>: continued run state for verification and next-step routing.</figcaption>
+            <img src="../assets/images/skills-state-s2.jpg" alt="DexHoldem continued system trace state">
+            <figcaption><code>s2</code>: continued verification, wait, or recovery routing.</figcaption>
           </figure>
-        </div>
-      </section>
-
-      <section class="detail-section">
-        <div class="detail-grid three">
-          <article>
-            <h3>Skill Variants</h3>
-            <p>
-              The released Skills package now includes native, isolated-perception, and
-              backend-stream variants for different agent/runtime tradeoffs.
-            </p>
-          </article>
-          <article>
-            <h3>State Files</h3>
-            <p>
-              The experiment stores captured images, parsed states, action records,
-              <code>hole_card_cache.json</code>, and <code>action_sequence.json</code> for replayable
-              inspection.
-            </p>
-          </article>
-          <article>
-            <h3>Monitor Dashboard</h3>
-            <p>
-              The monitor watches the experiment directory and displays current capture, loop stage,
-              table state, safety counters, and human-help alerts.
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <section class="detail-section">
-        <div class="table-wrap">
-          <table class="leaderboard">
-            <caption>Released DexHoldem Skills variants.</caption>
-            <thead>
-              <tr>
-                <th scope="col">Variant</th>
-                <th scope="col">Perception Mode</th>
-                <th scope="col">Runtime Role</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row"><code>dexholdem-v2</code></th>
-                <td>Scoped visual subagents</td>
-                <td>Original coding-agent workflow with helper scripts and visual guidelines.</td>
-              </tr>
-              <tr>
-                <th scope="row"><code>dexholdem-v2-native</code></th>
-                <td>Main agent reads visual guidelines directly</td>
-                <td>Single-agent capture, parse, route, execute, verify, and advance loop.</td>
-              </tr>
-              <tr>
-                <th scope="row"><code>dexholdem-v2-isolated</code></th>
-                <td>Visible <code>visual_agent</code> writes <code>01_parsed_state.md</code></td>
-                <td>Main agent owns poker reasoning, caches, robot actions, and recovery decisions.</td>
-              </tr>
-              <tr>
-                <th scope="row"><code>dexholdem-v2-backend-preview</code></th>
-                <td>Background perceiver streams fresh parses into <code>/tmp</code></td>
-                <td>Main loop imports validated stream states into the canonical <code>s_current</code>.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section class="detail-section">
-        <div class="table-wrap">
-          <table class="leaderboard">
-            <caption>Supported high-level actions routed by the system layer.</caption>
-            <thead>
-              <tr>
-                <th scope="col">Group</th>
-                <th scope="col">Actions</th>
-                <th scope="col">Purpose</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">Observation</th>
-                <td><code>wait</code>, <code>view_card</code>, <code>reset_to_init</code></td>
-                <td>Collect information, wait for turn, or reset the physical state.</td>
-              </tr>
-              <tr>
-                <th scope="row">Poker action</th>
-                <td><code>check</code>, <code>fold</code>, <code>call</code>, <code>raise</code>, <code>all_in</code></td>
-                <td>Select legal game-level behavior from parsed table state.</td>
-              </tr>
-              <tr>
-                <th scope="row">Primitive execution</th>
-                <td><code>show_card</code>, <code>put_down_card</code>, <code>collect_winnings</code></td>
-                <td>Translate decisions into card and chip motion sequences.</td>
-              </tr>
-              <tr>
-                <th scope="row">Safety</th>
-                <td><code>request_human</code>, <code>stop</code></td>
-                <td>Terminate or escalate when safe continuation is not possible.</td>
-              </tr>
-            </tbody>
-          </table>
         </div>
       </section>
 
       <section class="detail-section detail-links">
-        <a class="button primary" href="https://github.com/DexHoldem/DexHoldemSKills">DexHoldem Skills Repository</a>
-        <a class="button" href="../index.html#system">Back To System Overview</a>
+        <a class="button primary" href="../index.html#system">Back To System Overview</a>
+        <a class="button" href="agent.html">Agent Evaluation</a>
+        <a class="button" href="policy.html">Policy Details</a>
+        <a class="button" href="https://github.com/DexHoldem/DexHoldemSKills">DexHoldem Skills Repository</a>
       </section>
     </main>
   </body>

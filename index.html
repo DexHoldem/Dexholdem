@@ -143,7 +143,7 @@
             </p>
             <span class="card-link-label">Policy Details</span>
           </a>
-          <a class="feature-card feature-card-link" href="pages/perception.html" aria-label="Open Agentic Perception Bench details">
+          <a class="feature-card feature-card-link" href="pages/agent.html" aria-label="Open Agent Evaluation details">
             <span class="card-index">02</span>
             <h3>Agentic Perception Bench</h3>
             <p>
@@ -151,7 +151,7 @@
               loop stage, robot behavior, turn ownership, cards, chips, bets, scene stability, and
               outcome.
             </p>
-            <span class="card-link-label">Perception Details</span>
+            <span class="card-link-label">Agent Evaluation</span>
           </a>
           <a class="feature-card feature-card-link" href="pages/system.html" aria-label="Open Full-System Protocol details">
             <span class="card-index">03</span>
@@ -234,10 +234,10 @@
           <p class="eyebrow">Embodied System</p>
           <h2 id="system-title">Capture, parse, route, execute, and recover.</h2>
           <p>
-            DexHoldem Skills provides the agent-side runtime for launching a self-contained
-            experiment. The released skill variants include <code>dexholdem-v2</code> for scoped
-            subagents and <code>dexholdem-v2-native</code> for a single coding agent that directly
-            follows the visual guidelines, router, executor, and durable state-cache contract.
+            DexHoldem composes an agent-view perception loop with dexterous-policy primitives.
+            The agent captures a tabletop image, renews structured game-state memory, routes
+            through deterministic workflow gates, and dispatches a robot primitive only when
+            physical motion is required.
           </p>
         </div>
 
@@ -272,15 +272,14 @@
           <div class="workflow-card">
             <h3>Runtime Contract</h3>
             <ol class="workflow-list">
-              <li><strong>Capture</strong><span>Read the latest <code>00_capture.jpg</code> from the current state folder.</span></li>
-              <li><strong>Parse</strong><span>Write <code>01_parsed_state.md</code> with loop stage, robot status, table fields, and uncertainties.</span></li>
-              <li><strong>Route</strong><span>Gate progress through <code>visual_parse</code>, <code>resolve_turn</code>, <code>resolve_uncertain_fields</code>, and <code>verify_sequence_complete</code>.</span></li>
-              <li><strong>Execute</strong><span>Translate a legal high-level action into supported card or chip primitives.</span></li>
-              <li><strong>Verify</strong><span>Compare pre/post observations, update retry counters, and decide continue, recover, or request human help.</span></li>
-              <li><strong>Advance</strong><span>Create the next state and keep hole-card, blind, action-sequence, and safety caches synchronized.</span></li>
+              <li><strong>Capture</strong><span>Acquire a single agent-view tabletop image for the current loop step.</span></li>
+              <li><strong>Parse</strong><span>Recover loop stage, turn ownership, cards, bets, chip inventories, and showdown outcome.</span></li>
+              <li><strong>Route</strong><span>Gate the state through waiting, verification, continuation, recovery, or legal decision selection.</span></li>
+              <li><strong>Execute</strong><span>Translate a legal agent primitive into one or more policy primitives.</span></li>
+              <li><strong>Verify</strong><span>Check the tabletop state and retry individual failed atoms when recovery is safe.</span></li>
+              <li><strong>Continue</strong><span>Advance pending multi-atom translations without re-prompting the main agent.</span></li>
             </ol>
             <a class="inline-link" href="https://github.com/DexHoldem/DexHoldemSKills">DexHoldem Skills repository</a>
-            <p class="install-command"><code>npx skills add DexHoldem/DexHoldemSKills</code></p>
           </div>
         </div>
       </section>
@@ -635,8 +634,9 @@
           <h2 id="demos-title">Videos, runnable skills, and benchmark artifacts.</h2>
           <p>
             Policy-bench rollouts are released as compressed web videos with labels recovered from
-            the original model-task-result filenames. The released skills repository also provides a
-            runnable agent loop and monitor dashboard for reproducing system-level experiments.
+            the original model-task-result filenames. The system-level release documents the
+            GPT 5.5 + pi0 hand traces, state folders, wait branches, recovery dispatches, and
+            primitive counters used in the paper's case studies.
           </p>
         </div>
 
@@ -696,12 +696,12 @@
               <p>Agentic perception results over 36 tabletop states quantify strict state recovery and field-wise bottlenecks.</p>
             </div>
           </a>
-          <a class="demo-card" href="pages/analysis.html#system-level-evaluation">
+          <a class="demo-card" href="pages/system.html#system-level-evaluation">
             <img src="assets/images/system-level-trajectory.jpg" alt="DexHoldem system-level trajectory state">
             <div class="demo-copy">
               <p class="demo-label">System Evaluation</p>
               <h3>System-Level Evaluation</h3>
-              <p>Three GPT 5.5 + pi0 hand-level case studies expose wait branches, recovery dispatches, human help, and primitive counters.</p>
+              <p>Three GPT 5.5 + pi0 hand-level case studies expose wait branches, recovery dispatches, human-help, and primitive counters.</p>
             </div>
           </a>
         </div>
