@@ -92,9 +92,8 @@
           <article>
             <h3>Skill Variants</h3>
             <p>
-              <code>dexholdem-v2</code> supports scoped visual subagents, while
-              <code>dexholdem-v2-native</code> lets one coding agent apply the same visual
-              guidelines directly.
+              The released Skills package now includes native, isolated-perception, and
+              backend-stream variants for different agent/runtime tradeoffs.
             </p>
           </article>
           <article>
@@ -112,6 +111,43 @@
               table state, safety counters, and human-help alerts.
             </p>
           </article>
+        </div>
+      </section>
+
+      <section class="detail-section">
+        <div class="table-wrap">
+          <table class="leaderboard">
+            <caption>Released DexHoldem Skills variants.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Variant</th>
+                <th scope="col">Perception Mode</th>
+                <th scope="col">Runtime Role</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row"><code>dexholdem-v2</code></th>
+                <td>Scoped visual subagents</td>
+                <td>Original coding-agent workflow with helper scripts and visual guidelines.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>dexholdem-v2-native</code></th>
+                <td>Main agent reads visual guidelines directly</td>
+                <td>Single-agent capture, parse, route, execute, verify, and advance loop.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>dexholdem-v2-isolated</code></th>
+                <td>Visible <code>visual_agent</code> writes <code>01_parsed_state.md</code></td>
+                <td>Main agent owns poker reasoning, caches, robot actions, and recovery decisions.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>dexholdem-v2-backend-preview</code></th>
+                <td>Background perceiver streams fresh parses into <code>/tmp</code></td>
+                <td>Main loop imports validated stream states into the canonical <code>s_current</code>.</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </section>
 

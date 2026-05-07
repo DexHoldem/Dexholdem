@@ -56,8 +56,8 @@
             <h3>Required Artifacts</h3>
             <p>
               Each run writes <code>visual_summary.json</code>, <code>eval_report.md</code>, and
-              nonempty visual evidence under <code>visual_raw/</code>. Missing or invalid artifacts
-              are scored as incorrect for the affected fields.
+              nonempty visual evidence under <code>visual_raw/</code>. The summary follows the
+              same structured-state schema used by the system-level runtime.
             </p>
           </article>
           <article>
@@ -83,29 +83,29 @@
             </thead>
             <tbody>
               <tr>
-                <th scope="row">Loop stage</th>
-                <td><code>idle</code>, <code>acting</code>, <code>to_recover</code>, <code>down</code>, and related workflow states</td>
-                <td>Router gating and verification</td>
+                <th scope="row">Universal state</th>
+                <td><strong>LS</strong> loop stage, <strong>TO</strong> turn ownership, and <strong>BI</strong> blind assignment</td>
+                <td>Wait-vs-act routing, first-decision gates, and legal action selection</td>
               </tr>
               <tr>
-                <th scope="row">Turn and blind</th>
-                <td>Turn ownership, dealer button, small blind, big blind, and wait-vs-act decisions</td>
-                <td>Legal action selection</td>
+                <th scope="row">Community cards</th>
+                <td><strong>CC</strong> visible shared board cards, scored only when community cards are present</td>
+                <td>Decision context and showdown-state parsing</td>
               </tr>
               <tr>
-                <th scope="row">Cards</th>
-                <td>Visible community cards, robot-held card state, and showdown-visible cards</td>
-                <td>Decision context and outcome judgment</td>
+                <th scope="row">Chip state</th>
+                <td><strong>CB</strong> current bet chips, <strong>RCI</strong> robot chip inventory, and <strong>OCI</strong> opponent chip inventory</td>
+                <td>Call, raise, all-in, collect-winnings, and wait-branch decisions</td>
               </tr>
               <tr>
-                <th scope="row">Chips and bets</th>
-                <td>Robot-side inventory, opponent inventory, current bets, and committed chips</td>
-                <td>Call, raise, all-in, and chip primitive translation</td>
+                <th scope="row">Showdown outcome</th>
+                <td><strong>SO</strong> win/lose judgment from visible cards or detected opponent fold</td>
+                <td>Terminal state, reveal flow, and collect-winnings routing</td>
               </tr>
               <tr>
-                <th scope="row">Safety</th>
-                <td>Scene stability, robot behavior, uncertainty, retryability, and human-help triggers</td>
-                <td>Recovery and reset decisions</td>
+                <th scope="row">Schema support</th>
+                <td><code>scene_stable</code>, <code>uncertain_fields</code>, and compact table dictionaries</td>
+                <td>Artifact validation and auditable evidence for deterministic scoring</td>
               </tr>
             </tbody>
           </table>
