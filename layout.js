@@ -1,6 +1,6 @@
 (function () {
   const storageKey = "dexholdem-layout";
-  const layouts = new Set(["academic", "wide"]);
+  const layouts = new Set(["academic", "wide", "mobile"]);
   let currentLayout = "academic";
 
   try {
@@ -13,6 +13,7 @@
   function applyLayout(layout) {
     currentLayout = layouts.has(layout) ? layout : "academic";
     document.body.classList.toggle("layout-wide", currentLayout === "wide");
+    document.body.classList.toggle("layout-mobile", currentLayout === "mobile");
     document.querySelectorAll("[data-layout-option]").forEach((button) => {
       const isActive = button.dataset.layoutOption === currentLayout;
       button.classList.toggle("is-active", isActive);
@@ -37,7 +38,8 @@
 
     [
       ["academic", "Academic"],
-      ["wide", "Wide"],
+      ["wide", "Wide 80%"],
+      ["mobile", "Mobile"],
     ].forEach(([value, label]) => {
       const button = document.createElement("button");
       button.type = "button";

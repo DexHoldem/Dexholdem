@@ -1527,7 +1527,7 @@ caption {
 .layout-wide .detail-workflow,
 .layout-wide .detail-links,
 .layout-wide .site-footer p {
-  width: 100%;
+  width: min(80vw, 100%);
   max-width: none;
 }
 
@@ -1549,6 +1549,179 @@ caption {
 .layout-wide .policy-architecture,
 .layout-wide .taxonomy-grid {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.layout-mobile {
+  background: var(--paper-deep);
+}
+
+.layout-mobile .site-header,
+.layout-mobile main,
+.layout-mobile .site-footer {
+  width: min(430px, 100vw);
+  margin-inline: auto;
+}
+
+.layout-mobile .site-header {
+  position: absolute;
+  left: 0;
+  right: 0;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 12px;
+  min-height: auto;
+  padding: 14px 18px;
+}
+
+.layout-mobile main,
+.layout-mobile .site-footer {
+  background: var(--paper);
+  box-shadow: 0 0 0 1px rgba(38, 43, 52, 0.08);
+}
+
+.layout-mobile .site-nav {
+  flex-wrap: wrap;
+  gap: 16px;
+  overflow: visible;
+  padding-right: 18px;
+  font-size: 0.87rem;
+}
+
+.layout-mobile .layout-toggle {
+  flex-wrap: wrap;
+}
+
+.layout-mobile .hero {
+  min-height: auto;
+  padding: 168px 18px 34px;
+  background-position: 24% top;
+}
+
+.layout-mobile .hero-content,
+.layout-mobile .hero-subtitle,
+.layout-mobile .authors,
+.layout-mobile .section-heading,
+.layout-mobile .abstract-body,
+.layout-mobile .hero-metrics,
+.layout-mobile .title-tail {
+  width: 100%;
+  max-width: 100%;
+}
+
+.layout-mobile .hero h1 {
+  max-width: 100%;
+  font-size: clamp(2.05rem, 9vw, 2.45rem);
+}
+
+.layout-mobile .title-main {
+  max-width: 100%;
+  font-size: clamp(1.95rem, 8.7vw, 2.25rem);
+  line-height: 1;
+  overflow-wrap: anywhere;
+}
+
+.layout-mobile .title-tail {
+  font-size: clamp(1.08rem, 5.2vw, 1.45rem);
+  line-height: 1.2;
+}
+
+.layout-mobile .hero-subtitle {
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+.layout-mobile .authors {
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.layout-mobile .author-note {
+  font-size: 0.78rem;
+}
+
+.layout-mobile .hero-actions {
+  display: grid;
+  width: 100%;
+  max-width: 360px;
+  grid-template-columns: 1fr;
+}
+
+.layout-mobile .button {
+  width: 100%;
+}
+
+.layout-mobile .section {
+  padding: 58px 18px;
+}
+
+.layout-mobile .section-heading h2 {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  font-size: clamp(1.7rem, 8vw, 2.15rem);
+  line-height: 1.08;
+}
+
+.layout-mobile .section-heading p:not(.eyebrow),
+.layout-mobile .abstract-body p {
+  font-size: 1rem;
+}
+
+.layout-mobile .hero-metrics,
+.layout-mobile .feature-grid,
+.layout-mobile .abstract-body,
+.layout-mobile .split-panel,
+.layout-mobile .view-grid,
+.layout-mobile .asset-strip,
+.layout-mobile .asset-strip.six,
+.layout-mobile .policy-architecture,
+.layout-mobile .system-grid,
+.layout-mobile .taxonomy-grid,
+.layout-mobile .demo-grid,
+.layout-mobile .detail-hero,
+.layout-mobile .detail-grid.two,
+.layout-mobile .detail-grid.three,
+.layout-mobile .detail-grid.four,
+.layout-mobile .policy-video-heading,
+.layout-mobile .policy-video-grid,
+.layout-mobile .result-figures,
+.layout-mobile .resource-grid {
+  grid-template-columns: 1fr;
+}
+
+.layout-mobile .detail-page {
+  padding-top: 0;
+}
+
+.layout-mobile .detail-hero {
+  padding: 168px 18px 42px;
+}
+
+.layout-mobile .detail-section {
+  padding: 48px 18px;
+}
+
+.layout-mobile .policy-video-block {
+  padding: 16px;
+}
+
+.layout-mobile .policy-video-controls label {
+  min-width: min(100%, 240px);
+}
+
+.layout-mobile .hero-metrics div {
+  border-right: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.layout-mobile .hero-metrics div:last-child {
+  border-bottom: 0;
+}
+
+.layout-mobile .view-grid img,
+.layout-mobile .asset-strip img,
+.layout-mobile .demo-card img {
+  height: auto;
+  max-height: 260px;
 }
 
 @media (max-width: 980px) {
