@@ -147,9 +147,8 @@
             <span class="card-index">02</span>
             <h3>Agentic Perception Bench</h3>
             <p>
-              36 fixed tabletop states test whether an agent can produce structured artifacts for
-              loop stage, robot behavior, turn ownership, cards, chips, bets, scene stability, and
-              outcome.
+              36 real deployment states test whether a perceiver can recover structured
+              game-state memory from one current agent-view capture and predecessor context.
             </p>
             <span class="card-link-label">Agent Evaluation</span>
           </a>
@@ -289,11 +288,10 @@
           <p class="eyebrow">Agentic Perception Bench</p>
           <h2 id="perception-title">State parsing before any action is allowed.</h2>
           <p>
-            Each perception problem asks an agent to parse the routing-relevant table state from
-            visual evidence and write auditable artifacts such as <code>visual_summary.json</code>,
-            <code>eval_report.md</code>, and nonempty visual evidence. The benchmark separates
-            perception from poker-action selection and physical execution, making failures easier
-            to diagnose.
+            Each perception problem samples one real tabletop state from system-level deployment.
+            The perceiver parses only the current agent-view capture, optionally uses predecessor
+            states as context, and writes the fixed structured schema for loop stage, turn
+            ownership, blinds, cards, chip inventories, current bets, outcome, and uncertainty.
           </p>
         </div>
 
@@ -315,11 +313,11 @@
         <div class="taxonomy-grid" aria-label="Perception problem taxonomy">
           <article>
             <h3>Turn Gate</h3>
-            <p>Initial turn ownership and wait-vs-act decisions.</p>
+            <p>Turn ownership, blind context, and wait-vs-act decisions.</p>
           </article>
           <article>
             <h3>Robot Progress</h3>
-            <p>Motion, cached sequence continuation, and activity-stage tracking.</p>
+            <p>Acting, atom-idle, cached sequence continuation, and activity-stage tracking.</p>
           </article>
           <article>
             <h3>Recovery Safety</h3>
@@ -331,11 +329,11 @@
           </article>
           <article>
             <h3>Held Card Read</h3>
-            <p>Robot-held card identity and cached sequence routing.</p>
+            <p>Robot-held card identity using current visual evidence and predecessor context.</p>
           </article>
           <article>
             <h3>Outcome Judge</h3>
-            <p>Fold, showdown, win/loss, and collect-winnings transitions.</p>
+            <p>Win or lose judgment from visible cards, cached state, or opponent fold.</p>
           </article>
         </div>
       </section>

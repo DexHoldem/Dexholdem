@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>DexHoldem Agent Evaluation</title>
+    <title>DexHoldem Agentic Perception Bench</title>
     <meta
       name="description"
-      content="DexHoldem agent evaluation: agentic perception bench protocol, embodied-system routing context, and perceiver results."
+      content="DexHoldem agentic perception benchmark: 36 real tabletop states, structured game-state schema, agent sandbox, primitive mapping, and native-harness perceiver results."
     >
     <link rel="icon" href="../assets/images/logo-poker-hand.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../styles.css">
@@ -29,72 +29,105 @@
       <section class="detail-hero">
         <div>
           <p class="eyebrow">Agent Evaluation</p>
-          <h1>Agentic Perception and Routing Evaluation</h1>
+          <h1>Agentic Perception Bench</h1>
           <p>
-            DexHoldem evaluates whether an embodied agent can parse a real tabletop state into the
-            structured memory needed by the system router: waiting, recovery, showdown judgment,
-            legal decision states, and primitive dispatch all depend on this parse.
+            DexHoldem evaluates agent perception as a controlled state-parsing problem. The bench
+            isolates visual state parsing from downstream routing, poker-action selection, and
+            physical execution, then scores whether a perceiver recovers the structured game-state
+            memory needed by the embodied-system router.
           </p>
         </div>
-        <img src="../assets/images/perception-turn-gate.jpg" alt="DexHoldem agent evaluation tabletop state">
+        <img src="../assets/images/perception-turn-gate.jpg" alt="DexHoldem agentic perception tabletop state">
       </section>
 
       <section class="detail-section">
         <div class="section-heading compact-heading">
-          <p class="eyebrow">Bench Definition</p>
-          <h2>The benchmark isolates perception from poker strategy and physical execution.</h2>
+          <p class="eyebrow">Problem Interface</p>
+          <h2>Each problem is one real tabletop state with predecessor context.</h2>
           <p>
-            Each problem corresponds to one tabletop state sampled from a real game trajectory.
-            The perceiver receives the current agent-view capture plus predecessor-state context
-            when it is relevant, then writes a structured state that can be checked by a
-            deterministic evaluator.
+            The released bench contains 36 problems, <code>p1</code>-<code>p36</code>, drawn from
+            representative states encountered during system-level deployment. For each problem, the
+            perceiver receives one current agent-view capture and, when relevant, predecessor-state
+            context consisting of earlier captures and pre-labeled structured game-state memory.
           </p>
         </div>
         <div class="detail-grid three">
           <article>
-            <h3>36 Problems</h3>
+            <h3>Current Frame</h3>
             <p>
-              Fixed states cover turn gates, robot progress, held-card reads, cached sequence
-              continuation, recovery, table decisions, fold wins, showdown, and collect-winnings.
+              The sampled state's agent-view image is the only current observation parsed from raw
+              pixels. Previous states serve as context rather than new visual targets.
             </p>
           </article>
           <article>
-            <h3>Single Current Frame</h3>
+            <h3>Shared Workflow</h3>
             <p>
-              The sampled state's agent-view image is the only current frame parsed from raw
-              pixels; previous states are context rather than new visual targets.
+              Perceivers receive the same system visual guidelines and workflow guidelines used by
+              the deployed agent, but the isolated bench does not require script execution.
             </p>
           </article>
           <article>
-            <h3>Routing-Relevant Output</h3>
+            <h3>Fixed Output</h3>
             <p>
-              The output is not a caption. It is structured game-state memory used by wait gates,
-              recovery gates, legal action selection, and terminal outcome handling.
+              The required output is a structured visual summary, not a caption. It records loop
+              stage, turn state, cards, chip dictionaries, bets, showdown outcome, and uncertainty.
             </p>
           </article>
         </div>
       </section>
 
       <section class="detail-section">
+        <div class="section-heading compact-heading">
+          <p class="eyebrow">Structured State Schema</p>
+          <h2>The target artifact matches the full-system game-state memory.</h2>
+        </div>
+        <pre class="schema-block"><code>{
+  "loop_stage": "idle",
+  "blind": "big_blind",
+  "showdown_outcome": "not_showdown",
+  "table": {
+    "scene_stable": true,
+    "is_my_turn": true,
+    "community_cards": [],
+    "my_chips":       {"5": 4, "10": 3, "50": 3, "100": 3},
+    "opponent_chips": {"5": 4, "10": 4, "50": 3, "100": 3},
+    "my_current_bet": {"5": 0, "10": 0, "50": 0, "100": 0},
+    "opponent_bet":   {"5": 0, "10": 0, "50": 0, "100": 0},
+    "uncertain_fields": []
+  }
+}</code></pre>
+      </section>
+
+      <section class="detail-section">
+        <div class="section-heading compact-heading">
+          <p class="eyebrow">Scoring Columns</p>
+          <h2>Overall is strict exact match over the fields applicable to each state.</h2>
+          <p>
+            The deterministic evaluator reports one strict Overall score plus eight sub-capability
+            columns. Universal fields are scored on all 36 problems; chip, card, and outcome fields
+            are scored only where they are routing-relevant.
+          </p>
+        </div>
         <div class="table-wrap">
           <table class="leaderboard perception-results">
-            <caption>Structured perception challenges used by the agent evaluator.</caption>
+            <caption>Per-column problem applicability for the 36-problem agentic perception benchmark.</caption>
             <thead>
               <tr>
                 <th scope="col">Column</th>
-                <th scope="col">Challenge</th>
-                <th scope="col">Why It Matters To The Agent</th>
+                <th scope="col">Problems</th>
+                <th scope="col">Scored Content</th>
               </tr>
             </thead>
             <tbody>
-              <tr><th scope="row">LS</th><td>Loop stage</td><td>Distinguishes acting, atom-idle, idle, win, lose, retryable recovery, and down states.</td></tr>
-              <tr><th scope="row">TO</th><td>Turn ownership</td><td>Determines whether the robot may act or must wait for the opponent.</td></tr>
-              <tr><th scope="row">BI</th><td>Blind information</td><td>Initial routing and legal decision context depend on big-blind/small-blind assignment.</td></tr>
-              <tr><th scope="row">CC</th><td>Community cards</td><td>Used when board cards are visible, especially in table-decision and showdown states.</td></tr>
-              <tr><th scope="row">CB</th><td>Current bet chips</td><td>Exact bet dictionaries drive call, raise, all-in, and wait-branch decisions.</td></tr>
-              <tr><th scope="row">RCI</th><td>Robot chip inventory</td><td>Needed for betting capacity and collect-winnings state updates.</td></tr>
-              <tr><th scope="row">OCI</th><td>Opponent chip inventory</td><td>Needed to detect opponent-side changes and avoid routing to stale wait states.</td></tr>
-              <tr><th scope="row">SO</th><td>Showdown outcome</td><td>Determines win/lose terminal routing from visible or cached cards.</td></tr>
+              <tr><th scope="row">Overall</th><td>36</td><td>Strict exact match over every applicable challenge for that problem.</td></tr>
+              <tr><th scope="row">LS</th><td>36</td><td>Loop stage: <code>acting</code>, <code>atom_idle</code>, <code>idle</code>, <code>win</code>, <code>lose</code>, <code>to_recover</code>, or <code>down</code>.</td></tr>
+              <tr><th scope="row">TO</th><td>36</td><td>Turn ownership, represented by whether the robot is allowed to act or should wait.</td></tr>
+              <tr><th scope="row">BI</th><td>36</td><td>Blind assignment for initial and legal-decision context.</td></tr>
+              <tr><th scope="row">CC</th><td>13</td><td>Visible community-card set, order-insensitive, when board cards are present.</td></tr>
+              <tr><th scope="row">CB</th><td>16</td><td>Exact denomination-level current-bet dictionaries for robot and opponent bets.</td></tr>
+              <tr><th scope="row">RCI</th><td>16</td><td>Exact robot-side chip inventory over 5, 10, 50, and 100 denominations.</td></tr>
+              <tr><th scope="row">OCI</th><td>16</td><td>Exact opponent-side chip inventory over 5, 10, 50, and 100 denominations.</td></tr>
+              <tr><th scope="row">SO</th><td>7</td><td>Showdown outcome, requiring <code>win</code> or <code>lose</code> from visible cards or a detected fold.</td></tr>
             </tbody>
           </table>
         </div>
@@ -102,36 +135,75 @@
 
       <section class="detail-section">
         <div class="section-heading compact-heading">
-          <p class="eyebrow">Embodied System Context</p>
-          <h2>The evaluated parse is the front end of a rule-routed agent loop.</h2>
+          <p class="eyebrow">Core Challenge Types</p>
+          <h2>Different states stress different perception capabilities.</h2>
           <p>
-            In the full embodied system, each loop iteration captures an agent-view image, parses
-            it into structured memory, routes through deterministic workflow gates, and dispatches
-            a high-level agent primitive only when a new decision is needed.
+            Each problem carries one or more core challenges. For example, a state with the robot
+            executing a primitive stresses loop-stage recognition, while a state where both players
+            have revealed cards stresses showdown-outcome judgment.
           </p>
         </div>
         <div class="detail-grid three">
           <article>
-            <h3>Loop Stages</h3>
+            <h3>Turn Gate</h3>
+            <p>Resolve whether the robot is allowed to start acting or must wait for the opponent.</p>
+          </article>
+          <article>
+            <h3>Robot Progress</h3>
+            <p>Detect whether the robot is acting, settled between atoms, or ready for verification.</p>
+          </article>
+          <article>
+            <h3>Held-Card Read</h3>
+            <p>Use the current capture and predecessor context to identify a robot-held card.</p>
+          </article>
+          <article>
+            <h3>Recovery Safety</h3>
+            <p>Distinguish retryable harmless failures from states that require human intervention.</p>
+          </article>
+          <article>
+            <h3>Table Decision</h3>
+            <p>Recover cards, chip inventories, current bets, blind state, and turn ownership.</p>
+          </article>
+          <article>
+            <h3>Outcome Judge</h3>
+            <p>Determine win or lose from visible cards, cached state, or an opponent fold.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="detail-section">
+        <div class="section-heading compact-heading">
+          <p class="eyebrow">Embodied-Agent Context</p>
+          <h2>The perception bench measures the front end of the deployed agent loop.</h2>
+          <p>
+            In the full system, the embodied agent runs a capture -> perceive -> route -> execute
+            workflow. Each loop iteration captures a single agent-camera frame, writes the structured
+            game-state memory above, routes through deterministic gates, and dispatches a dexterous
+            primitive only when physical motion is required.
+          </p>
+        </div>
+        <div class="detail-grid three">
+          <article>
+            <h3>Seven Loop Stages</h3>
             <p>
-              <code>acting</code>, <code>atom_idle</code>, <code>idle</code>,
-              <code>win</code>, <code>lose</code>, <code>to_recover</code>, and
-              <code>down</code> decide whether to wait, continue, recover, stop, or ask for help.
+              <code>acting</code>, <code>atom_idle</code>, <code>idle</code>, <code>win</code>,
+              <code>lose</code>, <code>to_recover</code>, and <code>down</code> drive waiting,
+              continuation, recovery, stopping, or human-help branches.
             </p>
           </article>
           <article>
             <h3>Rule-Based Router</h3>
             <p>
-              The router handles waiting, primitive verification, continuation of cached
-              multi-atom translations, recovery, and human-help escalation before prompting the
-              main agent.
+              Hard workflow constraints are deterministic: a fresh game routes first to
+              <code>view_card</code>, and a pre-translated chip-bet sequence advances one robot atom
+              at a time without re-prompting the main agent.
             </p>
           </article>
           <article>
-            <h3>Agent Sandbox</h3>
+            <h3>Main-Agent Calls</h3>
             <p>
-              The runtime bundles workflow rules, visual guidelines, capture and state helpers,
-              router scripts, action translation, robot dispatch, and audio side effects.
+              The main agent is invoked only when multiple branches are legal, such as the
+              <code>idle</code> loop stage where a new poker action must be selected.
             </p>
           </article>
         </div>
@@ -140,35 +212,73 @@
       <section class="detail-section">
         <div class="table-wrap">
           <table class="leaderboard">
-            <caption>Agent primitives that depend on structured state parsing.</caption>
+            <caption>Sandbox components used by the embodied-agent runtime.</caption>
             <thead>
               <tr>
-                <th scope="col">Group</th>
-                <th scope="col">Agent Primitive</th>
-                <th scope="col">Runtime Meaning</th>
+                <th scope="col">Component</th>
+                <th scope="col">Role</th>
+                <th scope="col">Class</th>
               </tr>
             </thead>
             <tbody>
-              <tr><th scope="row">Control</th><td><code>wait</code>, <code>fold</code>, <code>stop</code></td><td>State-machine sleep, scene-recognized fold, or route termination.</td></tr>
-              <tr><th scope="row">View</th><td><code>view_card(L/R)</code></td><td>Pick up a hole card, perceive it, then put it back down.</td></tr>
-              <tr><th scope="row">Show</th><td><code>show_card(L/R)</code></td><td>Pick up a card and reveal the corresponding face.</td></tr>
-              <tr><th scope="row">Betting</th><td><code>check</code>, <code>call</code>, <code>raise</code>, <code>all_in</code></td><td>Audio or chip-push sequences inferred from parsed bet state.</td></tr>
-              <tr><th scope="row">Collection</th><td><code>collect_winnings</code></td><td>Pull chip primitives across both bet zones after a winning state.</td></tr>
-              <tr><th scope="row">Safety</th><td><code>reset_to_init</code>, <code>request_human</code></td><td>Reset or escalate when the parsed state is unsafe to continue.</td></tr>
+              <tr><th scope="row"><code>SKILL.md</code></th><td>Workflow document: loop, action space, and routing rules.</td><td>Doc</td></tr>
+              <tr><th scope="row"><code>visual_guidelines/</code></th><td>Ten Markdown modules used during the perceive stage.</td><td>Doc</td></tr>
+              <tr><th scope="row"><code>preflight.py</code></th><td>Backend validation and experiment-folder initialization.</td><td>Setup</td></tr>
+              <tr><th scope="row"><code>capture.py</code></th><td>Single-frame capture from the agent camera.</td><td>Perception I/O</td></tr>
+              <tr><th scope="row"><code>state.py</code></th><td>State-folder manager and parsed-state writer.</td><td>State</td></tr>
+              <tr><th scope="row"><code>router.py</code></th><td>Rule-based per-state router that emits the next gate as JSON.</td><td>Routing</td></tr>
+              <tr><th scope="row"><code>action_translator.py</code></th><td>Translates an agent primitive into a robot-primitive sequence.</td><td>Translation</td></tr>
+              <tr><th scope="row"><code>executor.py</code></th><td>Dispatches robot commands and records execution progress.</td><td>Execution</td></tr>
+              <tr><th scope="row"><code>text_to_sound.py</code></th><td>Plays audio cues for non-robot primitives.</td><td>Audio</td></tr>
+              <tr><th scope="row"><code>remote_exec.py</code></th><td>Sends commands to the dexterous-hand control terminal.</td><td>Control</td></tr>
+              <tr><th scope="row"><code>utils.py</code></th><td>Shared config, file I/O, and state helpers.</td><td>Helpers</td></tr>
             </tbody>
           </table>
         </div>
       </section>
 
       <section class="detail-section">
+        <div class="table-wrap">
+          <table class="leaderboard">
+            <caption>Agent-primitive to dexterous-policy-primitive mapping used by the runtime.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Agent Primitive</th>
+                <th scope="col">Dexterous-Policy Primitive Sequence</th>
+                <th scope="col">Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row"><code>wait</code>, <code>fold</code>, <code>stop</code></th><td>State-machine sleep, recognized-by-scene fold, or route termination.</td><td>Control</td></tr>
+              <tr><th scope="row"><code>reset_to_init</code></th><td>Reset hand to the home pose.</td><td>Reset</td></tr>
+              <tr><th scope="row"><code>view_card(L/R)</code></th><td><code>pick_up_left/right</code> -> perceive -> <code>put_down_left/right</code>.</td><td>View</td></tr>
+              <tr><th scope="row"><code>show_card(L/R)</code></th><td><code>pick_up_left/right</code> -> <code>show_left/right</code>.</td><td>Show</td></tr>
+              <tr><th scope="row"><code>put_down_card(L/R, down/up)</code></th><td><code>put_down_left/right</code> or <code>show_left/right</code>, depending on target face state.</td><td>Put-down</td></tr>
+              <tr><th scope="row"><code>check</code></th><td>Audio cue: Check.</td><td>Audio</td></tr>
+              <tr><th scope="row"><code>call</code></th><td>Push chips for delta = <code>opponent_bet - my_bet</code>.</td><td>Chip push</td></tr>
+              <tr><th scope="row"><code>raise(amount A)</code></th><td>Push chips for delta = <code>A - my_bet</code>.</td><td>Chip push</td></tr>
+              <tr><th scope="row"><code>all_in</code></th><td>Push primitives over the full robot-side chip stack.</td><td>Chip push</td></tr>
+              <tr><th scope="row"><code>collect_winnings</code></th><td>Pull primitives across both bet zones.</td><td>Chip pull</td></tr>
+              <tr><th scope="row"><code>request_human(reason)</code></th><td>Audio cue, then set <code>loop_stage</code> to <code>down</code>.</td><td>Help</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="detail-note">
+          Chip-betting primitives are split by a min-count rule that prefers larger denominations
+          and dispatches one push or pull primitive per chip in 100 -> 50 -> 10 -> 5 order, so a
+          single failed primitive can be retried in isolation.
+        </p>
+      </section>
+
+      <section class="detail-section">
         <div class="section-heading compact-heading">
           <p class="eyebrow">Evaluation Protocol</p>
-          <h2>Each perceiver is evaluated inside its native agent harness.</h2>
+          <h2>Each perceiver runs inside its native agent harness.</h2>
           <p>
-            Codex, Claude Code, and Gemini CLI are given the same agent-view observation,
-            predecessor-state context when relevant, visual guidelines, and workflow guidelines.
-            The submitted structured state is scored by strict exact match and field-wise
-            diagnostic columns.
+            Codex, Claude Code, and Gemini CLI are each given the same current observation, allowed
+            predecessor-state context, system visual guidelines, and workflow guidelines. Each row
+            below averages three validation runs under the same medium thinking budget exposed by
+            the corresponding harness.
           </p>
         </div>
         <div class="table-wrap">
@@ -207,28 +317,29 @@
       <section class="detail-section">
         <div class="section-heading compact-heading">
           <p class="eyebrow">Result Takeaways</p>
-          <h2>Complete routing-relevant state recovery remains unreliable.</h2>
+          <h2>Current agent perceivers still fail to recover complete routing state reliably.</h2>
         </div>
         <div class="detail-grid three">
           <article>
             <h3>Strict Overall</h3>
             <p>
-              Overall is strict problem-level exact match. The best strict score is 34.3%, reached
-              by Opus 4.7 in the Claude Code harness.
+              Overall counts a problem correct only when every applicable structured field is
+              correct. The best strict score is 34.3%, achieved by Opus 4.7.
             </p>
           </article>
           <article>
-            <h3>Field-Wise Avg</h3>
+            <h3>Field-Wise Average</h3>
             <p>
-              GPT 5.5 reaches the best unweighted field-wise average at 66.8%, while its strict
-              Overall remains 31.5%.
+              GPT 5.5 has the best unweighted mean over the eight sub-capability columns at 66.8%,
+              showing that strong isolated fields do not automatically compose.
             </p>
           </article>
           <article>
             <h3>Chip Bottleneck</h3>
             <p>
               Current bet chips and opponent chip inventory are the weakest routing-critical
-              fields, peaking at 45.8% and 43.8%.
+              fields, peaking at 45.8% and 43.8% because they require exact denomination-level
+              dictionaries under occlusion.
             </p>
           </article>
         </div>
@@ -237,26 +348,27 @@
       <section class="detail-section">
         <div class="section-heading compact-heading">
           <p class="eyebrow">Failure Modes</p>
-          <h2>Strong isolated fields still fail to compose into full state recovery.</h2>
+          <h2>Coarse markers are easier than long-horizon chip and outcome state.</h2>
           <p>
-            Blind information is nearly saturated and turn ownership is often reliable, but table
-            decision and outcome-judge states require many fields to be correct simultaneously.
-            Exact chip dictionaries are especially brittle because small stacked chips are often
-            partially occluded on the far side of the table.
+            Blind information is nearly saturated, and turn ownership is often reliable. The harder
+            cases are table-decision and outcome-judge states, where one wrong chip dictionary,
+            community-card set, or showdown decision is enough to fail strict Overall. In a
+            closed-loop run, missing a change in the opponent's bet can cause the system to keep
+            routing into a wait branch even after the opponent has moved.
           </p>
         </div>
         <div class="view-grid perception-grid">
           <figure>
-            <img src="../assets/images/perception-turn-gate.jpg" alt="Turn-gate agent evaluation problem">
-            <figcaption>Turn gate: decide whether the robot should wait or begin the route.</figcaption>
+            <img src="../assets/images/perception-turn-gate.jpg" alt="Turn-gate agentic perception problem">
+            <figcaption>Turn gate: parse turn ownership, blind context, and whether the route may begin.</figcaption>
           </figure>
           <figure>
-            <img src="../assets/images/perception-recovery.jpg" alt="Recovery agent evaluation problem">
-            <figcaption>Recovery: distinguish retryable physical failures from human-help cases.</figcaption>
+            <img src="../assets/images/perception-recovery.jpg" alt="Recovery-safety agentic perception problem">
+            <figcaption>Recovery safety: distinguish retryable physical failures from human-help states.</figcaption>
           </figure>
           <figure>
-            <img src="../assets/images/perception-showdown.jpg" alt="Showdown agent evaluation problem">
-            <figcaption>Showdown: parse visible cards, chip state, and terminal outcome.</figcaption>
+            <img src="../assets/images/perception-showdown.jpg" alt="Outcome-judge agentic perception problem">
+            <figcaption>Outcome judge: combine visible cards, chip state, and terminal win/loss evidence.</figcaption>
           </figure>
         </div>
       </section>
