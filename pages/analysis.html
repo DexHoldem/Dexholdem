@@ -123,10 +123,55 @@
         </div>
       </section>
 
+      <section class="detail-section" id="system-level-evaluation">
+        <div class="section-heading compact-heading">
+          <p class="eyebrow">System-Level Evaluation</p>
+          <h2>Closed-loop hands expose accumulated waits, recoveries, and primitive dispatches.</h2>
+          <p>
+            The system-level protocol pairs a GPT 5.5 agent harness with the pi0 dexterous
+            policy. Each rollout repeatedly captures state, routes through wait and verification
+            gates, and dispatches card or chip primitives only when physical motion is required.
+          </p>
+        </div>
+        <figure class="wide-figure">
+          <img src="../assets/images/system-level-trajectory.jpg" alt="DexHoldem system-level trajectory state">
+          <figcaption>
+            Representative state from a released system-level trajectory, where the agent must
+            preserve table state while continuing a multi-step hand.
+          </figcaption>
+        </figure>
+        <div class="table-wrap">
+          <table class="leaderboard">
+            <caption>Per-trajectory operational counters from the system-level protocol.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Agent</th>
+                <th scope="col">Policy</th>
+                <th scope="col">Trajectory</th>
+                <th scope="col">States</th>
+                <th scope="col">AP</th>
+                <th scope="col">DPP</th>
+                <th scope="col">WA</th>
+                <th scope="col">HL</th>
+                <th scope="col">RC</th>
+                <th scope="col">LAP</th>
+                <th scope="col">LDP</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">GPT 5.5</th><td>pi0</td><td>(i)</td><td>22</td><td>8</td><td>7</td><td>7</td><td>2</td><td>1</td><td><code>view_card(L)</code></td><td><code>pick_up_left</code></td></tr>
+              <tr><th scope="row">GPT 5.5</th><td>pi0</td><td>(ii)</td><td>54</td><td>13</td><td>22</td><td>26</td><td>0</td><td>1</td><td><code>collect_winnings</code></td><td><code>push_100</code></td></tr>
+              <tr><th scope="row">GPT 5.5</th><td>pi0</td><td>(iii)</td><td>23</td><td>8</td><td>10</td><td>7</td><td>0</td><td>1</td><td><code>call</code></td><td><code>pick_up_left</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
       <section class="detail-section detail-links">
         <a class="button primary" href="../index.html#results">Back To Result Tables</a>
         <a class="button" href="policy.html">Policy Details</a>
         <a class="button" href="perception.html">Perception Details</a>
+        <a class="button" href="system.html">System Details</a>
       </section>
     </main>
   </body>
