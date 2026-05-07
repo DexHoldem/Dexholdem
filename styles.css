@@ -1292,6 +1292,15 @@ caption {
   background: #faf7f0;
 }
 
+.result-figures .result-wide {
+  grid-column: 1 / -1;
+}
+
+.result-figures .result-wide img {
+  height: auto;
+  max-height: 470px;
+}
+
 .resource-band {
   background: #161a22;
   color: #fff;
