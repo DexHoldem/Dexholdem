@@ -163,6 +163,41 @@ pre {
   transform: scaleX(1);
 }
 
+.layout-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.09);
+  white-space: nowrap;
+}
+
+.site-header.scrolled .layout-toggle {
+  border-color: rgba(38, 43, 52, 0.14);
+  background: rgba(45, 95, 157, 0.08);
+}
+
+.layout-toggle button {
+  min-height: 30px;
+  padding: 6px 9px;
+  color: inherit;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  font: inherit;
+  font-size: 0.74rem;
+  font-weight: 850;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.layout-toggle button.is-active {
+  color: #fff;
+  background: var(--blue);
+}
+
 .hero {
   position: relative;
   display: grid;
@@ -1465,34 +1500,55 @@ caption {
   color: #fff;
 }
 
-.hero-content,
-.hero-metrics,
-.section-heading,
-.teaser-figure,
-.abstract-body,
-.feature-grid,
-.wide-figure,
-.split-panel,
-.view-grid,
-.system-grid,
-.taxonomy-grid,
-.asset-strip,
-.policy-architecture,
-.demo-grid,
-.policy-video-block,
-.leaderboard-controls,
-.table-wrap,
-.result-figures,
-.resource-grid,
-.citation-box,
-.detail-grid,
-.schema-block,
-.detail-note,
-.large-list,
-.detail-workflow,
-.detail-links,
-.site-footer p {
-  margin-inline: auto;
+.layout-wide .hero-content,
+.layout-wide .hero-metrics,
+.layout-wide .section-heading,
+.layout-wide .teaser-figure,
+.layout-wide .abstract-body,
+.layout-wide .feature-grid,
+.layout-wide .wide-figure,
+.layout-wide .split-panel,
+.layout-wide .view-grid,
+.layout-wide .system-grid,
+.layout-wide .taxonomy-grid,
+.layout-wide .asset-strip,
+.layout-wide .policy-architecture,
+.layout-wide .demo-grid,
+.layout-wide .policy-video-block,
+.layout-wide .leaderboard-controls,
+.layout-wide .table-wrap,
+.layout-wide .result-figures,
+.layout-wide .resource-grid,
+.layout-wide .citation-box,
+.layout-wide .detail-grid,
+.layout-wide .schema-block,
+.layout-wide .detail-note,
+.layout-wide .large-list,
+.layout-wide .detail-workflow,
+.layout-wide .detail-links,
+.layout-wide .site-footer p {
+  width: 100%;
+  max-width: none;
+}
+
+.layout-wide .section-heading p:not(.eyebrow),
+.layout-wide .detail-hero p:not(.eyebrow),
+.layout-wide .hero-subtitle,
+.layout-wide .authors,
+.layout-wide .title-tail {
+  width: min(1120px, 100%);
+}
+
+.layout-wide .demo-grid,
+.layout-wide .resource-grid {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.layout-wide .policy-video-grid,
+.layout-wide .asset-strip,
+.layout-wide .policy-architecture,
+.layout-wide .taxonomy-grid {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
 @media (max-width: 980px) {
