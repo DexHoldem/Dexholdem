@@ -184,12 +184,12 @@
               </tr>
               <tr>
                 <th scope="row">Serve</th>
-                <td><code>deploy_policy.py</code> or OpenPI deployment scripts on port <code>13579</code></td>
+                <td><code>deploy_policy.py</code>, <code>deploy_policy_cortex.py</code>, or OpenPI deployment scripts on port <code>13579</code></td>
                 <td>Expose a real-time inference server for action-chunk prediction.</td>
               </tr>
               <tr>
                 <th scope="row">Execute</th>
-                <td><code>robot_client.py</code> sends observations and executes predicted joint targets</td>
+                <td><code>robot_client.py</code> and <code>robot_client_cortex.py</code> send observations and execute predicted joint targets</td>
                 <td>Close the loop on the ShadowHand-UR platform under the same primitive schedule.</td>
               </tr>
               <tr>
@@ -251,6 +251,30 @@
                 <td>Pretrained VLA policies adapted to DexHoldem observations and 30-D actions</td>
                 <td>OpenPI language-action conditioning path</td>
               </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="detail-section">
+        <div class="table-wrap">
+          <table class="leaderboard">
+            <caption>Policy model sizes from the DexHoldem Policy implementation.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Model</th>
+                <th scope="col">Total Params</th>
+                <th scope="col">Trainable Params</th>
+                <th scope="col">Frozen Backbone</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">DP</th><td>80.6M</td><td>80.6M</td><td>None</td></tr>
+              <tr><th scope="row">DP Light</th><td>141.3M</td><td>141.3M</td><td>None</td></tr>
+              <tr><th scope="row">DP Max</th><td>457.6M</td><td>153.6M</td><td>304M DinoV2</td></tr>
+              <tr><th scope="row">ACT</th><td>190.8M</td><td>190.8M</td><td>None</td></tr>
+              <tr><th scope="row">Cortex</th><td>1.39B</td><td>110.1M</td><td>1.28B, 3x SigLIP</td></tr>
+              <tr><th scope="row">RDT-1B</th><td>2.52B</td><td>1.24B</td><td>1.28B, 3x SigLIP</td></tr>
             </tbody>
           </table>
         </div>
