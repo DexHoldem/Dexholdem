@@ -819,6 +819,45 @@ caption {
   background: #faf7f0;
 }
 
+.policy-architecture {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  width: min(1180px, 100%);
+}
+
+.policy-architecture article {
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fffdf9;
+}
+
+.policy-architecture span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 28px;
+  margin-bottom: 16px;
+  color: #fff;
+  border-radius: 6px;
+  background: var(--accent);
+  font-size: 0.76rem;
+  font-weight: 900;
+}
+
+.policy-architecture h3 {
+  margin: 0 0 10px;
+  color: var(--ink);
+  font-size: 1.1rem;
+}
+
+.policy-architecture p {
+  margin: 0;
+  color: var(--muted);
+}
+
 .demo-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1396,6 +1435,7 @@ caption {
   .view-grid,
   .asset-strip,
   .asset-strip.six,
+  .policy-architecture,
   .system-grid,
   .taxonomy-grid,
   .demo-grid,
@@ -1513,6 +1553,7 @@ caption {
   .view-grid,
   .asset-strip,
   .asset-strip.six,
+  .policy-architecture,
   .system-grid,
   .taxonomy-grid,
   .demo-grid,

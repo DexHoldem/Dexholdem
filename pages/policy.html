@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>DexHoldem Policy Rollouts</title>
+    <title>DexHoldem Policy Implementation</title>
     <meta
       name="description"
-      content="DexHoldem policy benchmark details: robot interface, primitive suite, model families, data format, and deployment."
+      content="DexHoldem policy implementation details: experiment interface, observation encoding, instruction conditioning, model families, deployment, and simulation check."
     >
     <link rel="icon" href="../assets/images/logo-poker-hand.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../styles.css">
@@ -29,13 +29,14 @@
       <section class="detail-hero">
         <div>
           <p class="eyebrow">Policy Rollout</p>
-          <h1>Card and Chip Primitives</h1>
+          <h1>Experiment and Policy Implementation</h1>
           <p>
-            A real-robot imitation-learning benchmark for 14 instruction-conditioned card and
-            chip primitives executed by a ShadowHand mounted on a UR arm.
+            DexHoldem evaluates instruction-conditioned policy implementations through a fixed
+            real-robot interface: multi-view observations in, action chunks for a UR arm and
+            ShadowHand out.
           </p>
         </div>
-        <img src="../assets/images/trajectory-1.png" alt="DexHoldem physical policy rollout trajectory">
+        <img class="detail-contain" src="../assets/images/benchmark-pipeline.jpg" alt="DexHoldem policy model and experiment interface diagram">
       </section>
 
       <section class="detail-section">
@@ -61,22 +62,31 @@
 
       <section class="detail-section">
         <div class="section-heading compact-heading">
-          <p class="eyebrow">Observation Streams</p>
-          <h2>Each rollout couples multi-view RGB-D streams with robot state.</h2>
+          <p class="eyebrow">Experiment Interface</p>
+          <h2>The policy sees a fixed multimodal state and returns a joint-space action chunk.</h2>
+          <p>
+            The benchmark keeps game-level decision making outside the low-level policy. Each
+            model receives the current primitive instruction, three RGB-D camera streams, and robot
+            proprioception, then predicts a short horizon of 30-dimensional joint-position targets.
+          </p>
         </div>
-        <div class="asset-strip camera-strip">
-          <figure>
-            <img src="../assets/images/topdown-camera.png" alt="Top-down DexHoldem camera stream">
-            <figcaption>Top-down camera: table layout, cards, chips, and contact context.</figcaption>
-          </figure>
-          <figure>
-            <img src="../assets/images/third-person-camera.png" alt="Third-person DexHoldem camera stream">
-            <figcaption>Third-person camera: arm-hand approach and scene-level motion.</figcaption>
-          </figure>
-          <figure>
-            <img src="../assets/images/wrist-camera.png" alt="Wrist DexHoldem camera stream">
-            <figcaption>Wrist camera: local hand-object geometry for precise manipulation.</figcaption>
-          </figure>
+        <div class="detail-grid four">
+          <article>
+            <h3>Observation</h3>
+            <p>Top-down, third-person, and wrist RGB-D cameras plus arm-hand proprioception.</p>
+          </article>
+          <article>
+            <h3>Condition</h3>
+            <p>One of 14 primitive instructions is injected as an integer ID or text-token condition.</p>
+          </article>
+          <article>
+            <h3>Action</h3>
+            <p>Joint-position targets cover 6 UR joints and 24 ShadowHand joints.</p>
+          </article>
+          <article>
+            <h3>Execution</h3>
+            <p>A robot client executes predicted action chunks under the fixed primitive schedule.</p>
+          </article>
         </div>
       </section>
 
@@ -84,6 +94,10 @@
         <div class="section-heading compact-heading">
           <p class="eyebrow">Primitive Suite</p>
           <h2>Atomic skills isolate dexterous execution from game-level strategy.</h2>
+          <p>
+            The policy benchmark is multi-task: the same implementation is trained and evaluated
+            across pickup, placement, reveal, chip push, and chip pull primitives.
+          </p>
         </div>
         <div class="primitive-list large-list" aria-label="DexHoldem policy primitives">
           <span>pick_up_left</span>
@@ -105,38 +119,84 @@
 
       <section class="detail-section">
         <div class="section-heading compact-heading">
-          <p class="eyebrow">Rollout Material</p>
-          <h2>Trajectory snapshots from the released physical policy bench.</h2>
+          <p class="eyebrow">Policy Structure</p>
+          <h2>Model families differ mainly in how they fuse vision, proprioception, and instructions.</h2>
           <p>
-            The trajectory panels are copied from the policy-benchmark paper assets and provide a
-            compact visual index for the real-world primitive rollouts.
+            DexHoldem Policy implements both task-trained imitation baselines and pretrained robot
+            policy families under the same action interface.
           </p>
         </div>
-        <div class="asset-strip six trajectory-gallery">
-          <figure>
-            <img src="../assets/images/trajectory-1.png" alt="DexHoldem policy trajectory snapshot 1">
-            <figcaption>Trajectory 1</figcaption>
-          </figure>
-          <figure>
-            <img src="../assets/images/trajectory-2.png" alt="DexHoldem policy trajectory snapshot 2">
-            <figcaption>Trajectory 2</figcaption>
-          </figure>
-          <figure>
-            <img src="../assets/images/trajectory-3.png" alt="DexHoldem policy trajectory snapshot 3">
-            <figcaption>Trajectory 3</figcaption>
-          </figure>
-          <figure>
-            <img src="../assets/images/trajectory-4.png" alt="DexHoldem policy trajectory snapshot 4">
-            <figcaption>Trajectory 4</figcaption>
-          </figure>
-          <figure>
-            <img src="../assets/images/trajectory-5.png" alt="DexHoldem policy trajectory snapshot 5">
-            <figcaption>Trajectory 5</figcaption>
-          </figure>
-          <figure>
-            <img src="../assets/images/trajectory-6.png" alt="DexHoldem policy trajectory snapshot 6">
-            <figcaption>Trajectory 6</figcaption>
-          </figure>
+        <div class="policy-architecture">
+          <article>
+            <span>01</span>
+            <h3>Shared Observation Encoder</h3>
+            <p>
+              DP and ACT consume <code>ObsEncoder</code> features: RGB/depth encoders, robot-state
+              MLPs, and optional instruction embeddings assembled as flat vectors or modality tokens.
+            </p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Instruction Conditioning</h3>
+            <p>
+              DP can concatenate instruction features or use a dedicated condition token. ACT treats
+              instruction as its own token stream. RDT and Cortex use frozen text encoders internally.
+            </p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Action Generator</h3>
+            <p>
+              Diffusion policies denoise action chunks; ACT decodes action queries from a CVAE
+              latent; Cortex separates trajectory planning from a proprioceptive refiner.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="detail-section">
+        <div class="section-heading compact-heading">
+          <p class="eyebrow">Training and Deployment</p>
+          <h2>One training registry, one deployment interface, multiple policy backbones.</h2>
+        </div>
+        <div class="table-wrap">
+          <table class="leaderboard">
+            <caption>Implementation stages exposed by DexHoldem Policy.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Stage</th>
+                <th scope="col">Implementation</th>
+                <th scope="col">Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Train</th>
+                <td><code>train.py</code> with registered model names and model-specific scripts</td>
+                <td>Run multi-task imitation learning with shared logging, checkpoints, and validation.</td>
+              </tr>
+              <tr>
+                <th scope="row">Encode</th>
+                <td>Frozen DinoV2 or SigLIP features; trainable ResNet18 for lightweight models</td>
+                <td>Keep large vision backbones reusable while allowing model-specific fusion.</td>
+              </tr>
+              <tr>
+                <th scope="row">Serve</th>
+                <td><code>deploy_policy.py</code> or OpenPI deployment scripts on port <code>13579</code></td>
+                <td>Expose a real-time inference server for action-chunk prediction.</td>
+              </tr>
+              <tr>
+                <th scope="row">Execute</th>
+                <td><code>robot_client.py</code> sends observations and executes predicted joint targets</td>
+                <td>Close the loop on the ShadowHand-UR platform under the same primitive schedule.</td>
+              </tr>
+              <tr>
+                <th scope="row">Score</th>
+                <td>SP, DC, TF, DF labels aggregated as SPSR and TCR</td>
+                <td>Separate clean scene-preserving success from disruptive completion and failure.</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </section>
 
@@ -148,40 +208,40 @@
               <tr>
                 <th scope="col">Model</th>
                 <th scope="col">Visual Backbone</th>
-                <th scope="col">Architecture</th>
-                <th scope="col">Role</th>
+                <th scope="col">Policy Structure</th>
+                <th scope="col">Instruction Path</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <th scope="row">Diffusion Policy</th>
                 <td>DinoV2 CLS or ResNet18</td>
-                <td>DDPM/DDIM with Transformer or UNet</td>
-                <td>Task-trained imitation baseline</td>
+                <td>DDPM/DDIM denoiser with Transformer cross-attention or conditional UNet FiLM blocks</td>
+                <td>ObsEncoder integer/text embedding; optional dedicated condition token</td>
               </tr>
               <tr>
                 <th scope="row">ACT</th>
                 <td>Trainable ResNet18</td>
-                <td>CVAE plus Transformer</td>
-                <td>Action-chunking baseline</td>
+                <td>CVAE encoder plus Transformer policy encoder/decoder over action queries</td>
+                <td>Instruction is projected as a separate modality token</td>
               </tr>
               <tr>
                 <th scope="row">RDT</th>
                 <td>SigLIP-SO400M</td>
-                <td>Robotics diffusion transformer with T5 text tokens</td>
-                <td>Robot-pretrained or scratch variant</td>
+                <td>28-layer ACI diffusion transformer predicting clean action samples</td>
+                <td>Frozen T5 text tokens cross-attended on alternating layers</td>
               </tr>
               <tr>
                 <th scope="row">Cortex</th>
                 <td>SigLIP-SO400M</td>
-                <td>Hierarchical planner and refiner</td>
-                <td>Policy-repo extension path</td>
+                <td>Hierarchical planner with a proprioceptive cerebellum-style residual refiner</td>
+                <td>Frozen SigLIP text tokens condition the planner; refiner uses plan and proprioception</td>
               </tr>
               <tr>
                 <th scope="row">pi0 / pi0.5</th>
                 <td>OpenPI camera adapters</td>
-                <td>Language-conditioned VLA policies</td>
-                <td>Pretrained policy family</td>
+                <td>Pretrained VLA policies adapted to DexHoldem observations and 30-D actions</td>
+                <td>OpenPI language-action conditioning path</td>
               </tr>
             </tbody>
           </table>
@@ -199,6 +259,65 @@
             <figcaption>
               Policy rollouts are scored with scene-preserving success rate and task completion rate.
             </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="detail-section">
+        <div class="section-heading compact-heading">
+          <p class="eyebrow">Appendix Simulation Check</p>
+          <h2>Simulator figures document real-to-sim reconstruction, not policy scores.</h2>
+          <p>
+            These camera views and replay frames belong to the appendix simulation check. They
+            visualize the reconstructed UR10e-ShadowHand environment and open-loop replay of
+            recorded trajectories; policy results are still reported from physical robot rollouts.
+          </p>
+        </div>
+        <div class="asset-strip camera-strip">
+          <figure>
+            <img src="../assets/images/topdown-camera.png" alt="Simulator top-down camera view for real-to-sim check">
+            <figcaption>Simulator top-down view with camera pose matched to the real setup.</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/images/third-person-camera.png" alt="Simulator third-person camera view for real-to-sim check">
+            <figcaption>Simulator third-person view for checking robot-scene reconstruction.</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/images/wrist-camera.png" alt="Simulator wrist camera view for real-to-sim check">
+            <figcaption>Simulator wrist view for local hand-object replay inspection.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="detail-section">
+        <div class="section-heading compact-heading">
+          <p class="eyebrow">Simulation Replay Sequence</p>
+          <h2>Top-down replay frames from the reconstructed simulator.</h2>
+        </div>
+        <div class="asset-strip six trajectory-gallery">
+          <figure>
+            <img src="../assets/images/trajectory-1.png" alt="Simulation replay frame 1">
+            <figcaption>Simulation replay frame 1</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/images/trajectory-2.png" alt="Simulation replay frame 2">
+            <figcaption>Simulation replay frame 2</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/images/trajectory-3.png" alt="Simulation replay frame 3">
+            <figcaption>Simulation replay frame 3</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/images/trajectory-4.png" alt="Simulation replay frame 4">
+            <figcaption>Simulation replay frame 4</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/images/trajectory-5.png" alt="Simulation replay frame 5">
+            <figcaption>Simulation replay frame 5</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/images/trajectory-6.png" alt="Simulation replay frame 6">
+            <figcaption>Simulation replay frame 6</figcaption>
           </figure>
         </div>
       </section>
