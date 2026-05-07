@@ -534,6 +534,67 @@ pre {
   color: var(--muted);
 }
 
+.contribution-link {
+  margin-top: 20px;
+}
+
+.contribution-grid,
+.author-profile-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  width: min(1180px, 100%);
+}
+
+.contribution-grid article,
+.author-profile-grid article {
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.58);
+}
+
+.contribution-grid h3,
+.author-profile-grid h2 {
+  margin: 0 0 10px;
+  color: var(--ink);
+  font-size: 1.12rem;
+  line-height: 1.28;
+}
+
+.author-profile-grid h2 {
+  font-size: 1.25rem;
+}
+
+.contribution-grid a,
+.author-profile-grid a {
+  color: inherit;
+  text-decoration-color: rgba(45, 95, 157, 0.34);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.contribution-grid a:hover,
+.author-profile-grid a:hover {
+  color: var(--blue);
+  text-decoration-color: currentColor;
+}
+
+.contribution-grid p,
+.author-profile-grid p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.author-role {
+  margin-bottom: 10px;
+  color: var(--blue);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .wide-figure {
   width: min(1180px, 100%);
   margin: 0;
@@ -1532,6 +1593,8 @@ caption {
 .layout-wide .result-figures,
 .layout-wide .resource-grid,
 .layout-wide .citation-box,
+.layout-wide .contribution-grid,
+.layout-wide .author-profile-grid,
 .layout-wide .detail-grid,
 .layout-wide .schema-block,
 .layout-wide .detail-note,
@@ -1559,7 +1622,9 @@ caption {
 .layout-wide .policy-video-grid,
 .layout-wide .asset-strip,
 .layout-wide .policy-architecture,
-.layout-wide .taxonomy-grid {
+.layout-wide .taxonomy-grid,
+.layout-wide .contribution-grid,
+.layout-wide .author-profile-grid {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
@@ -1688,6 +1753,8 @@ caption {
 .layout-mobile .policy-architecture,
 .layout-mobile .system-grid,
 .layout-mobile .taxonomy-grid,
+.layout-mobile .contribution-grid,
+.layout-mobile .author-profile-grid,
 .layout-mobile .demo-grid,
 .layout-mobile .detail-hero,
 .layout-mobile .detail-grid.two,
@@ -1768,6 +1835,8 @@ caption {
   .policy-architecture,
   .system-grid,
   .taxonomy-grid,
+  .contribution-grid,
+  .author-profile-grid,
   .demo-grid,
   .detail-hero,
   .detail-grid.three,
@@ -1886,6 +1955,8 @@ caption {
   .policy-architecture,
   .system-grid,
   .taxonomy-grid,
+  .contribution-grid,
+  .author-profile-grid,
   .demo-grid,
   .detail-hero,
   .detail-grid.two,
