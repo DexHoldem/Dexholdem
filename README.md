@@ -30,7 +30,7 @@ matching posters under `assets/videos/policy-bench/posters/`. Update
 - Teaser: `assets/images/teaser.png`
 - Policy rollout snapshots: `assets/images/trajectory-*.png`
 - Skills state captures: `assets/images/skills-state-*.jpg`
-- Detail pages: `pages/perception.html`, `pages/policy.html`, `pages/system.html`
+- Detail pages: `pages/agent.html`, `pages/data.html`, `pages/policy.html`, `pages/system.html`
 - Croissant metadata: `assets/data/croissant.json`
 - Dataset: <https://huggingface.co/datasets/Winniechen2002/TexasPokerRobot>
 - GitHub organization: <https://github.com/DexHoldem>
