@@ -127,6 +127,10 @@ def download_npz(task: str, expected_size: int, cache_dir: Path) -> Path:
     raise RuntimeError(f"Failed to download {task} after 3 attempts")
 
 
+def bgr_to_rgb(frame: np.ndarray) -> np.ndarray:
+    return frame[..., ::-1]
+
+
 def resize_frame(frame: np.ndarray, max_height: int) -> np.ndarray:
     if max_height <= 0 or frame.shape[0] <= max_height:
         resized = frame
@@ -155,7 +159,7 @@ def write_camera_video(
     if selected.size == 0:
         raise RuntimeError(f"No frames available for {output_path}")
 
-    poster = resize_frame(selected[0], max_height)
+    poster = resize_frame(bgr_to_rgb(selected[0]), max_height)
     imageio.imwrite(poster_path, poster)
 
     with imageio.get_writer(
@@ -167,7 +171,7 @@ def write_camera_video(
         ffmpeg_params=["-movflags", "+faststart"],
     ) as writer:
         for frame in selected:
-            writer.append_data(resize_frame(frame, max_height))
+            writer.append_data(resize_frame(bgr_to_rgb(frame), max_height))
 
 
 def generate_task(
