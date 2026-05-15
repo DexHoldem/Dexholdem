@@ -1424,6 +1424,10 @@ caption {
   background: linear-gradient(135deg, rgba(17, 21, 28, 0.94), rgba(42, 47, 57, 0.94));
 }
 
+.dataset-video-missing[hidden] {
+  display: none;
+}
+
 .dataset-video-missing strong {
   color: #fff;
   font-size: 1rem;
