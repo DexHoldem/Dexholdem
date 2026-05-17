@@ -47,7 +47,7 @@ python scripts/generate_dataset_video_previews.py --tasks all
 
 ## Key Resources
 
-- Paper placeholder: `assets/papers/paper.pdf`
+- Paper PDF: `assets/papers/paper.pdf`
 - Teaser: `assets/images/teaser.png`
 - Policy rollout snapshots: `assets/images/trajectory-*.png`
 - Skills state captures: `assets/images/skills-state-*.jpg`
