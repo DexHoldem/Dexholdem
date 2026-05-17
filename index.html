@@ -580,28 +580,36 @@
         </div>
 
         <div class="demo-grid">
-          <a class="demo-card" href="pages/demos.html">
-            <img loading="lazy" src="assets/images/system-level-trajectory.jpg" alt="DexHoldem complete hand-level agent trajectory">
+          <a class="demo-card" href="pages/data.html">
+            <img loading="lazy" class="contain-image" src="assets/images/benchmark-data-examples.jpg" alt="DexHoldem policy benchmark success and failure examples">
             <div class="demo-copy">
-              <p class="demo-label">Full Agent Demos</p>
-              <h3>Demos</h3>
-              <p>Two complete Texas Hold'em hands: one fully autonomous system run and one human teleoperation run.</p>
+              <p class="demo-label">Benchmark Data</p>
+              <h3>Data in Benchmark</h3>
+              <p>1,470 physical policy demonstrations plus 36 agent-state problems with ground-truth state, route, and action labels.</p>
             </div>
           </a>
-          <a class="demo-card" href="pages/data-demos.html">
-            <img loading="lazy" class="contain-image" src="assets/images/benchmark-data-examples.jpg" alt="DexHoldem representative dataset camera samples">
+          <a class="demo-card" href="pages/policy.html">
+            <img loading="lazy" class="contain-image" src="assets/images/model-scale-success.png" alt="DexHoldem policy evaluation bubble chart">
             <div class="demo-copy">
-              <p class="demo-label">Dataset Camera Triplets</p>
-              <h3>Data Demos</h3>
-              <p>One representative data point per task with synchronized top, third-person, and wrist camera previews.</p>
+              <p class="demo-label">Policy Evaluation</p>
+              <h3>Policy Evaluation</h3>
+              <p>Physical primitive trials compare pi-series, RDT, diffusion-policy, ACT, and BAKU policies under SPSR and TCR.</p>
             </div>
           </a>
-          <a class="demo-card" href="pages/policy-demos.html">
-            <img loading="lazy" src="assets/images/policy-example-grid.png" alt="DexHoldem physical policy benchmark rollout examples">
+          <a class="demo-card" href="pages/agent.html">
+            <img loading="lazy" src="assets/images/perception-turn-gate.jpg" alt="DexHoldem agent evaluation turn-gate state">
             <div class="demo-copy">
-              <p class="demo-label">Primitive Rollouts</p>
-              <h3>Policy Demos</h3>
-              <p>Compressed real-world policy benchmark videos with model, task, condition, and outcome labels.</p>
+              <p class="demo-label">Agent Evaluation</p>
+              <h3>Agent Evaluation</h3>
+              <p>Agentic perception results over 36 tabletop states quantify strict state recovery and field-wise bottlenecks.</p>
+            </div>
+          </a>
+          <a class="demo-card" href="pages/system.html#system-level-evaluation">
+            <img loading="lazy" src="assets/images/system-level-trajectory.jpg" alt="DexHoldem system-level trajectory state">
+            <div class="demo-copy">
+              <p class="demo-label">System Evaluation</p>
+              <h3>System-Level Evaluation</h3>
+              <p>Three GPT 5.5 + pi0 hand-level case studies expose wait branches, recovery dispatches, human-help, and primitive counters.</p>
             </div>
           </a>
         </div>
@@ -615,7 +623,7 @@
         <div class="resource-grid">
           <a class="resource-link" href="assets/papers/paper.pdf">
             <span>Paper</span>
-            <strong>Paper placeholder</strong>
+            <strong>DexHoldem paper PDF</strong>
           </a>
           <a class="resource-link" href="https://huggingface.co/datasets/Winniechen2002/TexasPokerRobot">
             <span>Dataset</span>
