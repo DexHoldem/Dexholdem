@@ -18,7 +18,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;850;900&display=swap">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=20260518-demo-platforms">
   </head>
   <body id="top">
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -122,14 +122,23 @@
           </div>
           <div class="agent-demo-grid">
             <article class="agent-demo-card">
-              <div class="bilibili-embed">
+              <div class="agent-video-embed">
                 <iframe
                   src="https://player.bilibili.com/player.html?isOutside=true&amp;aid=116591735866692&amp;bvid=BV1ZL5o6bEP6&amp;cid=38411700207&amp;p=1"
+                  data-bilibili-src="https://player.bilibili.com/player.html?isOutside=true&amp;aid=116591735866692&amp;bvid=BV1ZL5o6bEP6&amp;cid=38411700207&amp;p=1"
+                  data-youtube-src="https://www.youtube.com/embed/Gh5fYtZJN_Q?si=-xj3lUhoYQk9uJ05"
+                  data-provider="bilibili"
                   title="DexHoldem fully autonomous system demo"
                   scrolling="no"
                   frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin"
                   allowfullscreen
                 ></iframe>
+              </div>
+              <div class="video-provider-toggle" role="group" aria-label="Choose platform for fully autonomous demo">
+                <button class="provider-button is-active" type="button" data-video-provider="bilibili" aria-pressed="true">Bilibili</button>
+                <button class="provider-button" type="button" data-video-provider="youtube" aria-pressed="false">YouTube</button>
               </div>
               <div class="demo-copy">
                 <p class="demo-label">Autonomous System</p>
@@ -138,14 +147,23 @@
               </div>
             </article>
             <article class="agent-demo-card">
-              <div class="bilibili-embed">
+              <div class="agent-video-embed">
                 <iframe
                   src="https://player.bilibili.com/player.html?isOutside=true&amp;aid=116591735866758&amp;bvid=BV1ZL5o6bEAa&amp;cid=38411763881&amp;p=1"
+                  data-bilibili-src="https://player.bilibili.com/player.html?isOutside=true&amp;aid=116591735866758&amp;bvid=BV1ZL5o6bEAa&amp;cid=38411763881&amp;p=1"
+                  data-youtube-src="https://www.youtube.com/embed/rLgepMYnQoU?si=WBYm5dNCOCegZU3r"
+                  data-provider="bilibili"
                   title="DexHoldem human teleoperation demo"
                   scrolling="no"
                   frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin"
                   allowfullscreen
                 ></iframe>
+              </div>
+              <div class="video-provider-toggle" role="group" aria-label="Choose platform for human teleoperation demo">
+                <button class="provider-button is-active" type="button" data-video-provider="bilibili" aria-pressed="true">Bilibili</button>
+                <button class="provider-button" type="button" data-video-provider="youtube" aria-pressed="false">YouTube</button>
               </div>
               <div class="demo-copy">
                 <p class="demo-label">Human Teleoperation</p>
@@ -743,6 +761,7 @@
     </footer>
 
     <script src="layout.js"></script>
+    <script src="agent-demos.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
