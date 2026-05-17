@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DexHoldem Demos</title>
+    <meta
+      name="description"
+      content="Complete DexHoldem hand-level demos: one fully autonomous embodied-agent system run and one human teleoperation run."
+    >
+    <link rel="icon" href="../assets/images/logo-poker-hand.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;850;900&display=swap">
+    <link rel="stylesheet" href="../styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header scrolled">
+      <a class="brand" href="../index.html" aria-label="DexHoldem home">
+        <span class="brand-mark image-mark"><img src="../assets/images/logo-poker-hand.svg" alt=""></span>
+        <span>DexHoldem</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="../index.html#benchmark">Benchmark</a>
+        <a href="../index.html#results">Results</a>
+        <a href="demos.html">Demos</a>
+        <a href="data-demos.html">Data Demos</a>
+        <a href="policy-demos.html">Policy Demos</a>
+        <a href="../index.html#resources">Resources</a>
+      </nav>
+    </header>
+
+    <main class="detail-page" id="main-content">
+      <section class="detail-hero">
+        <div>
+          <p class="eyebrow">Full Agent Demos</p>
+          <h1>Complete Texas Hold'em Demos</h1>
+          <p>
+            These are hand-level demonstrations rather than primitive policy rollouts: one fully
+            autonomous embodied-agent system and one complete human teleoperation run.
+          </p>
+        </div>
+        <img src="../assets/images/system-level-trajectory.jpg" alt="DexHoldem full hand-level system trajectory" loading="lazy">
+      </section>
+
+      <section class="detail-section">
+        <div class="agent-demo-block standalone-demo-block" aria-labelledby="full-agent-demo-page-title">
+          <div class="agent-demo-heading">
+            <div>
+              <p class="demo-label">Complete Hands</p>
+              <h2 id="full-agent-demo-page-title">Complete Texas Hold'em Demos</h2>
+            </div>
+            <p>
+              The autonomous demo runs the embodied agent loop end to end, while the teleoperation
+              demo uses human teleoperation. Videos are shown at 10x speed.
+            </p>
+          </div>
+          <div class="agent-demo-grid">
+            <article class="agent-demo-card">
+              <div class="bilibili-embed">
+                <iframe
+                  src="https://player.bilibili.com/player.html?isOutside=true&amp;aid=116591735866692&amp;bvid=BV1ZL5o6bEP6&amp;cid=38411700207&amp;p=1"
+                  title="DexHoldem fully autonomous system demo"
+                  scrolling="no"
+                  frameborder="0"
+                  allowfullscreen
+                ></iframe>
+              </div>
+              <div class="demo-copy">
+                <p class="demo-label">Autonomous System</p>
+                <h3>Fully autonomous agent demo</h3>
+                <p>The system perceives the tabletop state, routes actions, and deploys with policy models.</p>
+              </div>
+            </article>
+            <article class="agent-demo-card">
+              <div class="bilibili-embed">
+                <iframe
+                  src="https://player.bilibili.com/player.html?isOutside=true&amp;aid=116591735866758&amp;bvid=BV1ZL5o6bEAa&amp;cid=38411763881&amp;p=1"
+                  title="DexHoldem human teleoperation demo"
+                  scrolling="no"
+                  frameborder="0"
+                  allowfullscreen
+                ></iframe>
+              </div>
+              <div class="demo-copy">
+                <p class="demo-label">Human Teleoperation</p>
+                <h3>Human teleop demo with agent guidance.</h3>
+                <p>A human teleoperator controls the ShadowHand through the complete poker hand in the same tabletop setup.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="detail-section detail-links">
+        <a class="button primary" href="data-demos.html">Data Demos</a>
+        <a class="button" href="policy-demos.html">Policy Demos</a>
+        <a class="button" href="../index.html#demos">Back to Homepage Demos</a>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <p>
+        DexHoldem project page. Site organization is inspired by
+        <a href="https://os-world.github.io/">OSWorld</a> and
+        <a href="https://www.swebench.com/">SWE-bench</a>.
+      </p>
+    </footer>
+    <script src="../layout.js"></script>
+  </body>
+</html>

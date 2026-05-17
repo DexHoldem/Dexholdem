@@ -20,13 +20,17 @@ Settings -> Pages -> Source to `GitHub Actions`.
 
 ## Updating Demo Videos
 
+Full hand-level agent demos are embedded from Bilibili in `index.html` and
+`pages/demos.html`.
+
 Compressed policy-bench videos live under `assets/videos/policy-bench/`, with
 matching posters under `assets/videos/policy-bench/posters/`. Update
 `policyDemoVideos` in `script.js` when adding new demo files or labels.
 
 ## Updating Dataset Video Previews
 
-The dataset video browser lives at `pages/dataset-videos.html`. It expects one
+The data demo browser lives at `pages/data-demos.html`. The legacy
+`pages/dataset-videos.html` URL keeps the same browser content. It expects one
 representative MP4 per RGB camera at:
 
 ```text
@@ -47,7 +51,7 @@ python scripts/generate_dataset_video_previews.py --tasks all
 - Teaser: `assets/images/teaser.png`
 - Policy rollout snapshots: `assets/images/trajectory-*.png`
 - Skills state captures: `assets/images/skills-state-*.jpg`
-- Detail pages: `pages/agent.html`, `pages/authors.html`, `pages/data.html`, `pages/dataset-videos.html`, `pages/policy.html`, `pages/system.html`
+- Detail pages: `pages/agent.html`, `pages/authors.html`, `pages/data.html`, `pages/data-demos.html`, `pages/demos.html`, `pages/dataset-videos.html`, `pages/policy.html`, `pages/policy-demos.html`, `pages/system.html`
 - Croissant metadata: `assets/data/croissant.json`
 - Dataset: <https://huggingface.co/datasets/Winniechen2002/TexasPokerRobot>
 - GitHub organization: <https://github.com/DexHoldem>

@@ -61,7 +61,9 @@
           <div class="hero-actions" aria-label="Project links">
             <a class="button primary" href="assets/papers/paper.pdf">Paper</a>
             <a class="button" href="https://huggingface.co/datasets/Winniechen2002/TexasPokerRobot">Dataset</a>
-            <a class="button" href="pages/dataset-videos.html">Demo</a>
+            <a class="button" href="pages/demos.html">Demos</a>
+            <a class="button" href="pages/data-demos.html">Data Demos</a>
+            <a class="button" href="pages/policy-demos.html">Policy Demos</a>
             <a class="button" href="https://github.com/DexHoldem/Dexholdem-Policy">Policy Repo</a>
             <a class="button" href="https://github.com/DexHoldem/DexHoldemSKills">Agent Repo</a>
           </div>
@@ -106,6 +108,52 @@
             table, revealing how recovery, human-help requests, and repeated primitive dispatches
             compound during real dexterous play.
           </p>
+        </div>
+        <div class="agent-demo-block" id="demos" aria-labelledby="agent-demo-title">
+          <div class="agent-demo-heading">
+            <div>
+              <p class="demo-label">Full Agent Demos</p>
+              <h2 id="agent-demo-title">Complete Texas Hold'em Demos</h2>
+            </div>
+            <p>
+              The autonomous demo runs the embodied agent loop end to end, while the teleoperation
+              demo uses human teleoperation. Videos are shown at 10x speed.
+            </p>
+          </div>
+          <div class="agent-demo-grid">
+            <article class="agent-demo-card">
+              <div class="bilibili-embed">
+                <iframe
+                  src="https://player.bilibili.com/player.html?isOutside=true&amp;aid=116591735866692&amp;bvid=BV1ZL5o6bEP6&amp;cid=38411700207&amp;p=1"
+                  title="DexHoldem fully autonomous system demo"
+                  scrolling="no"
+                  frameborder="0"
+                  allowfullscreen
+                ></iframe>
+              </div>
+              <div class="demo-copy">
+                <p class="demo-label">Autonomous System</p>
+                <h3>Fully autonomous agent demo</h3>
+                <p>The system perceives the tabletop state, routes actions, and deploys with policy models.</p>
+              </div>
+            </article>
+            <article class="agent-demo-card">
+              <div class="bilibili-embed">
+                <iframe
+                  src="https://player.bilibili.com/player.html?isOutside=true&amp;aid=116591735866758&amp;bvid=BV1ZL5o6bEAa&amp;cid=38411763881&amp;p=1"
+                  title="DexHoldem human teleoperation demo"
+                  scrolling="no"
+                  frameborder="0"
+                  allowfullscreen
+                ></iframe>
+              </div>
+              <div class="demo-copy">
+                <p class="demo-label">Human Teleoperation</p>
+                <h3>Human teleop demo with agent guidance.</h3>
+                <p>A human teleoperator controls the robot hand through a complete poker hand, separate from the autonomous policy benchmark.</p>
+              </div>
+            </article>
+          </div>
         </div>
         <figure class="teaser-figure">
           <img loading="lazy" src="assets/images/teaser.png" alt="DexHoldem teaser figure showing environment setup, system overview, policy results, and agent results">
@@ -488,14 +536,13 @@
         </div>
       </section>
 
-      <section class="section" id="demos">
+      <section class="section" id="demo-release">
         <div class="section-heading">
-          <p class="eyebrow">Demos &amp; Release</p>
+          <p class="eyebrow">Demo Categories &amp; Release</p>
           <p>
-            Policy-bench rollouts are released as compressed web videos with labels recovered from
-            the original model-task-result filenames. The system-level release documents the
-            GPT 5.5 + pi0 hand traces, state folders, wait branches, recovery dispatches, and
-            primitive counters used in the paper's case studies.
+            DexHoldem demos are grouped by what they show: complete hand-level agent play,
+            representative dataset camera triplets, and primitive-level policy benchmark rollouts.
+            The embedded block below is the policy-demo preview; each category also has a dedicated page.
           </p>
         </div>
 
@@ -531,36 +578,28 @@
         </div>
 
         <div class="demo-grid">
-          <a class="demo-card" href="pages/data.html">
-            <img loading="lazy" class="contain-image" src="assets/images/benchmark-data-examples.jpg" alt="DexHoldem policy benchmark success and failure examples">
+          <a class="demo-card" href="pages/demos.html">
+            <img loading="lazy" src="assets/images/system-level-trajectory.jpg" alt="DexHoldem complete hand-level agent trajectory">
             <div class="demo-copy">
-              <p class="demo-label">Benchmark Data</p>
-              <h3>Data in Benchmark</h3>
-              <p>1,470 physical policy demonstrations plus 36 agent-state problems with ground-truth state, route, and action labels.</p>
+              <p class="demo-label">Full Agent Demos</p>
+              <h3>Demos</h3>
+              <p>Two complete Texas Hold'em hands: one fully autonomous system run and one human teleoperation run.</p>
             </div>
           </a>
-          <a class="demo-card" href="pages/policy.html">
-            <img loading="lazy" class="contain-image" src="assets/images/model-scale-success.png" alt="DexHoldem policy evaluation bubble chart">
+          <a class="demo-card" href="pages/data-demos.html">
+            <img loading="lazy" class="contain-image" src="assets/images/benchmark-data-examples.jpg" alt="DexHoldem representative dataset camera samples">
             <div class="demo-copy">
-              <p class="demo-label">Policy Evaluation</p>
-              <h3>Policy Evaluation</h3>
-              <p>Physical primitive trials compare pi-series, RDT, diffusion-policy, ACT, and BAKU policies under SPSR and TCR.</p>
+              <p class="demo-label">Dataset Camera Triplets</p>
+              <h3>Data Demos</h3>
+              <p>One representative data point per task with synchronized top, third-person, and wrist camera previews.</p>
             </div>
           </a>
-          <a class="demo-card" href="pages/agent.html">
-            <img loading="lazy" src="assets/images/perception-turn-gate.jpg" alt="DexHoldem agent evaluation turn-gate state">
+          <a class="demo-card" href="pages/policy-demos.html">
+            <img loading="lazy" src="assets/images/policy-example-grid.png" alt="DexHoldem physical policy benchmark rollout examples">
             <div class="demo-copy">
-              <p class="demo-label">Agent Evaluation</p>
-              <h3>Agent Evaluation</h3>
-              <p>Agentic perception results over 36 tabletop states quantify strict state recovery and field-wise bottlenecks.</p>
-            </div>
-          </a>
-          <a class="demo-card" href="pages/system.html#system-level-evaluation">
-            <img loading="lazy" src="assets/images/system-level-trajectory.jpg" alt="DexHoldem system-level trajectory state">
-            <div class="demo-copy">
-              <p class="demo-label">System Evaluation</p>
-              <h3>System-Level Evaluation</h3>
-              <p>Three GPT 5.5 + pi0 hand-level case studies expose wait branches, recovery dispatches, human-help, and primitive counters.</p>
+              <p class="demo-label">Primitive Rollouts</p>
+              <h3>Policy Demos</h3>
+              <p>Compressed real-world policy benchmark videos with model, task, condition, and outcome labels.</p>
             </div>
           </a>
         </div>
@@ -580,9 +619,17 @@
             <span>Dataset</span>
             <strong>TexasPokerRobot on Hugging Face</strong>
           </a>
-          <a class="resource-link" href="pages/dataset-videos.html">
-            <span>Videos</span>
+          <a class="resource-link" href="pages/demos.html">
+            <span>Demos</span>
+            <strong>Complete autonomous and teleoperation hands</strong>
+          </a>
+          <a class="resource-link" href="pages/data-demos.html">
+            <span>Data Demos</span>
             <strong>Representative dataset camera triplets</strong>
+          </a>
+          <a class="resource-link" href="pages/policy-demos.html">
+            <span>Policy Demos</span>
+            <strong>Primitive-level policy rollout videos</strong>
           </a>
           <a class="resource-link" href="https://github.com/DexHoldem">
             <span>GitHub</span>

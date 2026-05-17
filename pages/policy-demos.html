@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DexHoldem Policy Demos</title>
+    <meta
+      name="description"
+      content="DexHoldem primitive-level policy demo videos with model, task, condition, and outcome labels."
+    >
+    <link rel="icon" href="../assets/images/logo-poker-hand.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;850;900&display=swap">
+    <link rel="stylesheet" href="../styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header scrolled">
+      <a class="brand" href="../index.html" aria-label="DexHoldem home">
+        <span class="brand-mark image-mark"><img src="../assets/images/logo-poker-hand.svg" alt=""></span>
+        <span>DexHoldem</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="../index.html#benchmark">Benchmark</a>
+        <a href="../index.html#results">Results</a>
+        <a href="demos.html">Demos</a>
+        <a href="data-demos.html">Data Demos</a>
+        <a href="policy-demos.html">Policy Demos</a>
+        <a href="../index.html#resources">Resources</a>
+      </nav>
+    </header>
+
+    <main class="detail-page" id="main-content">
+      <section class="detail-hero">
+        <div>
+          <p class="eyebrow">Policy Demos</p>
+          <h1>Primitive-level policy rollout videos.</h1>
+          <p>
+            These videos are policy-benchmark rollouts, not complete poker hands. Each card keeps
+            the model, task, condition, and success or failure label visible.
+          </p>
+        </div>
+        <img class="detail-contain" src="../assets/images/policy-example-grid.png" alt="DexHoldem physical policy benchmark rollout examples" loading="lazy">
+      </section>
+
+      <section class="detail-section">
+        <div class="policy-video-block standalone-demo-block" aria-labelledby="policy-video-title">
+          <div class="policy-video-heading">
+            <div>
+              <p class="demo-label">Policy Bench Rollouts</p>
+              <h2 id="policy-video-title">Compressed real-world demos with model, task, and outcome labels.</h2>
+            </div>
+            <p>
+              Source recordings are 4K 60fps MOV files. The hosted videos are 960x540 H.264 MP4
+              previews with original filenames preserved for traceability.
+            </p>
+          </div>
+
+          <div class="policy-video-controls" aria-label="Policy video filters">
+            <label>
+              <span>Model</span>
+              <select id="policy-model-filter"></select>
+            </label>
+            <label>
+              <span>Outcome</span>
+              <select id="policy-outcome-filter">
+                <option value="all">All outcomes</option>
+                <option value="Success">Success</option>
+                <option value="Fail">Fail</option>
+              </select>
+            </label>
+            <output id="policy-video-count" aria-live="polite"></output>
+          </div>
+
+          <div class="policy-video-grid" id="policy-video-grid"></div>
+        </div>
+      </section>
+
+      <section class="detail-section detail-links">
+        <a class="button primary" href="demos.html">Full Agent Demos</a>
+        <a class="button" href="data-demos.html">Data Demos</a>
+        <a class="button" href="../index.html#demo-release">Homepage Demo Release</a>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <p>
+        DexHoldem project page. Site organization is inspired by
+        <a href="https://os-world.github.io/">OSWorld</a> and
+        <a href="https://www.swebench.com/">SWE-bench</a>.
+      </p>
+    </footer>
+    <script src="../layout.js"></script>
+    <script src="../script.js" data-asset-root="../"></script>
+  </body>
+</html>
