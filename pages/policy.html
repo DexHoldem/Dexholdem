@@ -9,9 +9,13 @@
       content="DexHoldem policy benchmark details: primitive suite, shared observation-action interface, policy families, physical scoring protocol, and deployment runtime."
     >
     <link rel="icon" href="../assets/images/logo-poker-hand.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;850;900&display=swap">
     <link rel="stylesheet" href="../styles.css">
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <header class="site-header scrolled">
       <a class="brand" href="../index.html" aria-label="DexHoldem home">
         <span class="brand-mark image-mark"><img src="../assets/images/logo-poker-hand.svg" alt=""></span>
@@ -25,7 +29,7 @@
       </nav>
     </header>
 
-    <main class="detail-page">
+    <main class="detail-page" id="main-content">
       <section class="detail-hero">
         <div>
           <p class="eyebrow">Dexterous Hand Policy Bench</p>
@@ -36,7 +40,7 @@
             observation, action, rollout, and scoring interface.
           </p>
         </div>
-        <img class="detail-contain" src="../assets/images/model-scale-success.png" alt="DexHoldem policy result bubble chart comparing model family, pretraining scale, model size, and task completion">
+        <img class="detail-contain" src="../assets/images/model-scale-success.png" alt="DexHoldem policy result bubble chart comparing model family, pretraining scale, model size, and task completion" loading="lazy">
       </section>
 
       <section class="detail-section">
@@ -315,13 +319,13 @@
               <tr>
                 <th scope="col">Policy</th>
                 <th scope="col">Params</th>
-                <th scope="col">SP</th>
-                <th scope="col">DC</th>
-                <th scope="col">TF</th>
-                <th scope="col">DF</th>
+                <th scope="col"><abbr title="Scene-Preserving Success">SP</abbr></th>
+                <th scope="col"><abbr title="Disruptive Completion">DC</abbr></th>
+                <th scope="col"><abbr title="Task Failure">TF</abbr></th>
+                <th scope="col"><abbr title="Disruptive Failure">DF</abbr></th>
                 <th scope="col">N</th>
-                <th scope="col">SPSR</th>
-                <th scope="col">TCR</th>
+                <th scope="col"><abbr title="Scene-Preserving Success Rate">SPSR</abbr></th>
+                <th scope="col"><abbr title="Task Completion Rate">TCR</abbr></th>
               </tr>
             </thead>
             <tbody>
@@ -341,7 +345,7 @@
 
       <section class="detail-section">
         <figure class="wide-figure">
-          <img src="../assets/images/policy-example-grid.png" alt="DexHoldem physical policy benchmark success and failure examples">
+          <img src="../assets/images/policy-example-grid.png" alt="DexHoldem physical policy benchmark success and failure examples" loading="lazy">
           <figcaption>
             Representative physical rollouts from the policy benchmark. The examples show that
             success is not just object motion: non-target cards and chips must remain usable for
@@ -353,14 +357,14 @@
       <section class="detail-section">
         <div class="detail-grid two policy-figure-grid">
           <figure class="wide-figure">
-            <img src="../assets/images/model-scale-success.png" alt="DexHoldem model scale and policy completion chart">
+            <img src="../assets/images/model-scale-success.png" alt="DexHoldem model scale and policy completion chart" loading="lazy">
             <figcaption>
               Model family, pretraining scale, policy-only parameter count, and physical task
               completion rate over the shared 80-trial primitive schedule.
             </figcaption>
           </figure>
           <figure class="wide-figure">
-            <img src="../assets/images/rdt-pretraining-final-loss.png" alt="RDT fine-tuning final validation loss across data ratios">
+            <img src="../assets/images/rdt-pretraining-final-loss.png" alt="RDT fine-tuning final validation loss across data ratios" loading="lazy">
             <figcaption>
               RDT fine-tuning data-scaling probe: gripper-pretrained initialization gives a modest
               lower-loss offset, but does not create a strong low-data regime at 10% data.
@@ -374,6 +378,13 @@
         <a class="button" href="../index.html#demos">View Demo Videos</a>
       </section>
     </main>
+    <footer class="site-footer">
+      <p>
+        DexHoldem project page. Site organization is inspired by
+        <a href="https://os-world.github.io/">OSWorld</a> and
+        <a href="https://www.swebench.com/">SWE-bench</a>.
+      </p>
+    </footer>
     <script src="../layout.js"></script>
   </body>
 </html>

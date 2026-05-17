@@ -9,9 +9,13 @@
       content="DexHoldem system-level evaluation: Section 3.3 protocol, Section 4.5 GPT 5.5 + pi0 hand-level counters, and Appendix B.3 trajectory panels."
     >
     <link rel="icon" href="../assets/images/logo-poker-hand.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;850;900&display=swap">
     <link rel="stylesheet" href="../styles.css">
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <header class="site-header scrolled">
       <a class="brand" href="../index.html" aria-label="DexHoldem home">
         <span class="brand-mark image-mark"><img src="../assets/images/logo-poker-hand.svg" alt=""></span>
@@ -25,7 +29,7 @@
       </nav>
     </header>
 
-    <main class="detail-page">
+    <main class="detail-page" id="main-content">
       <section class="detail-hero">
         <div>
           <p class="eyebrow">System Evaluation</p>
@@ -37,7 +41,7 @@
             dexterous policy in real hand-level rollouts.
           </p>
         </div>
-        <img src="../assets/images/system-level-trajectory.jpg" alt="DexHoldem system-level trajectory state">
+        <img src="../assets/images/system-level-trajectory.jpg" alt="DexHoldem system-level trajectory state" loading="lazy">
       </section>
 
       <section class="detail-section">
@@ -78,7 +82,7 @@
           </p>
         </div>
         <figure class="wide-figure">
-          <img class="detail-contain" src="../assets/images/method.png" alt="DexHoldem embodied-agent system loop">
+          <img class="detail-contain" src="../assets/images/method.png" alt="DexHoldem embodied-agent system loop" loading="lazy">
           <figcaption>
             Figure 2 protocol context: the agent loads structured game-state memory and routes to
             a dexterous policy only when the scene is stable and an executable primitive is needed.
@@ -105,13 +109,13 @@
                 <th scope="col">Policy</th>
                 <th scope="col">Trajectory</th>
                 <th scope="col">States</th>
-                <th scope="col">AP</th>
-                <th scope="col">DPP</th>
-                <th scope="col">WA</th>
-                <th scope="col">HL</th>
-                <th scope="col">RC</th>
-                <th scope="col">LAP</th>
-                <th scope="col">LDP</th>
+                <th scope="col"><abbr title="Agent Primitives">AP</abbr></th>
+                <th scope="col"><abbr title="Dexterous-Policy Primitives">DPP</abbr></th>
+                <th scope="col"><abbr title="Wait Actions">WA</abbr></th>
+                <th scope="col"><abbr title="Human-Help">HL</abbr></th>
+                <th scope="col"><abbr title="Recovery">RC</abbr></th>
+                <th scope="col"><abbr title="Longest Agent Primitive">LAP</abbr></th>
+                <th scope="col"><abbr title="Longest Dexterous-Policy Primitive">LDP</abbr></th>
               </tr>
             </thead>
             <tbody>
@@ -225,15 +229,15 @@
         </div>
         <div class="asset-strip state-strip">
           <figure>
-            <img src="../assets/images/skills-state-s0.jpg" alt="DexHoldem initial system trace state">
+            <img src="../assets/images/skills-state-s0.jpg" alt="DexHoldem initial system trace state" loading="lazy">
             <figcaption><code>s0</code>: capture and parse before the first route decision.</figcaption>
           </figure>
           <figure>
-            <img src="../assets/images/skills-state-s1.jpg" alt="DexHoldem post-dispatch system trace state">
+            <img src="../assets/images/skills-state-s1.jpg" alt="DexHoldem post-dispatch system trace state" loading="lazy">
             <figcaption><code>s1</code>: table state after a dispatched physical primitive.</figcaption>
           </figure>
           <figure>
-            <img src="../assets/images/skills-state-s2.jpg" alt="DexHoldem continued system trace state">
+            <img src="../assets/images/skills-state-s2.jpg" alt="DexHoldem continued system trace state" loading="lazy">
             <figcaption><code>s2</code>: continued verification, wait, or recovery routing.</figcaption>
           </figure>
         </div>
@@ -246,6 +250,13 @@
         <a class="button" href="https://github.com/DexHoldem/DexHoldemSKills">DexHoldem Skills Repository</a>
       </section>
     </main>
+    <footer class="site-footer">
+      <p>
+        DexHoldem project page. Site organization is inspired by
+        <a href="https://os-world.github.io/">OSWorld</a> and
+        <a href="https://www.swebench.com/">SWE-bench</a>.
+      </p>
+    </footer>
     <script src="../layout.js"></script>
   </body>
 </html>

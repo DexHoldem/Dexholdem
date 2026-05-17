@@ -9,9 +9,13 @@
       content="DexHoldem agentic perception benchmark: 36 real tabletop states, structured game-state schema, agent sandbox, primitive mapping, and native-harness perceiver results."
     >
     <link rel="icon" href="../assets/images/logo-poker-hand.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;850;900&display=swap">
     <link rel="stylesheet" href="../styles.css">
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <header class="site-header scrolled">
       <a class="brand" href="../index.html" aria-label="DexHoldem home">
         <span class="brand-mark image-mark"><img src="../assets/images/logo-poker-hand.svg" alt=""></span>
@@ -25,7 +29,7 @@
       </nav>
     </header>
 
-    <main class="detail-page">
+    <main class="detail-page" id="main-content">
       <section class="detail-hero">
         <div>
           <p class="eyebrow">Agent Evaluation</p>
@@ -37,7 +41,7 @@
             memory needed by the embodied-system router.
           </p>
         </div>
-        <img src="../assets/images/perception-turn-gate.jpg" alt="DexHoldem agentic perception tabletop state">
+        <img src="../assets/images/perception-turn-gate.jpg" alt="DexHoldem agentic perception tabletop state" loading="lazy">
       </section>
 
       <section class="detail-section">
@@ -289,15 +293,15 @@
                 <th scope="col">Harness</th>
                 <th scope="col">Perceiver</th>
                 <th scope="col">Overall</th>
-                <th scope="col">LS</th>
-                <th scope="col">TO</th>
-                <th scope="col">BI</th>
-                <th scope="col">CC</th>
-                <th scope="col">CB</th>
-                <th scope="col">RCI</th>
-                <th scope="col">OCI</th>
-                <th scope="col">SO</th>
-                <th scope="col">Avg</th>
+                <th scope="col"><abbr title="Loop Stage">LS</abbr></th>
+                <th scope="col"><abbr title="Turn Ownership">TO</abbr></th>
+                <th scope="col"><abbr title="Blind Information">BI</abbr></th>
+                <th scope="col"><abbr title="Community Cards">CC</abbr></th>
+                <th scope="col"><abbr title="Current Bets">CB</abbr></th>
+                <th scope="col"><abbr title="Robot Chip Inventory">RCI</abbr></th>
+                <th scope="col"><abbr title="Opponent Chip Inventory">OCI</abbr></th>
+                <th scope="col"><abbr title="Showdown Outcome">SO</abbr></th>
+                <th scope="col"><abbr title="Field-wise Average">Avg</abbr></th>
               </tr>
             </thead>
             <tbody>
@@ -359,15 +363,15 @@
         </div>
         <div class="view-grid perception-grid">
           <figure>
-            <img src="../assets/images/perception-turn-gate.jpg" alt="Turn-gate agentic perception problem">
+            <img src="../assets/images/perception-turn-gate.jpg" alt="Turn-gate agentic perception problem" loading="lazy">
             <figcaption>Turn gate: parse turn ownership, blind context, and whether the route may begin.</figcaption>
           </figure>
           <figure>
-            <img src="../assets/images/perception-recovery.jpg" alt="Recovery-safety agentic perception problem">
+            <img src="../assets/images/perception-recovery.jpg" alt="Recovery-safety agentic perception problem" loading="lazy">
             <figcaption>Recovery safety: distinguish retryable physical failures from human-help states.</figcaption>
           </figure>
           <figure>
-            <img src="../assets/images/perception-showdown.jpg" alt="Outcome-judge agentic perception problem">
+            <img src="../assets/images/perception-showdown.jpg" alt="Outcome-judge agentic perception problem" loading="lazy">
             <figcaption>Outcome judge: combine visible cards, chip state, and terminal win/loss evidence.</figcaption>
           </figure>
         </div>
@@ -379,6 +383,13 @@
         <a class="button" href="../index.html#demos">Back To Release Cards</a>
       </section>
     </main>
+    <footer class="site-footer">
+      <p>
+        DexHoldem project page. Site organization is inspired by
+        <a href="https://os-world.github.io/">OSWorld</a> and
+        <a href="https://www.swebench.com/">SWE-bench</a>.
+      </p>
+    </footer>
     <script src="../layout.js"></script>
   </body>
 </html>

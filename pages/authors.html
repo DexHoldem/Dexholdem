@@ -9,9 +9,13 @@
       content="DexHoldem author profiles and project contribution summary."
     >
     <link rel="icon" href="../assets/images/logo-poker-hand.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;850;900&display=swap">
     <link rel="stylesheet" href="../styles.css">
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <header class="site-header scrolled">
       <a class="brand" href="../index.html" aria-label="DexHoldem home">
         <span class="brand-mark image-mark"><img src="../assets/images/logo-poker-hand.svg" alt=""></span>
@@ -25,7 +29,7 @@
       </nav>
     </header>
 
-    <main class="detail-page">
+    <main class="detail-page" id="main-content">
       <section class="detail-hero">
         <div>
           <p class="eyebrow">Authors</p>
@@ -36,7 +40,7 @@
             and project guidance.
           </p>
         </div>
-        <img class="detail-contain" src="../assets/images/logo-poker-hand.svg" alt="DexHoldem logo">
+        <img class="detail-contain" src="../assets/images/logo-poker-hand.svg" alt="DexHoldem logo" loading="lazy">
       </section>
 
       <section class="detail-section">
@@ -118,6 +122,13 @@
         <a class="button" href="../index.html#resources">Resources</a>
       </section>
     </main>
+    <footer class="site-footer">
+      <p>
+        DexHoldem project page. Site organization is inspired by
+        <a href="https://os-world.github.io/">OSWorld</a> and
+        <a href="https://www.swebench.com/">SWE-bench</a>.
+      </p>
+    </footer>
     <script src="../layout.js"></script>
   </body>
 </html>
