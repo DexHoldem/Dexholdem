@@ -71,7 +71,7 @@
       <section class="detail-section">
         <div class="section-heading compact-heading">
           <p class="eyebrow">Protocol</p>
-          <h2>Perceive, route, execute&mdash;at every captured state.</h2>
+          <h2>Perceive, route, execute.</h2>
           <p>
             At each loop step the agent captures an image, parses it into structured game state,
             and routes through deterministic workflow gates. Physical motion is dispatched only when
@@ -91,7 +91,7 @@
       <section class="detail-section" id="system-level-evaluation">
         <div class="section-heading compact-heading">
           <p class="eyebrow">Operational Counters</p>
-          <h2>Per-trajectory counters expose where the system spends its states.</h2>
+          <h2>Operational counters.</h2>
           <p>
             These three trajectories are case studies, not a statistically powered estimate.
             Each row reports how many states the system captured, how many were agent-level
@@ -126,25 +126,28 @@
         </div>
         <div class="detail-grid three">
           <article>
+            <h3>States</h3>
+            <p>Trajectory length. Hands folded at preflop are short; hands reaching the river or showdown are long.</p>
+          </article>
+          <article>
             <h3>AP / DPP</h3>
-            <p>
-              AP counts dispatched agent primitives, including <code>request_human</code>. DPP
-              counts dispatched dexterous-policy primitives from the physical policy suite.
-            </p>
+            <p>Dispatched agent primitives (high-level decisions) and dexterous-policy primitives (physical motor commands). Reflects trajectory complexity.</p>
           </article>
           <article>
-            <h3>WA / HL / RC</h3>
-            <p>
-              WA counts wait-branch events; HL counts human-help requests; RC counts recovery
-              dispatches for retryable failures.
-            </p>
+            <h3>WA</h3>
+            <p>Wait-branch count. Elevated WA suggests over-sensitivity to scene motion or conservative completion/stage-transition judgment.</p>
           </article>
           <article>
-            <h3>LAP / LDP</h3>
-            <p>
-              LAP and LDP identify the agent primitive and dexterous-policy primitive occupying
-              the most consecutive states. They are longest-run counters, not final actions.
-            </p>
+            <h3>HL / RC</h3>
+            <p>Human-help escalations and recovery dispatches. HL marks unrecoverable states; RC marks retryable primitive failures.</p>
+          </article>
+          <article>
+            <h3>LAP</h3>
+            <p>Agent primitive occupying the most consecutive states. Identifies agent-level bottlenecks such as stuck multi-atom sequences.</p>
+          </article>
+          <article>
+            <h3>LDP</h3>
+            <p>Dexterous-policy primitive occupying the most consecutive states. Pinpoints where physical execution is slow or repeatedly fails verification.</p>
           </article>
         </div>
       </section>
@@ -152,11 +155,6 @@
       <section class="detail-section">
         <div class="section-heading compact-heading">
           <p class="eyebrow">Trajectory Previews</p>
-          <h2>Browse every agent-view capture across all three case-study trajectories.</h2>
-          <p>
-            Click or hover any dot to preview the agent-view capture at that state. The label
-            below the image shows the action chosen by the agent or router at that step.
-          </p>
         </div>
 
         <div class="traj-explorer" id="traj-i">
@@ -199,7 +197,7 @@
       <section class="detail-section">
         <div class="section-heading compact-heading">
           <p class="eyebrow">Label Legend</p>
-          <h2>Timeline dot colors and state labels follow a four-category grammar.</h2>
+          <h2>State-label grammar.</h2>
         </div>
         <div class="detail-grid two">
           <article>

@@ -3,16 +3,27 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>DexHoldem Policy Implementation</title>
+    <title>DexHoldem &mdash; Policy Bench</title>
     <meta
       name="description"
-      content="DexHoldem policy benchmark details: primitive suite, shared observation-action interface, policy families, physical scoring protocol, and deployment runtime."
+      content="DexHoldem policy bench: 9 dexterous-hand policies evaluated on 14 primitives across 80 real-world trials with a four-level scoring rubric."
     >
     <link rel="icon" href="../assets/images/logo-poker-hand.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;850;900&display=swap">
     <link rel="stylesheet" href="../styles.css">
+    <style>
+      .rubric-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; width: min(1180px, 100%); }
+      .rubric-card { padding: 14px; border-radius: 8px; border: 1px solid var(--line); }
+      .rubric-card h3 { margin: 0 0 4px; font-size: 0.92rem; }
+      .rubric-card p { margin: 0; font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+      .rubric-card.sp { border-left: 3px solid var(--green); }
+      .rubric-card.dc { border-left: 3px solid var(--gold); }
+      .rubric-card.tf { border-left: 3px solid #94a3b8; }
+      .rubric-card.df { border-left: 3px solid var(--accent); }
+      @media (max-width: 680px) { .rubric-grid { grid-template-columns: 1fr 1fr; } }
+    </style>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -22,7 +33,10 @@
         <span>DexHoldem</span>
       </a>
       <nav class="site-nav" aria-label="Primary navigation">
+        <a href="../index.html#abstract">Abstract</a>
         <a href="../index.html#benchmark">Benchmark</a>
+        <a href="../index.html#system">System</a>
+        <a href="../index.html#perception">Perception</a>
         <a href="../index.html#results">Results</a>
         <a href="../index.html#demos">Demos</a>
         <a href="../index.html#resources">Resources</a>
@@ -32,251 +46,170 @@
     <main class="detail-page" id="main-content">
       <section class="detail-hero">
         <div>
-          <p class="eyebrow">Dexterous Hand Policy Bench</p>
-          <h1>Experiment and Policy Implementation</h1>
+          <p class="eyebrow">Policy Bench</p>
+          <h1>9 policies, 14 primitives, 80 real-world trials each.</h1>
           <p>
-            DexHoldem isolates low-level dexterous execution from poker strategy. Every policy is
-            trained and evaluated as a single multi-task primitive policy under the same real-robot
-            observation, action, rollout, and scoring interface.
+            The policy bench isolates low-level dexterous execution from poker strategy.
+            Every policy&mdash;pretrained VLAs and from-scratch baselines alike&mdash;is trained
+            and evaluated under the same observation, action, rollout, and scoring interface on
+            the physical ShadowHand&ndash;UR10e setup. A four-level rubric separates nominal
+            task completion from scene-preserving execution, because a primitive can locally
+            succeed while displacing cards or chips enough to block later actions.
           </p>
         </div>
-        <img class="detail-contain" src="../assets/images/model-scale-success.png" alt="DexHoldem policy result bubble chart comparing model family, pretraining scale, model size, and task completion" loading="lazy">
+        <img class="detail-contain" src="../assets/images/model-scale-success.png" alt="Model family, pretraining scale, parameter count, and task completion rate" loading="lazy">
       </section>
 
       <section class="detail-section">
+        <div class="section-heading compact-heading">
+          <p class="eyebrow">Primitives</p>
+          <h2>14 language-instructed atomic skills spanning card and chip manipulation.</h2>
+          <p>
+            Directional labels are in the robot-facing tabletop frame: push moves chips
+            away from the robot into the forward betting region; pull moves them back.
+          </p>
+        </div>
         <div class="detail-grid four">
           <article>
-            <h3>14 Primitives</h3>
-            <p>Card pickup, card placement, card reveal, chip push, and chip pull tasks are specified as language-instructed atomic skills.</p>
+            <h3>Card Pickup</h3>
+            <p><code>pick_up_left</code>, <code>pick_up_right</code></p>
           </article>
           <article>
+            <h3>Card Placement</h3>
+            <p><code>put_down_left</code>, <code>put_down_right</code>, <code>show_left</code>, <code>show_right</code></p>
+          </article>
+          <article>
+            <h3>Chip Push</h3>
+            <p><code>push_5</code>, <code>push_10</code>, <code>push_50</code>, <code>push_100</code></p>
+          </article>
+          <article>
+            <h3>Chip Pull</h3>
+            <p><code>pull_5</code>, <code>pull_10</code>, <code>pull_50</code>, <code>pull_100</code></p>
+          </article>
+        </div>
+      </section>
+
+      <section class="detail-section">
+        <div class="section-heading compact-heading">
+          <p class="eyebrow">Scoring Rubric</p>
+          <h2>Four outcome levels: SP, DC, TF, DF.</h2>
+        </div>
+        <div class="rubric-grid">
+          <div class="rubric-card sp">
+            <h3>SP &mdash; Scene-Preserving Success</h3>
+            <p>Primitive completed and the tabletop remains usable for subsequent actions.</p>
+          </div>
+          <div class="rubric-card dc">
+            <h3>DC &mdash; Disruptive Completion</h3>
+            <p>Goal achieved, but execution disturbs the scene enough to prevent normal continuation.</p>
+          </div>
+          <div class="rubric-card tf">
+            <h3>TF &mdash; Task Failure</h3>
+            <p>Primitive not completed, but the scene remains stable enough for retry.</p>
+          </div>
+          <div class="rubric-card df">
+            <h3>DF &mdash; Disruptive Failure</h3>
+            <p>Primitive fails and the environment must be reset before continuing.</p>
+          </div>
+        </div>
+        <p class="table-note" style="margin-top: 12px; width: min(1180px, 100%);">
+          SPSR = SP / N (only clean successes). TCR = (SP + DC) / N (any completion).
+        </p>
+      </section>
+
+      <section class="detail-section">
+        <div class="section-heading compact-heading">
+          <p class="eyebrow">Results</p>
+          <h2>Aggregate results over 80 physical trials per policy.</h2>
+        </div>
+        <div class="table-wrap">
+          <table class="leaderboard">
+            <caption>Policy bench results. Each policy is evaluated on the same 80 primitive-level real-world trials.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Policy</th>
+                <th scope="col">Family</th>
+                <th scope="col">Params</th>
+                <th scope="col"><span class="col-tip" data-tip="Scene-Preserving Success: primitive completed and table remains usable for subsequent actions">SP</span></th>
+                <th scope="col"><span class="col-tip" data-tip="Disruptive Completion: goal achieved but execution disturbs the scene enough to prevent normal continuation">DC</span></th>
+                <th scope="col"><span class="col-tip" data-tip="Task Failure: primitive not completed, but scene remains stable enough for retry">TF</span></th>
+                <th scope="col"><span class="col-tip" data-tip="Disruptive Failure: primitive fails and the environment must be reset before continuing">DF</span></th>
+                <th scope="col"><span class="col-tip tip-right" data-tip="Scene-Preserving Success Rate: counts only SP trials (SP / N)">SPSR</span></th>
+                <th scope="col"><span class="col-tip tip-right" data-tip="Task Completion Rate: counts SP + DC trials ((SP + DC) / N)">TCR</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">&pi;<sub>0.5</sub></th><td>Pretrained</td><td>2.94B</td><td>38</td><td>11</td><td>31</td><td>0</td><td>47.5%</td><td><strong>61.2%</strong></td></tr>
+              <tr><th scope="row">&pi;<sub>0</sub></th><td>Pretrained</td><td>2.82B</td><td>38</td><td>8</td><td>33</td><td>1</td><td>47.5%</td><td>57.5%</td></tr>
+              <tr><th scope="row">RDT</th><td>Pretrained</td><td>1.23B</td><td>24</td><td>13</td><td>40</td><td>3</td><td>30.0%</td><td>46.2%</td></tr>
+              <tr><th scope="row">DP (DINO)</th><td>From-scratch</td><td>128M</td><td>21</td><td>8</td><td>48</td><td>3</td><td>26.2%</td><td>36.2%</td></tr>
+              <tr><th scope="row">DP-Transformer</th><td>From-scratch</td><td>128M</td><td>11</td><td>5</td><td>46</td><td>18</td><td>13.8%</td><td>20.0%</td></tr>
+              <tr><th scope="row">RDT-small</th><td>From-scratch</td><td>165M</td><td>11</td><td>3</td><td>59</td><td>7</td><td>13.8%</td><td>17.5%</td></tr>
+              <tr><th scope="row">ACT</th><td>From-scratch</td><td>72.8M</td><td>8</td><td>4</td><td>67</td><td>1</td><td>10.0%</td><td>15.0%</td></tr>
+              <tr><th scope="row">BAKU</th><td>From-scratch</td><td>39.4M</td><td>5</td><td>5</td><td>67</td><td>3</td><td>6.2%</td><td>12.5%</td></tr>
+              <tr><th scope="row">DP-UNet</th><td>From-scratch</td><td>74.4M</td><td>1</td><td>0</td><td>79</td><td>0</td><td>1.2%</td><td>1.2%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="detail-section">
+        <div class="section-heading compact-heading">
+          <p class="eyebrow">Interface</p>
+          <h2>Three RGB-D views and proprioception map to 30-D joint-position action chunks.</h2>
+          <p>
+            At each rollout step the policy receives top-down, third-person, and wrist-mounted
+            RealSense RGB-D observations, the current 30-D arm+hand joint state, and a task
+            condition (natural-language text for pretrained models, discrete instruction ID for
+            from-scratch baselines). It returns a short-horizon sequence of joint-position targets.
+          </p>
+        </div>
+        <div class="detail-grid four">
+          <article>
             <h3>1,470 Demos</h3>
-            <p>Each primitive has 105 accepted teleoperated demonstrations, with a fixed 100 train / 5 validation split.</p>
+            <p>105 teleoperated demonstrations per primitive, with a fixed 100-train / 5-validation split.</p>
           </article>
           <article>
             <h3>30-D Actions</h3>
-            <p>Policies output joint-position targets for the 6-DOF UR10e arm and 24-DOF Shadow Dexterous Hand.</p>
+            <p>Joint-position targets for the 6-DOF UR10e arm and 24-DOF Shadow Dexterous Hand.</p>
           </article>
           <article>
-            <h3>80 Rollouts</h3>
-            <p>Physical evaluation uses 80 primitive-level trials per policy, grouped into pickup, chip push, chip pull, and put-down/show.</p>
+            <h3>ZMQ Server</h3>
+            <p>GPU inference runs behind a ZeroMQ endpoint; the robot client sends observations and executes returned chunks.</p>
+          </article>
+          <article>
+            <h3>80 Trials</h3>
+            <p>Physical evaluation uses 80 primitive-level trials per policy, grouped into pickup, push, pull, and put-down/show.</p>
           </article>
         </div>
       </section>
 
       <section class="detail-section">
         <div class="section-heading compact-heading">
-          <p class="eyebrow">Benchmark Interface</p>
-          <h2>The shared interface maps three RGB-D views and proprioception to joint-position action chunks.</h2>
-          <p>
-            The policy bench removes game-level decision making from the low-level model. At each
-            rollout step, the policy receives top-down, third-person, and wrist-mounted RealSense
-            RGB-D observations, the current arm-hand joint state, and a task condition. It returns a
-            short-horizon sequence of 30-dimensional joint-position targets in the canonical robot
-            order.
-          </p>
-        </div>
-        <div class="detail-grid four">
-          <article>
-            <h3>Observation</h3>
-            <p>Top-down, third-person, and wrist RGB-D cameras plus normalized joint-position proprioception.</p>
-          </article>
-          <article>
-            <h3>Condition</h3>
-            <p>Pretrained policies use natural-language task text; task-specific baselines use discrete instruction IDs.</p>
-          </article>
-          <article>
-            <h3>Prediction</h3>
-            <p>The canonical loader exposes RGB/depth inputs, optional precomputed visual features, instruction IDs, and 30-D action targets.</p>
-          </article>
-          <article>
-            <h3>Deployment</h3>
-            <p>A ZeroMQ policy server on port <code>13579</code> returns executable joint targets to the robot-side client.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="detail-section">
-        <div class="section-heading compact-heading">
-          <p class="eyebrow">Primitive Suite</p>
-          <h2>Policy tasks use the exact primitive IDs and instructions from the paper.</h2>
-          <p>
-            Directional labels are interpreted in the robot-facing tabletop frame: push moves chips
-            away from the robot into the forward betting region, and pull moves chips back toward
-            the robot-side region.
-          </p>
+          <p class="eyebrow">Policies</p>
+          <h2>Pretrained VLAs and from-scratch baselines under one protocol.</h2>
         </div>
         <div class="table-wrap">
           <table class="leaderboard">
-            <caption>Primitive-level task definitions.</caption>
-            <thead>
-              <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Primitive</th>
-                <th scope="col">Policy instruction</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><th scope="row">0</th><td><code>pick_up_left</code></td><td>Pick up the card on the left side.</td></tr>
-              <tr><th scope="row">1</th><td><code>pick_up_right</code></td><td>Pick up the card on the right side.</td></tr>
-              <tr><th scope="row">2</th><td><code>push_5</code></td><td>Push forward the chips worth 5.</td></tr>
-              <tr><th scope="row">3</th><td><code>push_10</code></td><td>Push forward the chips worth 10.</td></tr>
-              <tr><th scope="row">4</th><td><code>push_50</code></td><td>Push forward the chips worth 50.</td></tr>
-              <tr><th scope="row">5</th><td><code>push_100</code></td><td>Push forward the chips worth 100.</td></tr>
-              <tr><th scope="row">6</th><td><code>pull_5</code></td><td>Pull back the chips worth 5.</td></tr>
-              <tr><th scope="row">7</th><td><code>pull_10</code></td><td>Pull back the chips worth 10.</td></tr>
-              <tr><th scope="row">8</th><td><code>pull_50</code></td><td>Pull back the chips worth 50.</td></tr>
-              <tr><th scope="row">9</th><td><code>pull_100</code></td><td>Pull back the chips worth 100.</td></tr>
-              <tr><th scope="row">10</th><td><code>put_down_left</code></td><td>Place the held card onto the left position.</td></tr>
-              <tr><th scope="row">11</th><td><code>put_down_right</code></td><td>Place the held card onto the right position.</td></tr>
-              <tr><th scope="row">12</th><td><code>show_left</code></td><td>Reveal the face of the left card.</td></tr>
-              <tr><th scope="row">13</th><td><code>show_right</code></td><td>Reveal the face of the right card.</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section class="detail-section">
-        <div class="section-heading compact-heading">
-          <p class="eyebrow">Policy Families</p>
-          <h2>The main comparison contains two model families under one physical trial protocol.</h2>
-          <p>
-            The reported benchmark focuses on the policy families and variants included in the
-            main physical comparison. Experimental adapters that are not part of that comparison
-            are kept separate from the benchmarked-policy summary.
-          </p>
-        </div>
-        <div class="policy-architecture">
-          <article>
-            <span>01</span>
-            <h3>Pretrained Robot and VLA Policies</h3>
-            <p>
-              <code>pi0.5</code>, <code>pi0</code>, RDT, and RDT-small are adapted to the
-              ShadowHand-UR interface and conditioned on natural-language task text.
-            </p>
-          </article>
-          <article>
-            <span>02</span>
-            <h3>Task-Specific Imitation Baselines</h3>
-            <p>
-              DP (DINO), DP-Transformer, DP-UNet, ACT, and BAKU are trained on the DexHoldem
-              demonstrations with the same action space, primitive schedule, and scoring rubric.
-            </p>
-          </article>
-          <article>
-            <span>03</span>
-            <h3>Shared Scoring Contract</h3>
-            <p>
-              All models are evaluated by SP, DC, TF, and DF outcome labels, then reported as
-              scene-preserving success rate and task completion rate.
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <section class="detail-section">
-        <div class="table-wrap">
-          <table class="leaderboard">
-            <caption>Policy implementations used in the main physical comparison.</caption>
+            <caption>Policy implementations in the main physical comparison.</caption>
             <thead>
               <tr>
                 <th scope="col">Policy</th>
+                <th scope="col">Family</th>
                 <th scope="col">Conditioning</th>
-                <th scope="col">Implementation summary</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">pi0.5</th>
-                <td>Natural-language prompt</td>
-                <td>OpenPI bridge maps the three camera streams and robot state to pi0.5; the DexHoldem-side output uses absolute joint-action targets.</td>
-              </tr>
-              <tr>
-                <th scope="row">pi0</th>
-                <td>Natural-language prompt</td>
-                <td>OpenPI bridge with the same camera and prompt mapping as pi0.5; the default action convention is delta joint motion before conversion.</td>
-              </tr>
-              <tr>
-                <th scope="row">RDT</th>
-                <td>Cached T5 language tokens</td>
-                <td>RDT-1B-style diffusion Transformer adapted from a gripper interface to the 30-D ShadowHand-UR joint space with SigLIP visual patch tokens.</td>
-              </tr>
-              <tr>
-                <th scope="row">RDT-small</th>
-                <td>Cached T5 language tokens</td>
-                <td>Reduced-capacity RDT variant using the same observation adapter and deployment path, initialized randomly and trained from scratch.</td>
-              </tr>
-              <tr>
-                <th scope="row">DP (DINO)</th>
-                <td>Instruction ID</td>
-                <td>High-capacity diffusion-policy baseline using frozen DINOv2 visual features and a Transformer denoiser for 30-D action chunks.</td>
-              </tr>
-              <tr>
-                <th scope="row">DP-Transformer</th>
-                <td>Instruction ID</td>
-                <td>Diffusion-policy Transformer baseline trained from scratch under the same instruction-ID-conditioned objective.</td>
-              </tr>
-              <tr>
-                <th scope="row">DP-UNet</th>
-                <td>Instruction ID</td>
-                <td>Lightweight diffusion-policy baseline with trainable ResNet visual encoders and a 1D UNet denoiser.</td>
-              </tr>
-              <tr>
-                <th scope="row">ACT</th>
-                <td>Instruction ID</td>
-                <td>CVAE Transformer policy that decodes deterministic 30-D action chunks from observation and instruction tokens at inference time.</td>
-              </tr>
-              <tr>
-                <th scope="row">BAKU</th>
-                <td>Instruction ID</td>
-                <td>Deterministic action-token Transformer adapted to the canonical batch format and 30-D robot command space.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section class="detail-section">
-        <div class="section-heading compact-heading">
-          <p class="eyebrow">Training and Runtime</p>
-          <h2>The implementation keeps model-specific adapters behind a common robot-facing contract.</h2>
-        </div>
-        <div class="table-wrap">
-          <table class="leaderboard">
-            <caption>Implementation stages exposed by DexHoldem Policy.</caption>
-            <thead>
-              <tr>
-                <th scope="col">Stage</th>
                 <th scope="col">Implementation</th>
-                <th scope="col">Purpose</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">Organize</th>
-                <td>Raw primitive folders are converted to per-episode <code>.npy</code> arrays with 5 held-out validation trajectories per primitive.</td>
-                <td>Build the fixed 100/5 train-validation split used by every benchmarked policy.</td>
-              </tr>
-              <tr>
-                <th scope="row">Load</th>
-                <td>The loader exposes RGB/depth observations, optional precomputed RGB features, normalized proprioception, instruction ID, and action target.</td>
-                <td>Keep task-trained policies and pretrained adapters on the same data and state representation.</td>
-              </tr>
-              <tr>
-                <th scope="row">Normalize</th>
-                <td>Numeric proprioception and action channels are normalized to <code>[-1, 1]</code> with training-set statistics saved in the checkpoint.</td>
-                <td>Reuse the same statistics at deployment before unnormalizing executable joint targets.</td>
-              </tr>
-              <tr>
-                <th scope="row">Serve</th>
-                <td><code>deploy_policy.py</code> and OpenPI deployment scripts expose a ZeroMQ inference endpoint on port <code>13579</code>.</td>
-                <td>Keep GPU inference, checkpoint loading, and model-specific preprocessing off the robot-control process.</td>
-              </tr>
-              <tr>
-                <th scope="row">Execute</th>
-                <td><code>robot_client.py</code> packages live cameras, robot joints, and the selected primitive, then executes returned action chunks.</td>
-                <td>Run physical rollouts under the fixed primitive schedule and shared robot command format.</td>
-              </tr>
+              <tr><th scope="row">&pi;<sub>0.5</sub></th><td>Pretrained</td><td>Language</td><td>OpenPI bridge maps three camera streams and robot state; absolute joint-action targets.</td></tr>
+              <tr><th scope="row">&pi;<sub>0</sub></th><td>Pretrained</td><td>Language</td><td>Same OpenPI bridge as &pi;<sub>0.5</sub>; default delta joint motion before conversion.</td></tr>
+              <tr><th scope="row">RDT</th><td>Pretrained</td><td>T5 tokens</td><td>1B-class diffusion Transformer adapted from gripper to 30-D joint space with SigLIP patches.</td></tr>
+              <tr><th scope="row">RDT-small</th><td>From-scratch</td><td>T5 tokens</td><td>Reduced-capacity RDT variant, randomly initialized and trained from scratch.</td></tr>
+              <tr><th scope="row">DP (DINO)</th><td>From-scratch</td><td>Instr. ID</td><td>Diffusion policy with frozen DINOv2 features and Transformer denoiser.</td></tr>
+              <tr><th scope="row">DP-Transformer</th><td>From-scratch</td><td>Instr. ID</td><td>Diffusion policy Transformer trained from scratch.</td></tr>
+              <tr><th scope="row">DP-UNet</th><td>From-scratch</td><td>Instr. ID</td><td>Lightweight diffusion policy with trainable ResNet encoders and 1D UNet denoiser.</td></tr>
+              <tr><th scope="row">ACT</th><td>From-scratch</td><td>Instr. ID</td><td>CVAE Transformer decoding deterministic action chunks at inference.</td></tr>
+              <tr><th scope="row">BAKU</th><td>From-scratch</td><td>Instr. ID</td><td>Deterministic action-token Transformer adapted to the 30-D command space.</td></tr>
             </tbody>
           </table>
         </div>
@@ -284,90 +217,28 @@
 
       <section class="detail-section">
         <div class="section-heading compact-heading">
-          <p class="eyebrow">Physical Scoring</p>
-          <h2>DexHoldem separates nominal task completion from scene-preserving execution.</h2>
-          <p>
-            This distinction matters because a primitive can locally succeed while moving non-target
-            cards or chips enough to block later poker actions.
-          </p>
+          <p class="eyebrow">Figures</p>
+          <h2>Scaling and physical rollout examples.</h2>
         </div>
-        <div class="detail-grid four">
-          <article>
-            <h3>SP</h3>
-            <p>Scene-preserving success: the requested primitive is completed and the tabletop remains usable.</p>
-          </article>
-          <article>
-            <h3>DC</h3>
-            <p>Disruptive completion: the local goal is achieved, but the scene is disturbed enough to prevent normal continuation.</p>
-          </article>
-          <article>
-            <h3>TF</h3>
-            <p>Task failure: the primitive is not completed, but the scene remains stable enough for retry.</p>
-          </article>
-          <article>
-            <h3>DF</h3>
-            <p>Disruptive failure: the primitive fails and the environment must be reset before continuing.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="detail-section">
-        <div class="table-wrap">
-          <table class="leaderboard">
-            <caption>Aggregate physical policy results over 80 real-world primitive trials per policy.</caption>
-            <thead>
-              <tr>
-                <th scope="col">Policy</th>
-                <th scope="col">Params</th>
-                <th scope="col"><abbr title="Scene-Preserving Success">SP</abbr></th>
-                <th scope="col"><abbr title="Disruptive Completion">DC</abbr></th>
-                <th scope="col"><abbr title="Task Failure">TF</abbr></th>
-                <th scope="col"><abbr title="Disruptive Failure">DF</abbr></th>
-                <th scope="col">N</th>
-                <th scope="col"><abbr title="Scene-Preserving Success Rate">SPSR</abbr></th>
-                <th scope="col"><abbr title="Task Completion Rate">TCR</abbr></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><th scope="row">pi0.5</th><td>2.94B</td><td>38</td><td>11</td><td>31</td><td>0</td><td>80</td><td>47.5%</td><td>61.2%</td></tr>
-              <tr><th scope="row">pi0</th><td>2.82B</td><td>38</td><td>8</td><td>33</td><td>1</td><td>80</td><td>47.5%</td><td>57.5%</td></tr>
-              <tr><th scope="row">RDT</th><td>1.23B</td><td>24</td><td>13</td><td>40</td><td>3</td><td>80</td><td>30.0%</td><td>46.2%</td></tr>
-              <tr><th scope="row">DP (DINO)</th><td>128M</td><td>21</td><td>8</td><td>48</td><td>3</td><td>80</td><td>26.2%</td><td>36.2%</td></tr>
-              <tr><th scope="row">DP-Transformer</th><td>128M</td><td>11</td><td>5</td><td>46</td><td>18</td><td>80</td><td>13.8%</td><td>20.0%</td></tr>
-              <tr><th scope="row">RDT-small</th><td>165M</td><td>11</td><td>3</td><td>59</td><td>7</td><td>80</td><td>13.8%</td><td>17.5%</td></tr>
-              <tr><th scope="row">ACT</th><td>72.8M</td><td>8</td><td>4</td><td>67</td><td>1</td><td>80</td><td>10.0%</td><td>15.0%</td></tr>
-              <tr><th scope="row">BAKU</th><td>39.4M</td><td>5</td><td>5</td><td>67</td><td>3</td><td>80</td><td>6.2%</td><td>12.5%</td></tr>
-              <tr><th scope="row">DP-UNet</th><td>74.4M</td><td>1</td><td>0</td><td>79</td><td>0</td><td>80</td><td>1.2%</td><td>1.2%</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section class="detail-section">
         <figure class="wide-figure">
-          <img src="../assets/images/policy-example-grid.png" alt="DexHoldem physical policy benchmark success and failure examples" loading="lazy">
+          <img src="../assets/images/policy-example-grid.png" alt="Physical policy benchmark success and failure examples" loading="lazy">
           <figcaption>
-            Representative physical rollouts from the policy benchmark. The examples show that
-            success is not just object motion: non-target cards and chips must remain usable for
-            later tabletop interaction.
+            Representative physical rollouts. Success is not just object motion&mdash;non-target
+            cards and chips must remain usable for later tabletop interaction.
           </figcaption>
         </figure>
-      </section>
-
-      <section class="detail-section">
-        <div class="detail-grid two policy-figure-grid">
+        <div class="detail-grid two policy-figure-grid" style="margin-top: 24px;">
           <figure class="wide-figure">
-            <img src="../assets/images/model-scale-success.png" alt="DexHoldem model scale and policy completion chart" loading="lazy">
+            <img src="../assets/images/model-scale-success.png" alt="Model scale and policy completion chart" loading="lazy">
             <figcaption>
-              Model family, pretraining scale, policy-only parameter count, and physical task
-              completion rate over the shared 80-trial primitive schedule.
+              Model family, pretraining scale, parameter count, and physical task completion rate.
             </figcaption>
           </figure>
           <figure class="wide-figure">
-            <img src="../assets/images/rdt-pretraining-final-loss.png" alt="RDT fine-tuning final validation loss across data ratios" loading="lazy">
+            <img src="../assets/images/rdt-pretraining-final-loss.png" alt="RDT fine-tuning final validation loss" loading="lazy">
             <figcaption>
-              RDT fine-tuning data-scaling probe: gripper-pretrained initialization gives a modest
-              lower-loss offset, but does not create a strong low-data regime at 10% data.
+              RDT data-scaling probe: pretrained initialization gives a modest lower-loss offset
+              but does not create a strong low-data advantage at 10% data.
             </figcaption>
           </figure>
         </div>
@@ -376,6 +247,7 @@
       <section class="detail-section detail-links">
         <a class="button primary" href="https://github.com/DexHoldem/Dexholdem-Policy">DexHoldem Policy Repository</a>
         <a class="button" href="policy-demos.html">Policy Demo Videos</a>
+        <a class="button" href="../index.html#results">Back to Results</a>
       </section>
     </main>
     <footer class="site-footer">
