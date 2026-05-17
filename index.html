@@ -215,11 +215,13 @@
         <div class="section-heading">
           <p class="eyebrow">Results</p>
           <p>
-            Policy results are measured over 80 real-world primitive rollouts per model. Perception
-            results use strict problem-level exact-match over 36 tabletop states, plus field-wise
-            diagnostic accuracies. Full-system results are reported as three case-study trajectories
-            with operational counters rather than as a hand-level leaderboard.
-            See the full <a href="pages/results.html">results page</a> for detailed analysis.
+            We report three sets of results on this page: (1) aggregate policy results
+            scored by a four-level rubric over 80 real-world primitive rollouts per model,
+            (2) per-perceiver accuracy on the 36-problem perception bench with strict
+            problem-level exact match and field-wise diagnostics, and (3) RDT pretraining
+            data-scaling analysis. See the full
+            <a href="pages/results.html">results page</a> for system-level case studies
+            and detailed analysis.
           </p>
         </div>
 
@@ -231,7 +233,7 @@
 
         <div class="table-wrap">
           <table class="leaderboard" id="leaderboard">
-            <caption>Aggregate policy-model results over 80 real-world primitive-evaluation trials per policy.</caption>
+            <caption>Aggregate policy results over 80 real-world primitive-evaluation trials per policy.</caption>
             <thead>
               <tr>
                 <th scope="col">Policy</th>
@@ -341,7 +343,7 @@
 
         <div class="table-wrap perception-results-wrap">
           <table class="leaderboard perception-results">
-            <caption>Agentic perception semantic accuracy. Overall is strict exact-match over 36 problems; other columns are field-wise accuracies on applicable subsets.</caption>
+            <caption>Per-perceiver accuracy on perception bench. Overall is strict problem-level exact match; sub-field columns are field-wise accuracies on applicable subsets.</caption>
             <thead>
               <tr>
                 <th scope="col">Harness</th>
@@ -473,29 +475,28 @@
               </tr>
             </tbody>
           </table>
-          <p class="table-note">Notes: accuracy may vary due to harness version. Current results are evaluated at May 7, 2026.</p>
+          <p class="table-note">Notes: each sub-field column (LS, TO, BI, CC, CB, RCI, OCI, SO) is scored only on the subset of problems where that field applies — for example, SO is evaluated only on showdown problems, so a 0% SO does not prevent a model from achieving a higher Overall score. Overall requires exact match across all applicable fields per problem. Accuracy may vary due to harness version. Current results are evaluated at May 7, 2026.</p>
         </div>
 
         <div class="result-figures">
           <figure>
             <img loading="lazy" src="assets/images/rdt-pretraining-scaling.png" alt="RDT pretraining data scaling chart">
-            <figcaption>RDT pretraining data-scaling diagnostics on DexHoldem trajectories.</figcaption>
+            <figcaption><b>Figure 3:</b> Train-time validation-loss curves for the RDT fine-tuning data-scaling study. Each panel compares random initialization against pretrained RDT across 10%, 20%, 50%, and 100% data ratios, with shaded bands denoting one standard deviation over paired seeds.</figcaption>
           </figure>
           <figure>
             <img loading="lazy" src="assets/images/rdt-pretraining-final-loss.png" alt="RDT final validation loss scaling chart">
-            <figcaption>RDT final validation loss under DexHoldem data-scaling ablations.</figcaption>
+            <figcaption><b>Figure 4:</b> Final validation loss for the RDT fine-tuning data-scaling probe. Random and pretrained initializations follow similar data-scaling trends. Error bars denote one standard deviation over three completed paired seeds.</figcaption>
           </figure>
         </div>
       </section>
 
       <section class="section" id="demos">
         <div class="section-heading">
-          <p class="eyebrow">Demos &amp; Release</p>
+          <p class="eyebrow">Policy Demos</p>
           <p>
-            Policy-bench rollouts are released as compressed web videos with labels recovered from
-            the original model-task-result filenames. The system-level release documents the
-            GPT 5.5 + pi0 hand traces, state folders, wait branches, recovery dispatches, and
-            primitive counters used in the paper's case studies.
+            Real-world evaluation rollouts for every policy model in the policy bench table above.
+            Each video captures a single primitive trial on the physical ShadowHand setup, labeled
+            with model name, task, and four-level outcome. Filter by model or outcome to compare.
           </p>
         </div>
 
