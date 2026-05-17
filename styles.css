@@ -1283,6 +1283,74 @@ caption {
   font-size: 0.68rem;
 }
 
+.agent-demo-block {
+  width: min(1180px, 100%);
+  margin-top: 34px;
+}
+
+.standalone-demo-block {
+  margin-top: 0;
+}
+
+.agent-demo-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.62fr);
+  gap: 22px;
+  align-items: end;
+  margin-bottom: 18px;
+}
+
+.agent-demo-heading h2 {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3.4vw, 3rem);
+  line-height: 1.04;
+}
+
+.agent-demo-heading p:not(.demo-label) {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+
+.agent-demo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.agent-demo-card {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fffdf9;
+}
+
+.agent-demo-card h3 {
+  margin: 0 0 10px;
+  color: var(--ink);
+  font-size: 1.08rem;
+}
+
+.agent-demo-card p:not(.demo-label) {
+  margin: 0;
+  color: var(--muted);
+}
+
+.bilibili-embed {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #11151c;
+}
+
+.bilibili-embed iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 .policy-video-block {
   width: min(1180px, 100%);
   margin-top: 14px;
@@ -1300,6 +1368,7 @@ caption {
   margin-bottom: 18px;
 }
 
+.policy-video-heading h2,
 .policy-video-heading h3 {
   margin: 0;
   color: var(--ink);
@@ -2134,6 +2203,7 @@ caption {
 .layout-wide .taxonomy-grid,
 .layout-wide .asset-strip,
 .layout-wide .policy-architecture,
+.layout-wide .agent-demo-block,
 .layout-wide .demo-grid,
 .layout-wide .policy-video-block,
 .layout-wide .leaderboard-controls,
@@ -2171,6 +2241,7 @@ caption {
 }
 
 .layout-wide .policy-video-grid,
+.layout-wide .agent-demo-grid,
 .layout-wide .asset-strip,
 .layout-wide .policy-architecture,
 .layout-wide .taxonomy-grid,
@@ -2297,6 +2368,8 @@ caption {
 .layout-mobile .asset-strip,
 .layout-mobile .asset-strip.six,
 .layout-mobile .policy-architecture,
+.layout-mobile .agent-demo-heading,
+.layout-mobile .agent-demo-grid,
 .layout-mobile .system-grid,
 .layout-mobile .taxonomy-grid,
 .layout-mobile .contribution-grid,
@@ -2387,6 +2460,8 @@ caption {
   .asset-strip,
   .asset-strip.six,
   .policy-architecture,
+  .agent-demo-heading,
+  .agent-demo-grid,
   .system-grid,
   .contribution-grid,
   .author-profile-grid,
@@ -2512,6 +2587,8 @@ caption {
   .asset-strip,
   .asset-strip.six,
   .policy-architecture,
+  .agent-demo-heading,
+  .agent-demo-grid,
   .system-grid,
   .taxonomy-grid,
   .contribution-grid,

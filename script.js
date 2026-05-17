@@ -1,11 +1,19 @@
 const header = document.querySelector(".site-header");
 const navLinks = Array.from(document.querySelectorAll(".site-nav a"));
+const scriptAssetRoot = document.currentScript?.dataset.assetRoot || "";
+
+function getLocalSection(link) {
+  const href = link.getAttribute("href") || "";
+  if (!href.startsWith("#")) return null;
+  return document.querySelector(href);
+}
+
 const sections = navLinks
-  .map((link) => document.querySelector(link.getAttribute("href")))
+  .map(getLocalSection)
   .filter(Boolean);
 
 function updateHeader() {
-  header.classList.toggle("scrolled", window.scrollY > 28);
+  header?.classList.toggle("scrolled", window.scrollY > 28);
 }
 
 function updateActiveNav() {
@@ -113,11 +121,11 @@ function renderPolicyVideoCard(demo) {
   video.controls = true;
   video.preload = "none";
   video.playsInline = true;
-  video.poster = `assets/videos/policy-bench/posters/${demo.id}.jpg`;
+  video.poster = `${scriptAssetRoot}assets/videos/policy-bench/posters/${demo.id}.jpg`;
   video.setAttribute("aria-label", `${demo.model} ${demo.task} ${demo.condition} ${demo.outcome}`);
 
   const source = document.createElement("source");
-  source.src = `assets/videos/policy-bench/${demo.id}.mp4`;
+  source.src = `${scriptAssetRoot}assets/videos/policy-bench/${demo.id}.mp4`;
   source.type = "video/mp4";
   video.append(source);
   card.append(video);
