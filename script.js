@@ -1,6 +1,9 @@
 const header = document.querySelector(".site-header");
 const navLinks = Array.from(document.querySelectorAll(".site-nav a"));
 const scriptAssetRoot = document.currentScript?.dataset.assetRoot || "";
+const scrollDemoStage = document.querySelector("[data-scroll-demo-stage]");
+const scrollDemoShell = document.querySelector("[data-scroll-demo-shell]");
+const scrollDemoVideo = scrollDemoShell?.querySelector("video");
 
 function getLocalSection(link) {
   const href = link.getAttribute("href") || "";
@@ -31,13 +34,38 @@ function updateActiveNav() {
   });
 }
 
+function updateFloatingDemoVideo() {
+  if (!scrollDemoStage || !scrollDemoShell) return;
+
+  const stageRect = scrollDemoStage.getBoundingClientRect();
+  const shouldFloat = stageRect.bottom <= 92;
+  scrollDemoShell.classList.toggle("is-floating", shouldFloat);
+}
+
+function startScrollDemoVideo() {
+  if (!scrollDemoVideo) return;
+
+  scrollDemoVideo.muted = true;
+  const playAttempt = scrollDemoVideo.play();
+  if (playAttempt) playAttempt.catch(() => {});
+}
+
 window.addEventListener("scroll", () => {
   updateHeader();
   updateActiveNav();
-});
+  updateFloatingDemoVideo();
+}, { passive: true });
+window.addEventListener("resize", updateFloatingDemoVideo);
 
 updateHeader();
 updateActiveNav();
+updateFloatingDemoVideo();
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", startScrollDemoVideo, { once: true });
+} else {
+  startScrollDemoVideo();
+}
 
 const filterButtons = Array.from(document.querySelectorAll(".filter-button"));
 const leaderboardRows = Array.from(document.querySelectorAll("#leaderboard tbody tr"));
